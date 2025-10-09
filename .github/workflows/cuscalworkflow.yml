@@ -28,44 +28,44 @@ env:
   
 
 jobs:
-  # Job 1: Security Scans
-  security_scans:
-    name: Security Scans
-    runs-on: ubuntu-22.04
+  # # Job 1: Security Scans
+  # security_scans:
+  #   name: Security Scans
+  #   runs-on: ubuntu-22.04
 
-    if: ${{ github.actor != 'dependabot[bot]' }}
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
+  #   if: ${{ github.actor != 'dependabot[bot]' }}
+  #   permissions:
+  #     security-events: write
+  #     actions: read
+  #     contents: read
     
-    steps:
-    # Step 1: Checkout the repository
-    - name: Checkout Code
-      uses: actions/checkout@v4.1.7
+  #   steps:
+  #   # Step 1: Checkout the repository
+  #   - name: Checkout Code
+  #     uses: actions/checkout@v4.1.7
 
-    # Step 2: Secrets & Dependency Scans
-    - name: Security, Secrets and Dependency Scans
-      env:
-          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
-          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
-      if: ${{ inputs.security-check }}
-      uses: cuscal/app-eengineering-shared-githubactions/actions/dist/codeql-java@v1.0
-      with:
-        # java-version is the version of java to be used for compilation. 
-        java-version: ${{ env.JAVA_VERSION }}
-        # build-commands is the custom script to be used to build the code so that it can build and scan the code. 
-        build-commands: | 
-          chmod +x ./gradlew
-          ${{ env.DEPENDENCY_COMMANDS }} -x formatSource
-          ${{ env.BUILD_COMMANDS }} -x formatSource
+  #   # Step 2: Secrets & Dependency Scans
+  #   - name: Security, Secrets and Dependency Scans
+  #     env:
+  #         GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
+  #         GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+  #     if: ${{ inputs.security-check }}
+  #     uses: cuscal/app-eengineering-shared-githubactions/actions/dist/codeql-java@v1.0
+  #     with:
+  #       # java-version is the version of java to be used for compilation. 
+  #       java-version: ${{ env.JAVA_VERSION }}
+  #       # build-commands is the custom script to be used to build the code so that it can build and scan the code. 
+  #       build-commands: | 
+  #         chmod +x ./gradlew
+  #         ${{ env.DEPENDENCY_COMMANDS }} -x formatSource
+  #         ${{ env.BUILD_COMMANDS }} -x formatSource
       
-        # matrix-languages to be used
-        matrix-languages: ${{ env.MATRIX_LANGUAGES }}
+  #       # matrix-languages to be used
+  #       matrix-languages: ${{ env.MATRIX_LANGUAGES }}
 
-        # username & password for read access to Github packages.
-        GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
-        GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+  #       # username & password for read access to Github packages.
+  #       GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
+  #       GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
 
     # Step 3: Prints a link to the GitHub Advanced Security scan report
     - name: Print Security, Secrets & Dependency Scan Report
