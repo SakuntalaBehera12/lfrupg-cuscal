@@ -1,62 +1,62 @@
-# Workflow name, which will appear in the GitHub Actions UI
-name: Build and Deploy
+# # Workflow name, which will appear in the GitHub Actions UI
+# name: Build and Deploy
 
-# Concurrency ensures that only a single job or workflow using the same concurrency group will run at a time
-concurrency:  
-  group: build-deploy-${{ github.ref_name }} # The concurrency group name is dynamically generated based on the branch name  
-  cancel-in-progress: false # If another workflow run is in progress, it will not be cancelled
-
-
-# Define the events that trigger the workflow
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-# Access scope for the workflow's GitHub token. Adjust as needed.
-permissions:
-  contents: write         # Allows updating repository files (e.g., pushing changes)
-  packages: write         # Enables publishing to GitHub Packages
-  checks: write           # Allows creating status checks for PRs and commits
-  id-token: write         # Required for OIDC token generation in deployment
-  security-events: write  # Allows posting security scan results
-  actions: read           # Needed to query workflow run status
-
-jobs:
-# Job 1: Run Security Scans, Code Quality Scan, and Package Application
-  build:
-    name: Scan, Build and Package Application
-    uses: ./.github/workflows/wf-build.yml
-    secrets: inherit
-
-# Job 2: Deploy to the Dev environment automatically after code quality and security checks pass
-  deploy-to-dev:
-    name: Deploy to Dev
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' && github.event_name != 'pull_request' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: dev
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-    # This allows passing secrets as environment variables
-    secrets: inherit
+# # Concurrency ensures that only a single job or workflow using the same concurrency group will run at a time
+# concurrency:  
+#   group: build-deploy-${{ github.ref_name }} # The concurrency group name is dynamically generated based on the branch name  
+#   cancel-in-progress: false # If another workflow run is in progress, it will not be cancelled
 
 
-  # Job 3: Deploy to the Test environment as we do not have a stable development environment  
-  deploy-to-test:
-    name: Deploy to Test
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' && github.event_name != 'pull_request' && contains(github.ref, 'release/') }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: test
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-    # This allows passing secrets as environment variables
-    secrets: inherit
+# # Define the events that trigger the workflow
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+
+# # Access scope for the workflow's GitHub token. Adjust as needed.
+# permissions:
+#   contents: write         # Allows updating repository files (e.g., pushing changes)
+#   packages: write         # Enables publishing to GitHub Packages
+#   checks: write           # Allows creating status checks for PRs and commits
+#   id-token: write         # Required for OIDC token generation in deployment
+#   security-events: write  # Allows posting security scan results
+#   actions: read           # Needed to query workflow run status
+
+# jobs:
+# # Job 1: Run Security Scans, Code Quality Scan, and Package Application
+#   build:
+#     name: Scan, Build and Package Application
+#     uses: ./.github/workflows/wf-build.yml
+#     secrets: inherit
+
+# # Job 2: Deploy to the Dev environment automatically after code quality and security checks pass
+#   deploy-to-dev:
+#     name: Deploy to Dev
+#     needs: build
+#     if: ${{ github.actor != 'dependabot[bot]' && github.event_name != 'pull_request' }} 
+#     uses: ./.github/workflows/wf-deploy.yml
+#     with:
+#       environment-name: dev
+#       post-deployment-tests: true
+#       test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+#     # This allows passing secrets as environment variables
+#     secrets: inherit
+
+
+#   # Job 3: Deploy to the Test environment as we do not have a stable development environment  
+#   deploy-to-test:
+#     name: Deploy to Test
+#     needs: build
+#     if: ${{ github.actor != 'dependabot[bot]' && github.event_name != 'pull_request' && contains(github.ref, 'release/') }} 
+#     uses: ./.github/workflows/wf-deploy.yml
+#     with:
+#       environment-name: test
+#       post-deployment-tests: true
+#       test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+#     # This allows passing secrets as environment variables
+#     secrets: inherit
 
   
