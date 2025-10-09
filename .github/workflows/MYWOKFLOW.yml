@@ -47,5 +47,7 @@ jobs:
           npm config set strict-ssl false
           export GRADLE_OPTS="-Xms1724m -Xmx5048m"
           echo "🚀 Running Liferay Workspace build via Blade CLI..."
-          blade gw clean
-          blade gw "-Pliferay.workspace.environment=common" distBundleZip
+          # blade gw clean
+          # blade gw "-Pliferay.workspace.environment=common" distBundleZip
+          ./gradlew clean
+          ./gradlew "-Pliferay.workspace.environment=common" distBundleZip 
