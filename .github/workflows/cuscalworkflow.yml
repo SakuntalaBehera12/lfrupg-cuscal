@@ -189,55 +189,55 @@ jobs:
           ./gradlew "-Pliferay.workspace.environment=common" distBundleZip 
 
       # Step 7: Package Liferay Bundle
-      - name: Package Liferay Bundle
+      # - name: Package Liferay Bundle
     
-        run: |
-          # Verify the existence of required files and folders
-          echo "Checking if required files and folders exist..."
-          ls -latr build || echo "Build folder does not exist!"
-          ls -latr configs || echo "Configs folder does not exist!"
+      #   run: |
+      #     # Verify the existence of required files and folders
+      #     echo "Checking if required files and folders exist..."
+      #     ls -latr build || echo "Build folder does not exist!"
+      #     ls -latr configs || echo "Configs folder does not exist!"
           
-          # Ensure the build file is not empty
-          if [ -f build/lfrupg-cuscal-liferay-liferay.zip ]; then
-            if [ ! -s build/lfrupg-cuscal-liferay-liferay.zip ]; then
-              echo "Error: build/lfrupg-cuscal-liferay-liferay.zip is empty!"
-              exit 1
-            fi
-          else
-            echo "Error: build/lfrupg-cuscal-liferay-liferay.zip does not exist!"
-            exit 1
-          fi
+      #     # Ensure the build file is not empty
+      #     if [ -f build/lfrupg-cuscal-liferay-liferay.zip ]; then
+      #       if [ ! -s build/lfrupg-cuscal-liferay-liferay.zip ]; then
+      #         echo "Error: build/lfrupg-cuscal-liferay-liferay.zip is empty!"
+      #         exit 1
+      #       fi
+      #     else
+      #       echo "Error: build/lfrupg-cuscal-liferay-liferay.zip does not exist!"
+      #       exit 1
+      #     fi
           
-          # Create a folder in the current directory
-          mkdir -p temp_dir
+      #     # Create a folder in the current directory
+      #     mkdir -p temp_dir
           
-          # Copy necessary files to the folder
-          echo "Copying files to the folder..."
-          cp -v buildlfrupg-cuscal-liferay-liferay.zip temp_dir/CUSCAL-BUNDLE-${{ github.run_number }}.zip
+      #     # Copy necessary files to the folder
+      #     echo "Copying files to the folder..."
+      #     cp -v buildlfrupg-cuscal-liferay-liferay.zip temp_dir/CUSCAL-BUNDLE-${{ github.run_number }}.zip
             
-            if [ -d configs ]; then
-            cp -r configs temp_dir/
-            else
-              echo "Error: configs folder does not exist!"
-              exit 1
-          fi
+      #       if [ -d configs ]; then
+      #       cp -r configs temp_dir/
+      #       else
+      #         echo "Error: configs folder does not exist!"
+      #         exit 1
+      #     fi
           
-          # Zip the contents of the folder
-          cd temp_dir
+      #     # Zip the contents of the folder
+      #     cd temp_dir
           
-          # Replace '/' with '-' in ${{ github.ref_name }} and pass as environment variable
-          sanitized_branch_name=$(echo "${{ github.ref_name }}" | sed 's|/|-|g')
-          echo "SANITIZED_BRANCH_NAME=${sanitized_branch_name}" >> $GITHUB_ENV
+      #     # Replace '/' with '-' in ${{ github.ref_name }} and pass as environment variable
+      #     sanitized_branch_name=$(echo "${{ github.ref_name }}" | sed 's|/|-|g')
+      #     echo "SANITIZED_BRANCH_NAME=${sanitized_branch_name}" >> $GITHUB_ENV
           
-            zip -r -q ${{ env.ASSET_FILES }} .
+      #       zip -r -q ${{ env.ASSET_FILES }} .
           
-          # Move the zip file to the current directory
-            mv ${{ env.ASSET_FILES }} "$GITHUB_WORKSPACE/"
+      #     # Move the zip file to the current directory
+      #       mv ${{ env.ASSET_FILES }} "$GITHUB_WORKSPACE/"
 
-          # Clean up the folder
-          cd "$GITHUB_WORKSPACE"
-          rm -rf temp_dir
-          echo "Liferay Packaging completed successfully!"
+      #     # Clean up the folder
+      #     cd "$GITHUB_WORKSPACE"
+      #     rm -rf temp_dir
+      #     echo "Liferay Packaging completed successfully!"
 
       # # Step 8: Publish Artifact
       # - name: Upload Artifact
