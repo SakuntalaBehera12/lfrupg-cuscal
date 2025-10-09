@@ -1,0 +1,541 @@
+html#{$cadmin-selector} {
+	.portlet {
+		&:hover,
+		&.open {
+			> .cadmin.portlet-topper {
+				z-index: 999;
+			}
+		}
+
+		> .cadmin.portlet-topper {
+			font-size: 13.92px;
+			padding: 0 4px 0 8px;
+
+			@include media-breakpoint-up(md) {
+				display: flex;
+				white-space: nowrap;
+			}
+
+			@include media-breakpoint-up(sm) {
+				right: auto;
+			}
+
+			.portlet-title-default {
+				display: inline-block;
+				line-height: 24px;
+				vertical-align: middle;
+			}
+
+			.portlet-name-text {
+				margin-right: 12px;
+			}
+
+			.portlet-topper-toolbar {
+				display: inline-block;
+				vertical-align: middle;
+			}
+
+			.portlet-topper-toolbar,
+			.icon-monospaced {
+				height: 24px;
+				line-height: 24px;
+				width: 24px;
+			}
+
+			.portlet-topper-toolbar .component-action {
+				font-size: 14px;
+				height: 24px;
+				margin-top: -2px;
+				width: 24px;
+			}
+		}
+	}
+
+	.portlet-dropzone {
+		box-shadow: 0 0 0 1px transparent inset;
+		transition: box-shadow 300ms ease-in-out;
+		will-change: box-shadow;
+	}
+
+	.yui3-dd-drop-active-valid .portlet-dropzone {
+		box-shadow: 0 0 0 1px rgba($cadmin-primary-d2, 0.2) inset;
+	}
+
+	.yui3-dd-drop-over .portlet-dropzone {
+		box-shadow: 0 0 0 4px $cadmin-primary-d2 inset;
+	}
+}
+
+.portlet-layout {
+	.portlet {
+		.management-bar,
+		.navbar-underline {
+			> .container-fluid-max-xl {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+
+		.portlet-title-text {
+			color: map-get($theme-colors, secondary);
+			font-size: 0.875rem;
+			font-weight: 600;
+			line-height: 2.2;
+			margin-bottom: 0;
+			text-transform: uppercase;
+		}
+	}
+}
+
+.portlet {
+	> .portlet-topper {
+		font-size: 0.87rem;
+		padding: 0 4px 0 8px;
+
+		@include media-breakpoint-up(md) {
+			display: flex;
+			white-space: nowrap;
+		}
+
+		@include media-breakpoint-up(sm) {
+			right: auto;
+		}
+
+		.portlet-title-default {
+			display: inline-block;
+			line-height: 1.5rem;
+			vertical-align: middle;
+		}
+
+		.portlet-name-text {
+			margin-right: 0.75rem;
+		}
+
+		.portlet-topper-toolbar {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.portlet-topper-toolbar,
+		.icon-monospaced {
+			height: 1.5rem;
+			line-height: 1.5rem;
+			width: 1.5rem;
+		}
+
+		.portlet-topper-toolbar .component-action {
+			height: 1.5rem;
+			width: 1.5rem;
+		}
+
+		.lexicon-icon {
+			height: 0.875rem;
+			width: 0.875rem;
+            fill: #0b5fff;
+		}
+	}
+
+	&:hover,
+	&.open {
+		> .portlet-topper {
+			z-index: 999;
+		}
+	}
+}
+
+.portlet-dropzone {
+	box-shadow: 0 0 0 1px transparent inset;
+	transition: box-shadow 300ms ease-in-out;
+	will-change: box-shadow;
+
+	.yui3-dd-drop-active-valid & {
+		box-shadow: 0 0 0 1px rgba($primary-d2, 0.2) inset;
+	}
+
+	.yui3-dd-drop-over & {
+		box-shadow: 0 0 0 4px $primary-d2 inset;
+	}
+}
+
+
+// Customization legacy 6.0
+
+.freeform .portlet {
+	margin-bottom: 0;
+  }
+  
+  body.portlet {
+	border: none;
+  }
+  
+  .portlet-topper {
+	position: relative;
+  }
+  
+  .portlet-title {
+	display: block;
+	font-size: 1em;
+	margin: 0;
+  }
+  
+  .portlet-title-text {
+	cursor: pointer;
+  }
+  
+  .portlet-title img {
+	vertical-align: middle;
+  }
+  
+  .portlet-topper-toolbar {
+	margin: 0;
+	padding: 2px;
+	// position: absolute;
+	right: 0;
+	text-align: right;
+	top: 0;
+  }
+  
+  .portlet-topper-toolbar .nobr {
+	display: block;
+	float: left;
+	padding: 1px;
+  }
+  
+  .portlet-content,.portlet-minimized .portlet-content-container {
+	padding: 12px 10px 10px;
+  }
+  
+  .portlet-minimized .portlet-content {
+	padding: 0;
+  }
+  
+  .portlet-icon-back {
+	background: url(../images/arrows/01_left.png) no-repeat 0 50%;
+	font-weight: bold;
+	padding: 5px 5px 5px 18px;
+  }
+  
+  .portlet-nested-portlets .portlet-boundary {
+	position: relative!important;
+	top: 0!important;
+	left: 0!important;
+  }
+  
+  .portlet-borderless-container {
+	min-height: 2.5em;
+	position: relative;
+  }
+  
+  .portlet-borderless-bar {
+	background: #333;
+	color: #FFF;
+	font-size: 10px;
+	opacity: .3;
+	padding: 2px 5px 1px;
+	position: absolute;
+	right: 0;
+	text-shadow: -1px -1px #000;
+	top: 0;
+	z-index: 200;
+  }
+  
+  .portlet-borderless-bar .portlet-actions {
+	display: none;
+	float: left;
+	margin-right: 20px;
+  }
+  
+  .portlet-borderless-container:hover .portlet-borderless-bar {
+	opacity: 1;
+  }
+  
+  .portlet-borderless-container:hover .portlet-borderless-bar .portlet-actions {
+	display: inline;
+  }
+  
+  .portlet-borderless-bar .portlet-action-separator {
+	display: none;
+  }
+  
+  .portlet-borderless-bar a {
+	background: url() no-repeat 0 50%;
+	color: #3AF;
+	display: inline-block;
+	font-size: 0;
+	height: 16px;
+	margin-left: 5px;
+	text-indent: -9999px;
+	vertical-align: top;
+	width: 16px;
+  }
+  
+  .portlet-title-default {
+	display: inline-block;
+	float: right;
+	font-weight: bold;
+	text-transform: uppercase;
+  }
+  
+  .aui-dd-draggable .portlet-topper {
+	cursor: move;
+  }
+  
+  .aui-dd-draggable .portlet-title-default {
+	background: url(../images/portlet/draggable_borderless.png) no-repeat 0 50%;
+	cursor: move;
+	padding-left: 20px;
+  }
+  
+  .portlet-borderless-bar .portlet-back a {
+	background-image: url(../images/portlet/return_borderless.png);
+	height: auto;
+	text-indent: 0;
+	width: auto;
+  }
+  
+  .portlet-borderless-bar .portlet-close a {
+	background-image: url(../images/portlet/close_borderless.png);
+  }
+  
+  .portlet-borderless-bar .portlet-options li.lfr-trigger strong a {
+	background-image: url(../images/portlet/options_borderless.png);
+  }
+  
+  .portlet-borderless-bar .portlet-title-default,.portlet-borderless-bar .portlet-actions {
+	vertical-align: top;
+  }
+  
+  .lfr-panel-page {
+	width: 100%;
+  }
+  
+  .lfr-panel-page .portlet-title {
+	font-size: 13px;
+  }
+  
+  .lfr-panel-page .lfr-add-content h2 span {
+	background-color: #D3DADD;
+  }
+  
+  .portlet-msg-info {
+	background: #DFF4FF url(../images/messages/info.png) no-repeat 6px 50%;
+	border: 1px solid #A7CEDF;
+	color: #34404F;
+	display: block;
+	font-weight: bold;
+	margin: 2px auto 14px;
+	padding: 6px 6px 6px 30px;
+	text-align: left;
+  }
+  
+  .portlet-msg-info.pending {
+	background-image: url(../images/common/time.png);
+  }
+  
+  .portlet-msg-error {
+	background: #FDD url(../images/messages/error.png) no-repeat 6px 50%;
+	border: 1px solid #F00;
+	display: block;
+	font-weight: bold;
+	margin: 2px auto 14px;
+	padding: 6px 6px 6px 30px;
+	text-align: left;
+  }
+  
+  .portlet-msg-alert {
+	background: #FFC url(../images/messages/alert.png) no-repeat 6px 20%;
+	border: 1px solid #FC0;
+	display: block;
+	font-weight: bold;
+	margin: 2px auto 14px;
+	padding: 6px 6px 6px 30px;
+	text-align: left;
+  }
+  
+  .portlet-msg-success {
+	background: #F4FDEF url(../images/messages/success.png) no-repeat 6px 50%;
+	border: 1px solid #ACDFA7;
+	color: #384F34;
+	display: block;
+	font-weight: bold;
+	margin: 2px auto 14px;
+	padding: 6px 6px 6px 30px;
+	text-align: left;
+  }
+  
+  .portlet-section-selected,.portlet-section-selected a {
+	background: #727C81;
+	color: #FFF;
+	font-weight: bold;
+	text-decoration: none;
+  }
+  
+  .portlet-section-selected a:hover,.portlet-section-selected a:focus {
+	background-color: #727C81;
+  }
+  
+  .restricted,.restricted td {
+	background: #FDD;
+	border: none;
+  }
+  
+  .alt.restricted td {
+	background-color: #FFC0C0;
+  }
+  
+  .hover.restricted td {
+	background-color: #D3BDC0;
+  }
+  
+  .restricted * {
+	color: #727C81;
+  }
+  
+  .restricted td.col-1,.alt.restricted td.col-1 {
+	background-image: url(../images/messages/error.png);
+	background-position: 5px 50%;
+	background-repeat: no-repeat;
+	padding-left: 28px;
+  }
+  
+  .results-row.lfr-role .col-1,.results-row.hover.lfr-role .col-1 {
+	background-image: url();
+	background-position: 5px 50%;
+	background-repeat: no-repeat;
+	padding-left: 30px;
+  }
+  
+  .results-row.lfr-role-guest .col-1,.results-row.hover.lfr-role-guest .col-1 {
+	background-image: url(../images/common/guest_icon.png);
+  }
+  
+  .results-row.lfr-role-regular .col-1,.results-row.hover.lfr-role-regular .col-1 {
+	background-image: url(../images/common/user_icon.png);
+  }
+  
+  .results-row.lfr-role-community .col-1,.results-row.hover.lfr-role-community .col-1 {
+	background-image: url(../images/common/community_icon.png);
+  }
+  
+  .results-row.lfr-role-organization .col-1,.results-row.hover.lfr-role-organization .col-1 {
+	background-image: url(../images/common/organization_icon.png);
+  }
+  
+  .results-row.lfr-role-team .col-1,.results-row.hover.lfr-role-team .col-1 {
+	background-image: url(../images/common/team_icon.png);
+  }
+  
+  .lfr-portlet-item,.lfr-portlet-item p a {
+	font-size: 1em;
+  }
+  
+  .lfr-actions,.lfr-actions ul {
+	background: #FFF url(../images/forms/button.png) repeat-x 0 100%;
+	border: 1px solid;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
+  }
+  
+  .lfr-actions ul {
+	bottom: -1px;
+  }
+  
+  .lfr-actions .lfr-trigger,.lfr-actions .lfr-trigger,.lfr-actions .lfr-trigger strong {
+	background: none;
+  }
+  
+  .lfr-actions .lfr-trigger li {
+	background: transparent;
+	border-bottom: 1px solid #DEDEDE;
+	padding: 2px;
+  }
+  
+  .lfr-actions .lfr-trigger li a {
+	padding: 5px 10px 5px 25px;
+  }
+  
+  .lfr-actions .lfr-trigger li a:hover {
+	background-color: #828F95;
+	color: #FFF;
+  }
+  
+  .lfr-actions .lfr-trigger li a img {
+	left: 3px;
+	position: absolute;
+  }
+  
+  .lfr-actions .lfr-trigger li.last {
+	border-bottom: none;
+  }
+  
+  .lfr-actions.portlet-options {
+	background: none;
+	border: none;
+	float: left;
+  }
+  
+  .lfr-actions.portlet-options .lfr-trigger {
+	padding: 0;
+  }
+  
+  .lfr-actions.portlet-options .lfr-trigger strong {
+	min-width: 0;
+	padding: 1px;
+  }
+  
+  .lfr-actions.portlet-options .lfr-trigger strong a {
+	background-image: url(../images/portlet/options.png);
+	background-position: 0 0;
+	display: block;
+	font-size: 0;
+	height: 16px;
+	padding: 0;
+	text-indent: -9999em;
+	width: 16px;
+  }
+  
+  .visible.portlet-options .lfr-trigger strong a {
+	background-image: url(../images/portlet/options_selected.png);
+  }
+  
+  .taglib-calendar tr.portlet-section-header th,.taglib-calendar tr td {
+	border: none;
+  }
+  
+  .taglib-calendar tr td a {
+	background-color: #F0F5F7;
+	border: 1px solid #FFF;
+	border-bottom: none;
+	border-left: none;
+	display: block;
+	height: 15px;
+	padding: 5px 0;
+  }
+  
+  .taglib-calendar table td {
+	border-width: 0;
+  }
+  
+  .taglib-calendar tr td a:hover {
+	background-color: #727C81;
+	color: #FFF;
+  }
+  
+  .taglib-calendar .calendar-current-day,.taglib-calendar .calendar-current-day a {
+	background-color: #FFF;
+  }
+  
+  .taglib-calendar .calendar-current-day a {
+	border: 1px solid #727C81;
+	color: #369;
+	text-decoration: underline;
+  }
+  
+  .taglib-calendar tr td.calendar-inactive {
+	background-color: #FFF;
+	color: #B5BFC4;
+  }
+  
+  .taglib-calendar tr th {
+	border-bottom-color: #D7D7D7;
+  }
+  

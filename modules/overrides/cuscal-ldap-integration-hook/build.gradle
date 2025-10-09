@@ -1,0 +1,36 @@
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+
+	implementation project(":modules:utils:shared-props")
+	implementation project(":modules:utils:resource-util-dxp")
+
+	implementation "log4j:log4j:1.2.17"
+	// For easyconf that is used commonly in Cuscal modules and utils
+	implementation(group: "easyconf", name: "easyconf", version: "0.9.5") {
+		exclude group: "dom4j", module: "dom4j"
+		exclude group: "javax.sql", module: "jdbc-stdext"
+		exclude group: "servletapi", module: "servletapi"
+		exclude group: "xdoclet", module: "xdoclet"
+		exclude group: "xdoclet", module: "xdoclet-web-module"
+		exclude group: "xpp3", module: "xpp3_min"
+	}
+
+	// Include dom4j with excluding jaxen and saxpath to avoid conflicts about XML builder
+	implementation(group: "dom4j", name: "dom4j", version: "1.4") {
+		// TODO verify when we can really verifying execution relates to easyconf
+		exclude group: "jaxen", module: "jaxen"
+		exclude group: "saxpath", module: "saxpath"
+	}
+
+	implementation group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.framework", version: "5.2.0"
+	implementation group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.security", version: "5.2.0"
+
+	// Spring LDAP
+	implementation group: 'org.springframework.security', name: 'spring-security-ldap', version: '5.5.4'
+
+	compileOnly rootProject.files("libs/AuditCategories-0.0.2-20130509.052834-4.jar")
+	compileOnly rootProject.files("libs/CuscalPerformance-0.0.3-20130301.041459-1.jar")
+	compileOnly rootProject.files("libs/resource-utils-0.0.7-20150409.040244-1.jar")
+	compileOnly rootProject.files("libs/WebServices-Client-0.0.57-20130830.050933-1.jar")
+	implementation group: "commons-pool", name: "commons-pool", version: "1.6"
+}

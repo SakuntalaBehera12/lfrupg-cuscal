@@ -1,0 +1,9 @@
+<h1 id="contentHeadingFull">
+	${headline.getData()}
+</h1>
+<script>
+	if(document.getElementById('contentWrapper2')!=null) {
+		document.getElementById('contentWrapper2').style.width = 950 + 'px';
+		document.getElementById('contentWrapper2').style.paddingLeft = 15 +'px';
+	}
+</script>

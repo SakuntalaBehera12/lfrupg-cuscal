@@ -1,0 +1,19 @@
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+
+	compileOnly project(":modules:utils:shared-props")
+
+	compileOnly group: "org.slf4j", name: "slf4j-api" , version: "1.7.25"
+	compileOnly group: "org.slf4j", name: "slf4j-log4j12" , version: "1.7.25"
+
+	// Need to refer to this version.
+	// Because displaytag uses an older version of jcl104-over-slf4j-1.4.2.jar,
+	// which is known as collison with slf4j version in latest Spring.s
+	compileOnly "org.slf4j:jcl-over-slf4j:1.7.25"
+
+	compileOnly(group: "displaytag", name: "displaytag", version: "1.2") {
+		exclude group: "org.slf4j", module: "jcl104-over-slf4j"
+	}
+
+	compileInclude "log4j:log4j:1.2.17"
+}

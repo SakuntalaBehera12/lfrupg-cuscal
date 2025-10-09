@@ -1,0 +1,103 @@
+br {
+	clear: both;
+}
+
+h5 {
+	
+	text-align: center;
+}
+
+a.links {
+	color: #fe5402;
+	text-decoration: none;
+}
+
+a.links:hover {
+	text-decoration: underline;
+}
+
+div.forms {
+	background-color: #eee;
+	border: solid 1px #ddd;
+	border-radius: 5px;
+	display: block;
+	float: left;
+	width: 650px;
+}
+
+ul.menu {
+	display: block;
+	float: left;
+	list-style-type: none;
+	margin: 100px 0;
+	padding: 0;
+	width: 110px;
+}
+
+ul li.home,
+ul li.login {
+	background: url("../images/response.png") top left no-repeat transparent;
+	cursor: pointer;
+	display: block;
+	height: 110px;
+	opacity: 0.4;
+	position: relative;
+	text-align: center;
+	width: 110px;
+}
+
+ul li.login {
+	background-image: url("../images/challengeResponse.png");
+}
+
+ul li.selected {
+	background-color: #eee;
+	border: solid 1px #ddd;
+	border-width: 1px 0 1px 1px;
+	opacity: 1;
+}
+
+#challenge-response {
+	display: none;
+}
+
+.fields {
+	display: block;
+	padding: 5px;
+	position: relative;
+}
+
+.fields label {
+	display: inline-block;
+	font-weight: bold;
+	text-align: right;
+	width: 150px;
+}
+
+span.challenge-key {
+	display: inline-block;
+	width: 150px;
+}
+
+.important-info {
+	border-top: solid 1px #ddd;
+	display: block;
+	margin-top: 100px;
+	padding: 5px;
+	position: relative;
+}
+
+.important-info p {
+	margin: 1em 0;
+}
+
+.error {
+	color: #c00;
+	font-weight: bold;
+	margin: 0 5px;
+	text-align: center;
+}
+
+.no-wrap {
+	white-space: no-wrap;
+}

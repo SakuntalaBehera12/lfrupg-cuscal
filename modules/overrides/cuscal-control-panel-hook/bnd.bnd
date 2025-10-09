@@ -1,0 +1,6 @@
+Bundle-Name: Cuscal Control Panel Hook
+Bundle-SymbolicName: au.com.cuscal.control.panel.hook
+Bundle-Version: 1.0.0
+Web-ContextPath: /cuscal-control-panel-hook
+-dsannotations-options: inherit
+-includeresource: META-INF/lib/cuscal.shared.props.jar=cuscal.shared.props-*.jar;lib:=true

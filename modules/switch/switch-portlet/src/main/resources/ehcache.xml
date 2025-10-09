@@ -1,0 +1,36 @@
+<ehcache>
+	<diskStore path="java.io.tmpdir" />
+
+	<defaultCache
+		diskExpiryThreadIntervalSeconds="300"
+		diskPersistent="false"
+		eternal="false"
+		maxElementsInMemory="20000"
+		memoryStoreEvictionPolicy="LRU"
+		overflowToDisk="true"
+		timeToIdleSeconds="100"
+		timeToLiveSeconds="100"
+	/>
+
+	<cache
+		eternal="true"
+		maxElementsInMemory="15000"
+		name="au.com.cuscal.connect.domain.ReportTypeCategory"
+		overflowToDisk="false"
+	/>
+
+	<cache
+		eternal="true"
+		maxElementsInMemory="15000"
+		name="au.com.cuscal.connect.domain.ReportType"
+		overflowToDisk="false"
+	/>
+
+	<cache
+		eternal="true"
+		maxElementsInMemory="15000"
+		name="au.com.cuscal.connect.domain.ReportFrequency"
+		overflowToDisk="false"
+	/>
+
+</ehcache>

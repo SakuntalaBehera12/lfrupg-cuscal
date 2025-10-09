@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+	<import resource="applicationContext.xml"></import>
+<context:component-scan base-package="au.com.cuscal.saf"></context:component-scan>
+<bean class="au.com.cuscal.saf.rejects.controller.SAFRejectsController" id="safRejectsController">
+	<property name="orgIdOverride" value="${override.user.orgId}"></property>
+	<property name="orgShortNameOverride" value="${override.user.orgShortName}"></property>
+	<property name="orgFullNameOverride" value="${override.user.orgFullName}"></property>
+</bean>
+<!--<bean class="au.com.cuscal.framework.webservices.client.impl.EntityServiceImpl" id="entityService"></bean>-->
+<!--<bean class="au.com.cuscal.framework.webservices.client.impl.SAFServiceImpl" id="safService"></bean>-->
+<bean class="au.com.cuscal.saf.services.SAFRejectsServiceImpl" id="safRejectsService"/>
+<bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
+	<property name="basenames">
+		<list>
+			<value>content.messages</value>
+		</list>
+	</property>
+</bean>
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+	<property name="viewClass" value="com.liferay.portletmvc4spring.PortletJstlView"></property>
+	<property name="prefix" value="/WEB-INF/jsp/"></property>
+	<property name="suffix" value=".jsp"></property>
+</bean>
+<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean" id="propUtil">
+	<property name="locations">
+		<list>
+			<value>file:${catalina.home}/../property-files/saf/saf.properties</value>
+		</list>
+	</property>
+</bean>
+<!-- Other configuration details -->
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="configurationPropertyConfigurer">
+	<property name="locations">
+		<list>
+			<value>file:${catalina.home}/../property-files/saf/saf.properties</value>
+			<value>file:${catalina.home}/../property-files/webservice.properties</value>
+		</list>
+	</property>
+</bean>
+</beans>

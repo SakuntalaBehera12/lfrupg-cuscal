@@ -1,0 +1,30 @@
+cud.detail.authorisedby.v=Visa
+cud.detail.authorisedby.h=Host
+cud.detail.authorisedby.s=Standin
+
+
+#Transaction description for CUD transaction
+
+cud.transaction.description.from=Purchase,Withdraw,Purchase with Cashout
+cud.transaction.description.for=Authorisation,Balance Enquiry
+cud.transaction.description.to=Refund,Deposit
+cud.transaction.description.default=with
+
+
+# Card Source usage
+cud.detail.switched.by.Cuscal=AI-ADL
+cud.detail.switched.by.default=First Data 
+
+# common properties........
+
+# Max Days for transaction archived search 
+cud.search.max.days=30
+
+#whether want to display double quotes around terminal location on list and details page.
+cud.terminalLocation.double.quote.enable=false
+
+
+#Max records Hard limit for Transaction list page
+cud.transaction.list.hardLimit=250
+
+

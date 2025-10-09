@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -exv
+
+
+export PATH=$PATH:$M2_HOME/bin
+
+if ! ( keytool -list -keystore $JAVA_HOME/jre/lib/security/cacerts -alias cardserviced -storepass "changeit" -noprompt >/dev/null 2>&1 ) ; then
+  keytool -import -alias cardserviced -trustcacerts -file repository/src/main/resources/cuscal-d.cer -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass "changeit" -noprompt
+fi
+
+cd repository/
+
+#mvn -X -U -s ./settings.xml clean -U deploy -DskipTests -DskipITs -Dmaven.test.skip=true #old nexus way
+mvn -U -Dmaven.wagon.http.ssl.insecure=true -Dinternal.repo.username=${bamboo_nexus_user} -Dinternal.repo.password=${bamboo_nexus_password} -s ./settings.xml clean -U deploy -DskipTests -DskipITs -Dmaven.test.skip=true
+
+keytool -delete -alias cardserviced -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass "changeit" -noprompt

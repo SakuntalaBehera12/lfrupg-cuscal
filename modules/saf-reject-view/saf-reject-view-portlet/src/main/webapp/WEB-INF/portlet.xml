@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<portlet-app version="3.0"
+	xmlns="http://java.sun.com/xml/ns/portlet/portlet-app.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet.xsd
+		http://java.sun.com/xml/ns/portlet/portlet-app_3_0.xsd">
+	<portlet>
+	<portlet-name>saf-reject-view-portlet</portlet-name>
+	<display-name>SAF Reject</display-name>
+	<portlet-class>com.liferay.portletmvc4spring.DispatcherPortlet</portlet-class>
+	<init-param>
+		<name>contextConfigLocation</name>
+		<value>/WEB-INF/saf-reject-view-portlet.xml</value>
+	</init-param>
+	<supports>
+		<mime-type>text/html</mime-type>
+		<portlet-mode>view</portlet-mode>
+	</supports>
+	<resource-bundle>content.messages</resource-bundle>
+	<portlet-info>
+		<title>SAF Reject</title>
+		<short-title>SAF Reject</short-title>
+		<keywords>SAF Reject</keywords>
+	</portlet-info>
+	<container-runtime-option>
+		<name>javax.portlet.actionScopedRequestAttributes</name>
+		<value>true</value>
+		<value>numberOfCachedScopes</value>
+		<value>10</value>
+	</container-runtime-option>
+</portlet>
+</portlet-app>

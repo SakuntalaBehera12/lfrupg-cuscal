@@ -1,0 +1,303 @@
+/* ---------- Normal styles for the screen ---------- */
+br {
+	clear: both;
+}
+
+a {
+	outline: none;
+}
+
+#contentWrapper2 {
+	float: none !important;
+}
+
+.bpay-wrapper {
+	font-size: 12px;
+	padding: 0 10px;
+	width: 946px;
+}
+
+.bpay-wrapper fieldset {
+	max-width: 914px;
+}
+
+.bpay-wrapper h1 {
+	background-color: #dedede;
+	color: #fe5402;
+	font-size: 20px;
+	line-height: 38px;
+	margin: 0 0 10px 0;
+	padding: 0 5px;
+}
+
+form label {
+	display: block;
+	float: left;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+form label.disclaimer {
+	display: inline-block;
+	float: none;
+	font-weight: normal;
+}
+
+form fieldset legend {
+	color: #000;
+}
+
+
+.small {
+	width: 210px;
+}
+
+.medium {
+	width: 260px;
+}
+
+.large {
+	width: 310px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+span.pagination-links strong {
+	font-weight: normal;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.error {
+	color: #c00;
+	font-weight: bold;
+	width : 500px;
+}
+
+
+form input#transactionDate,
+form input#payerReportedDate{
+	width: 100px;
+}
+
+form input#givenName,
+form input#surname,
+form input#phoneNumber,
+form input#paymentMethod,
+form input#entryMethod,
+form input#memberNumber,
+form input#fraudType,
+form input#scamType{
+	width: 175px;
+}
+
+form input#transactionRefNumber,
+form input#customerRefNumber,
+form input#correctCRN,
+form input#reason,
+form input#payerName,
+form input#billerName,
+form input#memberName,
+form input#bpayInvestigationId,
+form input#sbClientItemNumber{
+	width: 200px;
+}
+
+form input#email{
+	width: 275px;
+}
+
+form input#comment{
+	width: 300px;
+}
+
+form input#organisation,
+form input#billerCode,
+form input#paymentAmount
+{
+	width: 100px;
+}
+
+
+form label.submit-label-fixed-width {
+	display: block;
+	float: left;
+	font-weight: bold;
+	margin-right: 5px;
+	
+}
+
+fieldset div {
+	margin-bottom: 3px;
+	margin-top: 3px;
+}
+
+
+table.contact-details td.first-column,
+table.contact-details td.second-column {
+	font-weight: bold;
+	width: 170px;
+}
+
+.mandatory {
+	color: #c00;
+}
+
+textarea {
+	height: 120px;
+	width: 100%;
+}
+
+form input[type="text"],
+from input[type="file"],
+form input[type="password"] {
+	padding: 2px 1px !important;
+	color:#000000;	
+}
+
+
+input[type="submit"].request-buttons,
+input[type="button"].request-buttons,
+input[type="submit"].request-buttons:hover,
+input[type="button"].request-buttons:hover {
+	background-color: #fe5402 !important;
+	background-image: none !important;
+	border: none !important;
+	border-radius: 3px !important;
+	box-shadow: none !important;
+	color: #fff !important;
+	font-weight: normal !important;
+	margin-top: 5px;
+	padding: 4px 8px;
+	text-shadow: none !important;
+	width: auto;
+}
+
+
+#service-request-wrapper {
+	font-size: 12px;
+	padding: 0 10px;
+	width: 946px;
+}
+
+#service-request-wrapper h1 {
+	background-color: #dedede;
+	color: #fe5402;
+	font-size: 20px;
+	line-height: 38px;
+	margin: 0;
+	padding: 0 5px;
+}
+
+.contact-info{
+	display: block;
+	float: left;
+	width: 50%;
+}
+
+.contact-info label{
+	width: 120px;
+}
+
+a.buttons,
+a.buttons:hover {
+	display: inline-block;
+	margin: 10px 0;
+	/* padding: 4px 8px; */
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff !important;
+	font-weight: normal;
+	padding: 6px 10px;
+	text-decoration: none !important;
+}
+
+a.masked-details,
+a.masked-details:hover,
+a.masked-details:active {
+	float: none;
+}
+
+a.modal-close {
+	text-align: center;
+}
+
+ul.masked-fields-output li {
+	color: #000;
+	font-size: 12px;
+	list-style-type: none;
+}
+
+form span {
+	margin-right: 5px;
+}
+
+form fieldset div.bpay-input-wrapper {
+	margin-bottom: 6px;
+	margin-top: 6px;
+}
+
+div#disclaimer-wrap {
+	margin-bottom: 6px;
+}
+
+input[type="checkbox"] {
+	float: left;
+	margin-right: 5px;
+}
+
+.hidden-message-scam {
+    display: none;
+    position: absolute;
+    color: #000; /* ---------- Black text ---------- */
+    border: 1px solid #000; /* ---------- Black border ---------- */
+    padding: 10px;
+    border-radius: 4px;
+	left: 498px;
+	top: 840px;
+}
+
+.hidden-message-fraud {
+    display: none;
+    position: absolute;
+    color: #000; /* ---------- Black text ---------- */
+    border: 1px solid #000; /* ---------- Black border ---------- */
+    padding: 10px;
+    border-radius: 4px;
+	top: 742px;
+}
+
+#fraudInfoBlock textarea, 
+#scamInfoBlock textarea{
+	height: 100px;
+	width: 68%;
+}
+#bpayScamType{
+	margin-bottom: 202px;
+	margin-top: 78px;
+}
+#scamInfoBlock{
+	margin-top: 77px;
+}
+#fraudTypeDescription{
+	left: 501px;
+}
+.scam-type-description .description {
+    display: none;
+    position: absolute;
+    color: #000; /* ---------- Black text ---------- */
+    border: 1px solid #000; /* ---------- Black border ---------- */
+    padding: 10px;
+    border-radius: 4px;
+    top: 840px;
+    left: 498px;
+}
+
+/* ---------- Show the description div for the selected option ---------- */
+.scam-type-description .description.active {
+    display: block;
+}

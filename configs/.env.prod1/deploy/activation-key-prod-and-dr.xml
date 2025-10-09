@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<license>
+	<account-name>Cuscal Portal Project</account-name>
+	<owner>Cuscal Portal Project</owner>
+	<description>DRCluster</description>
+	<product-name>DXP Backup</product-name>
+	<product-version>7.3</product-version>
+	<license-name>DXP Backup</license-name>
+	<license-type>production</license-type>
+	<license-version>6</license-version>
+	<start-date>Monday, February 28, 2022 12:00:00 AM GMT</start-date>
+	<expiration-date>Wednesday, October 6, 2123 12:00:00 AM GMT</expiration-date>
+	<max-servers>4</max-servers>
+	<instance-size>Sizing 1</instance-size>
+	<servers>
+		<server>
+			<host-names>
+				<host-name>HBPWAS49V</host-name>
+			</host-names>
+			<ip-addresses>
+				<ip-address>10.162.251.149</ip-address>
+			</ip-addresses>
+			<mac-addresses>
+				<mac-address>00:50:56:99:5B:4B</mac-address>
+			</mac-addresses>
+		</server>
+		<server>
+			<host-names>
+				<host-name>HBPWAS48V</host-name>
+			</host-names>
+			<ip-addresses>
+				<ip-address>10.162.251.148</ip-address>
+			</ip-addresses>
+			<mac-addresses>
+				<mac-address>00:50:56:99:0B:31</mac-address>
+			</mac-addresses>
+		</server>
+		<server>
+			<host-names>
+				<host-name>ULPWAS48V</host-name>
+			</host-names>
+			<ip-addresses>
+				<ip-address>10.161.251.148</ip-address>
+			</ip-addresses>
+			<mac-addresses>
+				<mac-address>00:50:56:83:9F:D6</mac-address>
+			</mac-addresses>
+		</server>
+		<server>
+			<host-names>
+				<host-name>ULPWAS49V</host-name>
+			</host-names>
+			<ip-addresses>
+				<ip-address>10.161.251.149</ip-address>
+			</ip-addresses>
+			<mac-addresses>
+				<mac-address>00:50:56:83:A9:99</mac-address>
+			</mac-addresses>
+		</server>
+	</servers>
+	<key>da7714056cbebdefcb7c0b29522adb6b7f5b2456d208b3ebc3666db66d9434d4b1711acafb388ebb5c9d14e7cbbbe746db8eb440360427a83d4a141c4d90fbe65ec137691019fb921ad1392cf553e02f7fe9da7d41ac1ab07c831418f01b903a10f41e305ca1dcedc07dcf930b0e71648227fd92fd2cb0766fe3248d8f1370062de33dc6</key>
+</license>

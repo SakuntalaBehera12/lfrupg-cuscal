@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="transactionService"
+	targetNamespace="http://connect.cuscal.com.au/transactionService/1.0"
+	xmlns:tns="http://connect.cuscal.com.au/transactionService/1.0"
+	xmlns:search="http://connect.cuscal.com.au/transactionSearch/1.0"
+	xmlns:query="http://connect.cuscal.com.au/transactionQuery/1.0"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import schemaLocation="../xsd/transactionQuery.xsd"
+				namespace="http://connect.cuscal.com.au/transactionQuery/1.0"></xsd:import>
+		</xsd:schema>
+		<xsd:schema>
+			<xsd:import schemaLocation="../xsd/transactionSearch.xsd"
+				namespace="http://connect.cuscal.com.au/transactionSearch/1.0"></xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="TransactionSearchRequest">
+		<wsdl:part name="TransactionSearchRequest" element="search:TransactionSearchRequest" />
+	</wsdl:message>
+	<wsdl:message name="TransactionSearchResponse">
+		<wsdl:part name="TransactionSearchResponse" element="search:TransactionSearchResponse" />
+	</wsdl:message>
+	<wsdl:message name="TransactionQueryRequest">
+		<wsdl:part name="TransactionQueryRequest" element="query:TransactionQueryRequest" />
+	</wsdl:message>
+	<wsdl:message name="TransactionQueryResponse">
+		<wsdl:part name="TransactionQueryResponse" element="query:TransactionQueryResponse" />
+	</wsdl:message>
+	<wsdl:portType name="TransactionServicePortType">
+		<wsdl:operation name="search">
+			<wsdl:input name="TransactionSearchRequest" message="tns:TransactionSearchRequest" />
+			<wsdl:output name="TransactionSearchResponse" message="tns:TransactionSearchResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="query">
+			<wsdl:input name="TransactionQueryRequest" message="tns:TransactionQueryRequest" />
+			<wsdl:output name="TransactionQueryResponse" message="tns:TransactionQueryResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="TransactionServiceBinding" type="tns:TransactionServicePortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="search">
+			<soap:operation style="document"
+				soapAction="http://connect.cuscal.com.au/TransactionService/search" />
+			<wsdl:input name="TransactionSearchRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="TransactionSearchResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="query">
+			<soap:operation style="document"
+				soapAction="http://connect.cuscal.com.au/TransactionService/query" />
+			<wsdl:input name="TransactionQueryRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="TransactionQueryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="TransactionService">
+		<wsdl:port name="TransactionServicePort" binding="tns:TransactionServiceBinding">
+			<soap:address location="/service/TransactionService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions> 
+ 
+      

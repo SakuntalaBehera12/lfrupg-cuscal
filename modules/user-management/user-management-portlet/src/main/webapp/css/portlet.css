@@ -1,0 +1,90 @@
+.content {
+	float: right;
+	margin-right: 10px;
+	width: 785px;
+}
+
+form.accountManagementForm dl	{
+	margin: 0 0 10px 0;
+	padding: 10px 0 0 10px;
+}
+
+form.accountManagementForm dl dt	{
+	clear: left;
+	float: left;
+	font-weight: bold;
+	padding: 0 10px 10px 0;
+	text-align: right;
+	width: 200px;
+}
+
+form.accountManagementForm dl dd	{
+	padding: 0 0 10px 0;
+}
+
+form.accountManagementForm dl dd input	{
+	width: 200px;
+}
+
+form.accountManagementForm dl dd input[disabled]	{
+	color: #C0C0C0;
+}
+
+label.warning	{
+	color: red;
+}
+
+label.successful	{
+	color: green;
+}
+.required {
+	color: red;	
+}
+
+input[type="text"],
+input[type="password"] {
+	font-family: Verdana, Arial, Helvetica, Sans-Serif !important;
+	font-size: 1em !important;
+	padding: 5px !important;
+}
+
+input[type="submit"].button,
+input[type="submit"].button:hover,
+input[type="submit"].button:active {
+	background-color: #fe5402;
+	background-image: none;
+	border: none;
+	border-radius: 3px;
+	color: #fff;
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 7px 6px;
+	text-shadow: none;
+	width: auto;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.error {
+	color: #f00;
+	font-weight: bold;
+}
+
+.no-wrap {
+	white-space: nowrap;
+}
+
+#secondaryNav{
+	display:none;
+}
+
+#manageAccountContent{
+	float: none;
+	width: 785px;
+}
+
+#manageAccountContent h3{
+	color:black !important;
+	margin: 1em 0 !important;
+}

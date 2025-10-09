@@ -1,0 +1,5 @@
+Bundle-Name: cuscal-asset-publisher-web
+Bundle-SymbolicName: cuscal.asset.publisher.web
+Bundle-Version: 1.0.0
+Fragment-Host: com.liferay.asset.publisher.web
+Portal-Bundle-Version: 7.3.10

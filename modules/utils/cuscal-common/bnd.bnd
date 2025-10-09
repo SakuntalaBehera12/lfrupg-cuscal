@@ -1,0 +1,22 @@
+Bundle-Name: cuscal-common
+Bundle-SymbolicName: com.cuscal.common
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.cuscal.common,\
+	com.cuscal.common.command,\
+	com.cuscal.common.constants,\
+	com.cuscal.common.configuration,\
+	com.cuscal.common.db,\
+	com.cuscal.common.email,\
+	com.cuscal.common.exceptions,\
+	com.cuscal.common.ftp,\
+	com.cuscal.common.ldap.beans,\
+	com.cuscal.common.menu,\
+	com.cuscal.common.text,\
+	com.cuscal.common.utilities
+Import-Package:\
+    !org.apache.xml.resolver.*,\
+    !javax.jms,\
+    !org.apache.regexp,\
+    \
+    *

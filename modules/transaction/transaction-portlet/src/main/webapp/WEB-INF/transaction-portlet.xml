@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/cache
+		http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	<import resource="applicationContext.xml" />
+
+<bean
+	class="au.com.cuscal.transactions.controllers.TransactionSearchController"
+	id="transactionSearchController"
+>
+	<property name="organisationIdOverride" value="${organisation.id.override}" />
+</bean>
+
+<!--<bean class="au.com.cuscal.framework.webservices.client.impl.CardServiceImpl" id="cardService" />-->
+
+<!--<bean-->
+<!--	autowire-candidate="true"-->
+<!--	class="au.com.cuscal.transactions.services.client.CommonServiceImpl"-->
+<!--	id="commonService"-->
+<!--&gt;-->
+<!--	<property name="cardService" ref="cardService" />-->
+<!--</bean>-->
+
+<!--<bean id="ticketingService" class="au.com.cuscal.framework.webservices.client.impl.TicketingServiceImpl" />-->
+
+<bean
+	autowire-candidate="true"
+	class="au.com.cuscal.transactions.services.client.TransactionServiceImpl"
+	id="transactionService"
+>
+	<property name="transactionServicesUrl" value="${webservice.transaction.url}" />
+	<property name="cardServicesUrl" value="${webservice.cards.url}" />
+	<property name="entityServicesUrl" value="${webservice.entity.url}" />
+	<property name="commonServicesUrl" value="${webservice.common.url}" />
+	<!--<property name="ticketServicesUrl" value="${webservice.ticket.url}" />-->
+</bean>
+
+<bean class="com.liferay.portletmvc4spring.multipart.CommonsPortletMultipartResolver" id="portletMultipartResolver" />
+
+<!--<bean id="ticketTransferService" autowire-candidate="true"
+		class="au.com.cuscal.transactions.services.client.TicketTransferServiceImpl">
+		<property name="ticketAttachmentServicesUrl" value="${webservice.ticket.url}" />
+	</bean>-->
+</beans>

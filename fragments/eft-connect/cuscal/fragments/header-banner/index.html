@@ -1,0 +1,56 @@
+[#assign privateFriendlyURL = themeDisplay.getPathFriendlyURLPrivateGroup() +
+themeDisplay.getSiteGroup().getFriendlyURL() publicFriendlyURL =
+themeDisplay.getPathFriendlyURLPublic() +
+themeDisplay.getSiteGroup().getFriendlyURL()
+site_default_public_url = htmlUtil.escape(themeDisplay.getSiteGroup().getDisplayURL(themeDisplay, false))
+/]
+<header id="banner">
+<div class="header-box">
+	<div class="navbar navbar-classic py-0">
+		<div class="container-fluid container-fluid-max-xl user-personal-bar">
+			<div class="align-items-center d-flex justify-content-between w-100">
+				
+					<div class="site-logo-fragment">
+						<a class="align-items-center d-md-inline-flex logo-md" href="${site_default_public_url}">
+							[#assign siteLogo = htmlUtil.escape(themeDisplay.getCompanyLogo()) /]
+							<img alt="${configuration.alt}" class="fragment-site-logo" height="${configuration.imageHeight}" src="${siteLogo}" width="${configuration.imageWidth}" />
+						</a>
+					</div>
+				
+
+				<div class="autofit-col banner-top d-sm-none d-none d-md-block">
+					<lfr-editable id="banner-top" type="image">
+						 <a href="https://www.cuscalpayments.com.au" target="_blank">
+						 		<img class="img-fluid" src="[resources:image_gallery.gif]" />
+						</a>
+					</lfr-editable>
+				</div>
+
+				<div class="autofit-col">
+					<div class="my-acc-container align-items-end d-flex justify-content">
+						[#if themeDisplay.isSignedIn()]
+						<div class="autofit-col my-account mr-4">
+								<div><strong>Logged In As</strong></div>
+								'${user.getDisplayEmailAddress()}'
+								<a href="/web/cuscal/manage-your-account"><strong>Manage Your Account</strong></a>
+						</div>
+						 
+						<div class="user-personal-bar-fragment">
+								<a href="/c/portal/logout" class="btn btn-primary"><strong>Log out</strong></a>
+						</div>
+						[#else]
+						<div class="autofit-col" id="contact-us">
+								<a href="/c/portal/login" id="customer-login" >Customer Login</a>
+								<div><strong>Contact Us</strong></div>
+								<div>1300 650 501</div>
+								<a href="#" id="email" >info@cuscal.com.au</a>
+						</div>
+						[/#if]
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</header>

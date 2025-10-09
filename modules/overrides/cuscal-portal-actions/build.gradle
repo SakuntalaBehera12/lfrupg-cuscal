@@ -1,0 +1,4 @@
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly project(":modules:cuscal-terms-of-use:cuscal-terms-of-use-api")
+}

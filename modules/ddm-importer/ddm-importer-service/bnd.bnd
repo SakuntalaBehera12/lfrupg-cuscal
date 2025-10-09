@@ -1,0 +1,7 @@
+Bundle-Activator: com.liferay.common.ddm.importer.service.DDMImporterBundleActivator
+Bundle-Name: Common DDM Importer Service
+Bundle-SymbolicName: com.liferay.common.ddm.importer.service
+Bundle-Version: 1.0.0
+Liferay-Require-SchemaVersion: 1.0.0
+Liferay-Service: true
+-dsannotations-options: inherit

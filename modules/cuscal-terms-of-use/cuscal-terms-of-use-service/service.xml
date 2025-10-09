@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="au.com.cuscal.termsofuse">
+	<namespace>CuscalToC</namespace>
+	<entity local-service="true" name="TermsOfUse" remote-service="true" uuid="false">
+
+		<!-- PK fields -->
+
+		<column name="entryId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
+		<!-- Terms of Use fields -->
+
+		<column name="userId" type="long" />
+		<column name="screenName" type="String" />
+		<column name="version" type="double" />
+		<column name="acceptedDate" type="Date" />
+
+		<!-- Other Audit fields -->
+
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="acceptedDate" />
+		</order>
+
+	</entity>
+</service-builder>

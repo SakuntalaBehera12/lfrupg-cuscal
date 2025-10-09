@@ -1,0 +1,6 @@
+Bundle-Name: cuscal-language
+Bundle-SymbolicName: au.com.cuscal.language.hook
+Bundle-Version: 1.0.0
+Provide-Capability:\
+	liferay.language.resources;\
+		resource.bundle.base.name="content.Language"

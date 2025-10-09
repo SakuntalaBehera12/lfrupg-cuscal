@@ -1,0 +1,1 @@
+<#include "${full_templates_path}/portal_content_include.ftl" />

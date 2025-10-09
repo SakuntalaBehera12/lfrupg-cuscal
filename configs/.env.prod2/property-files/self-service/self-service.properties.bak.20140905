@@ -1,0 +1,22 @@
+# Leave this property empty for test and production systems. This is a development only property.
+organisation.id.override=
+
+# Max number of file attachments allowed
+max.file.attachments=5
+
+# Max file size for file attachments.
+max.file.attachment.size=5242880
+
+file.attachment.types=jpg,jpeg,gif,tif,tiff,pdf
+file.attachment.size=2097152
+
+service.request.role.view=SelfService
+service.request.role.attachment=SelfServiceAttachment
+service.request.role.note=SelfServiceNote
+
+self.service.heading=Self Service
+self.service.intro=Welcome to Cuscal Self Service where you can view any requests you or your organisation has raised with us.  Simply enter the request number you are interested in viewing or use the request filters to narrow your search results.
+
+# The different org short names for Cuscal.
+cuscal.org.short.names=cuscal,cuscalra21
+cuscal.org.default.name=Cuscal

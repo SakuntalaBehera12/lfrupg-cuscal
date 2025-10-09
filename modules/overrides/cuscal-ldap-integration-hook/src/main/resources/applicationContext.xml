@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="placeholderConfig">
+		<property name="location">
+			<value>file:${catalina.home}/../property-files/ldap-config.properties</value>
+		</property>
+	</bean>
+	<bean class="org.springframework.ldap.core.support.LdapContextSource" id="contextSource">
+		<property name="url" value="${providerURL}" />
+		<property name="base" value="${searchBase}" />
+		<property name="userDn" value="${securityPrincipal}" />
+		<property name="password" value="${securityCredentials}" />
+	</bean>
+	<bean
+		class="org.springframework.ldap.core.LdapTemplate"
+		id="ldapTemplate"
+	>
+		<constructor-arg ref="contextSource" />
+	</bean>
+	<bean class="au.com.cuscal.connect.ldap.dao.impl.PersonDaoImpl" id="personDao">
+		<property name="ldapTemplate" ref="ldapTemplate" />
+	</bean>
+
+	<bean class="au.com.cuscal.connect.util.resource.dxp.UserUtilImpl" id="userUtil" />
+</beans>

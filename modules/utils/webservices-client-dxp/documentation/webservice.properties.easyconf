@@ -1,0 +1,62 @@
+# ################################################################################################ #
+# WebServices Configuration File
+# ################################################################################################ #
+# This property file contains the url endpoints that the WebServices-client.jar uses.
+# This is used within all liferay code that calls the Cuscal Web Service layer
+# Uses EasyConf.  
+# Refer to http://easyconf.sourceforge.net/user/introduction.html for help.
+# 
+# ################################################################################################ #
+# url is the primary variable used to build the webservice endpoints 
+# set it to the appropriate url.xxxx value
+url.base=${url.devapp20}
+
+# these url.xxxx values define the known possible endpoints.
+# set url.base to one of these values to change the endpoint
+url.devapp20=${protocol.https}://${host.devapp20}:${port.8080}
+url.testapp20=${protocol.https}://${host.testapp20}:${port.8443}
+url.prodapp20=${protocol.https}://${host.prodapp20}:${port.8443}
+url.nick=${protocol.http}://${host.nick}:${port.9090}
+url.eric=${protocol.http}://${host.eric}:${port.8080}
+url.rajni=${protocol.http}://${host.rajni}:${port.9005}
+url.aaashish=${protocol.http}://${host.aaashish}:${port.8082}
+url.rizal=${protocol.http}://${host.rizal}:${port.8080}
+
+# ------------------------------------------------------------------------------------------------ -
+# The following variables are component variables used in building up the urls above
+# ------------------------------------------------------------------------------------------------ -
+protocol.http=http
+protocol.https=https
+
+host.devapp20=services.cuscal-d.com.au
+host.testapp20=services.cuscal-t.com.au
+host.prodapp20=services.cuscal.com.au
+
+host.nick=168.217.134.32
+host.eric=168.217.134.94
+host.aaashish=ws4000240.cuscalad.com
+host.rajni=ws4000261.cuscalad.com
+host.rizal=ws4000263.cuscalad.com
+
+port.8080=8080
+port.9090=9080
+port.8443=8443
+port.8082=8082
+port.9005=9005
+
+# ------------------------------------------------------------------------------------------------ -
+# The following variables are final end points. They can be changed by changing the url.base
+# variable above
+# ------------------------------------------------------------------------------------------------ -
+webservice.transaction.url=${url.base}/transaction-services/TransactionService?wsdl
+webservice.cards.url=${url.base}/transaction-services/CardService?wsdl
+webservice.entity.url=${url.base}/transaction-services/EntityService?wsdl
+webservice.common.url=${url.base}/transaction-services/CommonService?wsdl
+webservice.atm.url=${url.base}/transaction-services/AtmService?wsdl
+webservice.pct.url=${url.base}/transaction-services/PctService?wsdl
+webservice.transactionArchive.url=${url.base}/transaction-services/TransactionArchiveService?wsdl
+webservice.saf.url=${url.base}/transaction-services/SAFService?wsdl
+webservice.reports.url=${url.base}/reporting-services/report-ws/ReportTransferService.wsdl
+webservice.ticketing.url=${url.rizal}/selfServiceWs/selfService?wsdl
+
+# end of file.

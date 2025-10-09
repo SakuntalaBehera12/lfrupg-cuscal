@@ -1,0 +1,83 @@
+volumes:
+  oracle_oradata:
+  elasticsearch_data:
+
+services:
+
+  liferay:
+    container_name: liferay-cuscal
+    image: liferay/dxp:2025.q1.14-lts
+    environment:
+      - LIFERAY_DISABLE_TRIAL_LICENSE=true
+      - LIFERAY_JPDA_ENABLED=true
+      - LIFERAY_JVM_OPTS=-Xms3g -Xmx4g -XX:MaxMetaspaceSize=768m -XX:MaxMetaspaceSize=1024m -Dlogs.home=/opt/liferay/logs
+      - LIFERAY_VIRTUAL_PERIOD_HOSTS_PERIOD_VALID_PERIOD_HOSTS=*
+    user: root:root
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+    volumes:
+      - ./services/liferay/patching:/mnt/liferay/patching
+      - ./services/liferay/files:/mnt/liferay/files
+      - ./services/liferay/scripts:/mnt/liferay/scripts
+      - ./bundles/deploy:/opt/liferay/deploy
+      - ./bundles/osgi/modules:/opt/liferay/osgi/modules
+      - ./bundles/osgi/war:/opt/liferay/osgi/war
+      - ./bundles/logs:/opt/liferay/logs
+    depends_on:
+      database:
+        condition: service_healthy
+      search:
+        condition: service_healthy
+
+  database:
+    container_name: oracle-cuscal
+    image: cuscal-oracle-image
+    build:
+      context: ./
+      dockerfile: services/oracle/Dockerfile
+    shm_size: '4gb'
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    environment:
+      - ORACLE_SID=ORCLCDB
+      - ORACLE_PDB=ORCLPDB1
+      - ORACLE_PWD=Liferay1237
+      - ORACLE_EDITION=enterprise
+      - ORACLE_CHARACTERSET=WE8MSWIN1252
+    volumes:
+      - oracle_oradata:/opt/oracle/oradata
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    healthcheck:
+      test: [ "CMD", "/opt/oracle/scripts/setup/10-custom-status.sh"]
+      interval: 60s
+      retries: 1000
+      timeout: 10s
+      start_period: 40s
+
+  search:
+    container_name: elasticsearch-cuscal
+    build: ./services/elasticsearch/
+    environment:
+      - cluster.name=LiferayElasticsearchCluster
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.type=single-node"
+      - "node.name=es-node1"
+      - "INGEST_GEOIP_DOWNLOADER_ENABLED=false"
+      - "xpack.security.enabled=false"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://search:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      database:
+        condition: service_healthy

@@ -1,0 +1,11 @@
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.framework", version: "5.2.2"
+	compileOnly group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.security", version: "5.2.2"
+	compileOnly group: "commons-lang", name: "commons-lang", version: "2.6"
+	compileInclude group: "log4j", name: "log4j", version: "1.2.17"
+	compileOnly rootProject.files("libs/AuditFramework-0.0.30.jar")
+	compileOnly rootProject.files("libs/CuscalTicketingFramework-1.1.jar")
+	compileOnly rootProject.files("libs/WebServices-Client-0.0.76-SNAPSHOT.jar")
+	compileOnly project(":modules:utils:audit-framework-dxp")
+}

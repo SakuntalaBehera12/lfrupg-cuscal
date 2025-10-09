@@ -1,0 +1,1097 @@
+/* ---------- Print styles overriding the default styles since liferay does not let us add a print only stylesheet. ---------- */
+@media print {
+	@page {
+		size: auto;
+	}
+	
+	body {
+		font-family: Verdana, Arial, Sans-Serif !important;
+		font-size: 12px !important;
+		height: auto !important;
+		margin: 0 !important;
+		width: auto !important;
+	}
+	
+	.no-print,
+	#navigation, 
+	#pan,
+	#pin-change-details-pan,
+	#bannerTable, 
+	#transaction-search-form, 
+	#transaction-cud-form,
+	.show-hide-export-button-wrapper, 
+	#footer,
+	#service-requests,
+	#dockbar {
+		display: none !important;
+	}
+	
+	.masked-pan,
+	#pin-change-details-masked-pan {
+		display: inline-block !important;
+		margin-left: 10px !important;
+	}
+
+	/* .printable,
+	.print-request { */
+	.printable {
+		display: block !important;
+		overflow: visible !important;
+		position: relative !important;
+	}	
+	
+	div#transactionDetailsDiv,
+	div#transactionCudDetailsDiv,
+	div#pin-change-details-wrapper {
+		border: none !important;
+		height: auto !important;
+		overflow-y: visible !important;
+	}
+	
+	div#simplemodal-container {
+		left: 0 !important;
+		position: absolute !important;
+		top: 0 !important;
+	}
+	
+	/* .printable fieldset, 
+	.print-request fieldset {*/
+	.printable fieldset {
+		display: block !important;
+		margin: 5px 0 !important;
+		overflow: visible !important;
+		position: relative !important;
+	}
+	
+ 	div#simplemodal-overlay {
+		background-color: #fff !important;
+		height: 100% !important;
+		position: relative !important;
+		width: 100% !important;
+	}
+	
+	.transaction-service-requests th {
+		text-align: left;
+	}
+}
+
+/* ---------- Normal styles for the screen ---------- */
+br {
+	clear: both;
+}
+
+a {
+	outline: none;
+}
+
+.masked-pan,
+#pin-change-details-masked-pan {
+	display: none;
+}
+
+.ie input,
+.ie select {
+	vertical-align: middle;
+}
+
+label.pan,
+label.expiry-date,
+label.function-code,
+label.message-type {
+	font-weight: bold;
+	margin-left: 10px;
+	margin-right: 5px;
+}
+
+label.expiry-date {
+	margin-left: 5px;
+}
+
+form label {
+	display: block;
+	float: left;
+	font-weight: bold;
+	margin-right: 5px;
+	width: 88px;
+}
+
+form label.externalTransaction,
+form label.rrn,
+form label.cardAcceptor {
+	width: 145px;	
+}
+
+form label.amount-type {
+	width: 102px;	
+}
+
+form label.start-date {
+	width: 150px;
+}
+
+form label.end-date {
+	width: 135px;
+}
+
+form label.message-code {
+	width: 105px;
+}
+
+form label.response-code,
+form label.amountset {
+	width: 111px;
+}
+
+form fieldset {
+	padding: 5px 3px;
+}
+
+form fieldset legend {
+	color: #000;
+}
+
+form fieldset div {
+	display: block;
+	float: left;
+	margin-bottom: 10px;
+	width: 33%;
+}
+
+div.response-code-wrapper {
+	width: 265px;
+}
+
+div.message-div-wrapper {
+	width: 360px;
+}
+
+form fieldset div.date-time-div {
+	width: 40%;
+}
+
+form fieldset div.date-type-div {
+	margin-left: 62px;
+	width: 40%;
+}
+
+form fieldset div.amount-type-div {
+	margin-left: 62px;
+	width: 40%;
+}
+
+form fieldset div.amount-div {
+	width: 267px;
+}
+
+/* ---------- Setting the max width for the modal window ---------- */
+div#transactionDetailsDiv,
+div#service-requests,
+div#messageCodeDiv,
+div#transactionCudDetailsDiv, 
+div#pin-change-details-wrapper {
+	overflow: hidden;
+	width: 800px;
+}
+
+ul.tabs {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.tabs li {
+	background-color: #c8c9cb;
+	border: solid 1px #c8c9cb;
+	border-radius: 3px 3px 0 0;
+	border-width: 1px 1px 0 1px;
+	color: #000;
+	cursor: pointer;
+	display: inline;
+	font-size: 1.1em;
+	font-weight: bold;
+	line-height: 43px;
+	margin: 0 2px;
+	padding: 4px 11px;
+	position: relative;
+	top: 1px;
+}
+
+.ie7 ul.tabs li {
+	top: 0;
+}
+
+.firefox ul.tabs li {
+	top: -1px;
+}
+
+ul.tabs li.selected {
+	background-color: #fff;
+	color: #fe5402;
+}
+
+ul.tabs li.first-tab {
+	margin-left: 0;
+}
+
+/* ul.tabs li a {
+	color: #000;
+}
+
+ul.tabs li.selected a {
+	color: #fe5402;
+} */
+
+/* #cardInfoDiv,
+#cardLimitDiv,
+#accountInfoDiv {
+	background-color: #fff;
+	border: solid 1px #c8c9cb;
+	color: #000;
+} */
+
+div#transaction-details-wrapper,
+div#service-requests,
+div#msgCodeDescrp,
+div#schemeIDDescrp,
+table#respCodeDescrp {
+	/* padding-top: 10px; */
+	background-color: #fff;
+	border-top: solid 1px #c8c9cb;
+	color: #000;
+	padding: 10px 0;
+	width: 100%;
+}
+
+.ie7 div#transaction-details-wrapper,
+.ie7 div#service-requests,
+.ie7 div#schemeIDDescrp
+.ie7 div#msgCodeDescrp {
+	width: 795px;
+}
+
+.ie7 table#respCodeDescrp  {
+	width: 815px;
+}
+
+.ie div#transactionDetailsDiv,
+.ie div#responseCodeDiv,
+.ie div#messageCodeDiv,
+.ie div#schemeIDDiv,
+.ie div#transactionCudDetailsDiv,
+.ie div#pin-change-details-wrapper {
+	overflow-y: scroll;
+}
+ 
+div#service-requests, 
+input#submit-visa {
+	display: none;
+}
+
+div#visa-service-request,
+div#atm-pos-service-request {
+	display: none;
+}
+
+div#service-request table#transaction-service-requests td, 
+div#service-request table#transaction-service-requests th {
+	padding: 3px;
+}
+
+div#service-requests div.bold {
+	font-weight: bold;
+}
+
+div#service-requests div.normal {
+	font-weight: normal;
+}
+
+div#service-requests th,
+div#service-requests td {
+	vertical-align: top;
+}
+
+div#service-requests th {
+	width: 125px;
+}
+
+div#service-requests th.header-product {
+	width: 150px;
+}
+
+div#service-requests th.header-status {
+	width: 85px;
+}
+
+div#service-requests th.header-submitted-by {
+	width: 150px;
+}
+
+div#service-requests form th {
+	padding: 0 5px;
+	text-align: right;
+}
+
+div#service-requests fieldset.request-transaction th{
+	width: 160px;
+}
+
+div#service-requests fieldset.mastercard-additional-transaction-info-fieldset th{
+	width: 160px;
+}
+
+div#transaction-details-wrapper fieldset.mastercard-additional-transaction-info-fieldset th{
+	width: 160px;
+}
+
+div#transaction-details-wrapper fieldset.response-details th{
+	width: 160px;
+}
+
+#service-requests .masked-pan {
+	display: block;
+}
+
+#service-requests #visa-transation-details {
+	display: none;
+}
+
+div#service-requests th.small {
+	width: 70px;
+}
+
+div#service-requests td.value {
+	width: 281px;
+}
+
+div#service-requests label {
+	margin-bottom: 4px;
+	width: 105px;
+}
+
+div#service-requests label.large {
+	width: 150px;
+}
+
+div#service-requests fieldset div#tc40-form,
+div#service-requests fieldset div#tc52-form {
+	width: 100%;
+}
+
+#tc40-form,
+#tc52-form {
+	display: none;
+}
+
+div#service-requests input[type="submit"] {
+	clear: both;
+	font-weight: bold !important;
+	margin-top: 5px;
+}
+
+div#service-requests fieldset div {
+	margin: 0;
+}
+
+div#service-requests fieldset.member-details div {
+	width: 45%;
+}
+
+div#service-requests fieldset.claim-details div#atm-fee-div {
+	width: 25%;
+}
+
+div#service-requests fieldset.claim-details div#atm-fee-div div {
+	width: 100%;
+}
+
+div#service-requests fieldset.claim-details input.amount-received {
+	text-align: right;
+	width: 80px;
+}
+	
+div#service-requests fieldset.claim-details input.amount-deposited {
+	text-align: right;
+	width: 80px;
+}
+
+div#service-requests fieldset.attachment-details div {
+	width: 45%;
+}
+
+div#responseCodeDiv td,
+div#messageCodeDiv td {
+	white-space: no-wrap;
+}
+
+em {
+	color: #c00;
+}
+
+span.message {
+	display: block;
+	/* margin-left: 30px; */
+	margin-bottom: 10px;
+}
+
+form input[type="text"] {
+	padding: 2px 1px;
+}
+
+form input[type="text"].amount {
+	text-align: right;
+}
+
+.modal-wrapper fieldset {
+	padding: 4px;
+}
+
+.modal-wrapper fieldset.pos,
+.modal-wrapper fieldset.response-details,
+.modal-wrapper fieldset.amounts,
+.modal-wrapper fieldset.date-time,
+.modal-wrapper fieldset.acquirer,
+.modal-wrapper fieldset.issuer,
+.modal-wrapper fieldset.original-acquirer,
+.modal-wrapper fieldset.card-acceptor {
+	clear: both;
+	float: none;
+	width: auto;
+}
+
+fieldset legend {
+	color: #000;
+	font-weight: bold;
+}
+
+form input.date-pick {
+	width: 80px;
+}
+
+form input#amount,
+form input#responseCode,
+form input#messageCode {
+	width: 80px;
+}
+
+table.tx-details,
+p.error-message {
+	margin: 10px 0;
+}
+
+table.tx-details td {
+	padding: 0 3px;
+	vertical-align: top;
+}
+
+table.tx-details td.tx-titles {
+	font-weight: bold;
+	text-align: right;
+	width: 166px;
+}
+
+table.transaction-code {
+	width: 100%;
+}
+
+table.transaction-code td {
+	padding: 0 3px;
+	vertical-align: top;
+}
+
+table.transaction-code td.tx-titles,
+table.transaction-code td.code {
+	font-weight: bold;
+	text-align: right;
+	width: 80px;
+}
+
+table.transaction-code td.code {
+	width: 42px;
+}
+
+table.tx-details td.tx-titles span.normal {
+	font-weight: normal;
+}
+
+#responseCodeDiv table.tx-details {
+	margin-top: 0;
+}
+
+#responseCodeDiv table.tx-details td,
+#messageCodeDiv table.tx-details td {
+	padding: 5px;
+	text-align: left;
+}
+
+#messageCodeDiv td.message-code {
+	width: 42px;
+}
+
+#messageCodeDiv fieldset {
+	margin-bottom: 5px;
+}
+
+#responseCodeDiv table.tx-details td.tx-titles,
+#schemeIDDiv table.tx-details td.tx-titles,
+#messageCodeDiv table.tx-details td.tx-titles {
+	text-align: left;
+	width: auto;
+}
+
+fieldset.date-time td.tx-titles,
+fieldset.original-acquirer td.tx-titles {
+	width: 85px;
+}
+
+fieldset.amounts td.tx-titles {
+	text-align: center;
+	width: 25%;
+}
+
+fieldset.issuer td.tx-titles, 
+fieldset.acquirer td.tx-titles {
+	width: 95px;
+}
+
+fieldset.acquirer td.visa-transaction {
+	width: 150px;
+}
+
+fieldset.card-acceptor td.tx-titles {
+	width: 45px;
+}
+
+fieldset.acquirer td.id,
+fieldset.issuer td.id,
+fieldset.card-acceptor td.id {
+	width: 25px;
+}
+
+fieldset.acquirer td#sysTrace,
+fieldset.issuer td#retRefNo,
+fieldset.original-acquirer td#terminalIdTx {
+	width: 85px;
+}
+
+fieldset.acquirer td#acqId, 
+fieldset.issuer td#issueId,
+fieldset.original-acquirer td#orgAcqId {
+	width: 100px;
+}
+
+fieldset.acquirer td#acqName,
+fieldset.issuer td#issuerName,
+fieldset.original-acquirer td#orgAcqName {
+	width: 150px;
+}
+
+fieldset.card-acceptor td#cardAcceptId {
+	width: 140px;
+}
+
+/* fieldset tr.alt,tr.alt {
+	background-color: #ddd;
+} */
+
+table.tx-details td.sub-section {
+	background-color: #4a4b4b;
+	color: #fff;
+	text-align: center;
+}
+
+table.response-details td.tx-titles {
+	width: 112px;
+}
+
+table.pin-response-details td.tx-titles {
+	width: 28%;
+}
+
+.pagination-text {
+	float: right;
+	margin-top: 7px;
+}
+
+.pagination-links {
+	display: block;
+	font-weight: normal;
+	margin-top: 5px;
+	text-align: center;
+}
+
+.export-links {
+	display: block;
+	font-weight: normal;
+	margin-top: 5px;
+	text-align: center;
+}
+
+.tx-buttons-left,
+.tx-buttons-right {
+	float: left;
+	margin: 10px 0;
+	text-align: right;
+	width: 70%;
+}
+
+.tx-buttons-right {
+	width: 29%;
+}
+
+.tx-buttons-left a,
+.tx-buttons-right a {
+	float: none;
+}
+
+span.pagination-links strong {
+	font-weight: normal;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.error {
+	color: #c00;
+	font-weight: bold;
+}
+
+.no-results {
+	clear: both;
+	display: block;
+	font-weight: bold;
+}
+
+a.search-button,
+a.clear-button,
+a.export-button,
+.modal-wrapper a.modal-close,
+.modal-wrapper a.print-button,
+.modal-wrapper a.prev-button,
+.modal-wrapper a.next-button,
+.modal-wrapper a.close-button {
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff !important;
+	display: inline-block;
+	float: left;
+	line-height: 1.4em;
+	margin-right: 5px;
+	padding: 4px 8px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+a.search-button:hover,
+a.clear-button:hover,
+a.export-button:hover,
+.modal-wrapper a.modal-close:hover,
+.modal-wrapper a.print-button:hover,
+.modal-wrapper a.prev-button:hover,
+.modal-wrapper a.next-button:hover,
+.modal-wrapper a.close-button:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+a.clear-button,
+a.clear-button:hover {
+	padding: 0 8px;
+}
+
+.modal-wrapper a.disabled,
+.modal-wrapper a.disabled:hover {
+	background-color: #ddd;
+	cursor: default;
+}
+
+.tx-buttons-right a.close-button,
+a.export-button {
+	float: right;
+}
+
+a#show-hide-search,
+a#show-hide-search-form {
+	clear: both;
+	float: left;
+}
+
+.modal-wrapper a.next-button {
+	margin-right: 15px;
+}
+
+/**
+ * a table that needs to be embedded within a div.
+ * the div may or may not provide the curved corners
+ */
+table.embeddedCuscalTable {
+	padding: 5px;
+	width: 100%;
+}
+
+table.embeddedCuscalTable td {
+	padding: 0px 10px 0 0;
+}
+
+table.embeddedCuscalTable thead tr {
+	background-color: #fe5402;
+}
+
+/**
+ * a table with curved corners
+ */
+table.cuscalTable {
+	padding: 5px;
+	width: 100%;
+}
+
+table.cuscalTable td,
+table.cuscalTable th {
+	padding: 4px;
+	vertical-align: top;	
+}
+
+table.cuscalTable td {
+	border: solid 1px #999;
+	border-width: 1px 0;
+	vertical-align: top;
+}
+
+table.cuscalTable td.first {
+	border-width: 1px 0 1px 1px;
+}
+
+table.cuscalTable td.last {
+	border-width: 1px 1px 1px 0;
+}
+
+table.cuscalTable thead tr {
+	color: #fe5402;
+	font-weight: bold;
+}
+
+table.cuscalTable tbody tr:hover {
+	background-color: #c5cdde;
+}
+
+/* ---------- displaytag specific styling ---------- */
+.tableHeaderRow {
+	background-color: #f38f1d;
+}
+
+.alignRight {
+	text-align: right;
+}
+
+.alignCenter {
+	text-align: center;
+}
+
+.paddingRight {
+	padding-right: 10px;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.odd {
+	background-color: #cecece;
+}
+
+.even {
+	background-color: #fff;
+}
+
+.sorted.descending,
+.sorted.ascending {
+	background: url("../images/sort-arrow-descending.png") left 25% transparent no-repeat;
+	padding-left: 12px;
+}
+
+.sorted.ascending {
+	background: url("../images/sort-arrow-ascending.png") left 50% transparent no-repeat;
+}
+
+.field_title {
+	display: inline-block;
+	font-weight: bold;
+	vertical-align: top;
+	width: 100px;
+}
+
+.field_title_wide {
+	display: inline-block;
+	font-weight: bold;
+	vertical-align: top;
+	width: 300px;
+}
+
+.field,
+.spacer {
+	display: inline-block;
+}
+
+.ie .spacer {
+	display: inline;
+}
+
+.spacer {
+	margin: 0 5px;
+	width: 15px;
+}
+
+form#transactionForm,
+form#transactionCudForm,
+form#pinChangeSearchResultsForm {
+	position: relative;
+}
+
+.pagination-text {
+	float: right;
+	margin-top: 7px;
+}
+
+.pagination-links {
+	display: block;
+	font-weight: normal;
+	margin-top: 5px;
+	text-align: center;
+}
+
+span.pagination-links strong {
+	font-weight: normal;
+}
+
+.simplemodal-wrap {
+	overflow-x: hidden;
+}
+
+#transactionDetailsDiv.modal-wrapper {
+	background-color: #fff;
+	border: solid 1px #000;
+	border-radius: 4px;
+	box-sizing: content-box;
+	color: black;
+	display: none;
+	font-size: 0.85em;
+	max-width: 826px;
+	min-width: 400px;
+	overflow: auto;
+	padding: 4px 4px 0 4px;
+	position: relative;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	width: calc(100% - 10px);
+}
+
+ .modal-wrapper a,
+ .modal-wrapper a:hover {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.modal-wrapper a.normal-link {
+	background-color: transparent;
+	border-radius: 0;
+	color: #fe5402;
+	font-weight: normal;
+	padding: 0;
+	text-decoration: none;
+}
+
+.modal-wrapper a.normal-link:hover {
+	text-decoration: underline;
+}
+
+.modal-header {
+	color: #000;
+	display: block;
+	height: 32px;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+
+.modal-header h6,
+.modal-header h5 {
+	display: inline-block;
+	font-size: 1em;
+	font-weight: normal;
+	margin: 0 4px;
+}
+
+.modal-header h5 {
+	background-color: transparent;
+	/* color: #fe5402; */
+	font-weight: bold;
+	line-height: 37px;
+}
+
+.modal-header a {
+	margin: 4px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.modal-header a.print-button {
+	right: 35px;
+}
+
+.modal-content {
+	color: #000;
+	padding: 10px;
+}
+
+.modal-buttons {
+	clear: both;
+	line-height: 40px;
+	text-align: right;
+}
+
+#simplemodal-overlay {
+	cursor: wait;
+}
+
+.heading {
+	color: black;
+}
+
+/* ---------- Override liferay default fonts for input elements ---------- */
+input[type="text"],
+input[type="password"],
+input[type="file"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+select,
+textarea,
+.textarea,
+button {
+	font: 1em verdana, Arial, Sans-Serif, Helvetica !important;
+}
+
+input[type="submit"],
+input[type="submit"]:hover,
+input[type="submit"]:active,
+input[type="button"],
+input[type="button"]:hover,
+input[type="button"]:active {
+	background-color: #fe5402 !important;
+	background-image: none !important;
+	border: none !important;
+	border-radius: 3px !important;
+	color: #fff !important;
+	cursor: pointer !important;
+	padding: 4px 8px !important;
+	text-shadow: none !important;
+}
+
+ul.msgListStyle{ 
+	color : black;
+	list-style-type:square;  
+}
+
+select.reason-list {
+	width: 350px;
+}
+
+.portlet-msg-info,
+.portlet-msg-error {
+	padding-left: 30px !important;
+	background-position: 6px 14px !important;	
+}
+
+div.show-hide-export-button-wrapper {
+	display: block;
+	height: 30px;
+}
+
+table#fileTable {
+	clear: none;
+	display: block;
+	float: left;
+}
+
+div#service-requests label.documentation-label {
+	vertical-align: top;
+	width: 190px;
+}
+
+div#service-requests label.reason-list {
+	width: 60px;
+}
+
+input[type="file"] {
+	margin-bottom: 3px;
+	padding: 1px !important;
+}
+
+div.show-hide-export-button-wrapper {
+	display: block;
+	height: 30px;
+}
+
+div#service-requests fieldset.claim-details div.comments,
+div#service-requests fieldset div.comments {
+	width: 100%;
+}
+
+div#service-requests fieldset.claim-details div.comments label,
+div#service-requests fieldset div.comments label {
+	display: block;
+	float: none;
+	margin-bottom: 0;
+}
+
+div#service-requests fieldset.claim-details div.comments span,
+div#service-requests fieldset div.comments span {
+	font-style: italic;
+}
+
+div#service-requests fieldset.claim-details div.comments textarea,
+div#service-requests fieldset div.comments textarea {
+	width: 99%;
+}
+
+div.atm-fee-div {
+	margin-bottom: 0px; 
+	height: 30px;
+}
+
+div#atm-fee-div label.atm-fee-label {
+	width: 60px;
+}
+
+div.amount-received {
+	width: 110px;
+}
+
+div.amount-deposited {
+	width: 110px;
+}
+
+.contact-email {
+	width: 240px;
+}
+
+form fieldset.contact-details div {
+	width: 50%;
+}
+
+form fieldset.contact-details span.message {
+	font-style: italic;
+}
+
+#disclaimer-wrap {
+	display: none;
+}
+
+.atm-deposit-error {
+    display: inline-block;
+    width: 500px;	
+}
+abbr {	
+	border-bottom: 1px dotted #b1b0a7 !important; 
+}

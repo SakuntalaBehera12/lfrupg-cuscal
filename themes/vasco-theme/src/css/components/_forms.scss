@@ -1,0 +1,100 @@
+fieldset {
+	border: 1px solid #BFBFBF;
+	padding: 8px;
+}
+
+.ie fieldset {
+	padding-top: 0;
+}
+
+.aui-fieldset {
+	border-width: 0;
+	padding: 0;
+	position: relative;
+}
+
+.configuration-popup .aui-fieldset {
+	margin-bottom: 0;
+}
+
+.aui-fieldset .aui-field-content, .aui-field-row, .aui-button-holder, .aui-field-wrapper-content {
+	margin: 10px 0;
+}
+
+.aui-field-inline .aui-field-content, .aui-field-row .aui-field-content {
+	margin: 0;
+	margin-right: 5px;
+}
+
+.aui-search-bar .aui-field-content {
+	margin-right: 0;
+}
+
+.aui-search-bar .aui-field-content, .aui-search-bar .aui-button-content {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.aui-field-choice .aui-field-label {
+	display: inline-block;
+}
+
+.aui-field-date .aui-field-content {
+	overflow: hidden;
+}
+
+legend {
+	font-weight: bold;
+	padding: 0 6px;
+}
+
+.aui-fieldset-legend {
+	color: #000;
+	font-size: 120%;
+	font-weight: bold;
+	padding: 0 0 1.5em;
+}
+
+.aui-legend {
+	border-bottom: 1px solid #CCC;
+	display: block;
+	position: absolute;
+	width: 90%;
+}
+
+input {
+	background: #FFF;
+}
+
+input[type="text"], input[type="password"], input[type="file"], input[type="submit"], input[type="button"], input[type="reset"], select, textarea, .textarea, button {
+	background-repeat: no-repeat;
+	border: 1px solid;
+	font: 1em Arial, Helvetica, Verdana, sans-serif;
+	padding: 5px 1px;
+}
+
+select {
+	padding: 1px;
+}
+
+input[type="image"] {
+	background: transparent none;
+	border: none;
+	padding: 0;
+}
+
+input[type="submit"], input[type="button"], input[type="reset"], button {
+	cursor: pointer;
+	font-weight: bold;
+	overflow: visible;
+	padding: 5px;
+	width: auto;
+}
+
+
+input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-actions, .lfr-actions ul {
+	border: 1px solid;
+	font-weight: bold;
+}
+
+

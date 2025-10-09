@@ -1,0 +1,122 @@
+@import "components/breadcrumb";
+@import "components/color";
+@import "components/forms";
+@import "components/group-item";
+@import "components/info-panel";
+@import "components/navbars";
+@import "components/sidebar";
+@import "components/table";
+@import "components/widget";
+@import "portlet/portlet";
+@import "portlet/portlet_decorators";
+
+@import "custom_properties/custom_properties_set";
+@import "custom_properties/cuscal_custom.scss";
+
+// Control Panel and left Side bar issue
+
+@media (min-width: 576px) {
+  .applications-menu-modal  .modal-dialog {
+    max-width: unset !important;
+  }
+}
+
+.product-menu.sidenav-menu .sidebar-body {
+  top: 0 !important;
+}
+
+
+.product-menu.sidenav-menu .nav>li>a {
+  display: block;
+  padding: .625rem 1rem;
+}
+
+
+.product-menu.sidenav-menu .sidebar-body .panel-title {
+  display: grid;
+}
+
+.product-menu.sidenav-menu .sidebar-body  a:hover {
+  text-decoration: none;
+}
+
+
+
+/* Hack to master override some imported var */
+@media (min-width: 768px) {
+  html:not(#__):not(#___) .controls-visible .portlet:hover > .cadmin.portlet-topper, html:not(#__):not(#___) .controls-visible .portlet.open > .cadmin.portlet-topper, html:not(#__):not(#___) .controls-visible .portlet.focus > .cadmin.portlet-topper {
+    color: #0b5fff;
+    opacity: 0.95 !important;
+    background-color: #fff;
+    transform: translateY(0) !important;
+    .portlet-name-text {
+      color: #0b5fff;
+    }
+  }
+}
+
+//* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+/* reset all the default browser styles */
+html, body, div, p, ul, li, ol, em, label, input, pre, span {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	// font-family: Verdana, Arial, Sans-Serif, Helvetica;
+	// font-size: 13px;
+}
+
+br {
+	clear: both;
+}
+
+#wrapper {
+	position: relative;
+	display: block;
+	width: 800px;
+	margin: 100px auto;
+}	
+
+h5 {
+	display: block;
+	position: relative;
+	margin: 5px 0 50px 0;
+	padding: 5px;
+}
+
+input {
+	vertical-align: middle;
+}
+
+input[type="Submit"],
+input[type="submit"],
+input[type="Submit"]:hover,
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+input[type="Submit"]:focus,
+input[type="submit"]:active,
+input[type="Submit"]:active {
+	background-image: none;
+	background-color: #fe5402;
+	color: #fff;
+	text-shadow: none;
+	border: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+#portlet_stepup_WAR_stepupportlet {
+  font-family: Verdana, Arial, Sans-Serif, Helvetica;
+
+  box-sizing: content-box !important;
+  .fields {
+    label{
+      font-size: 0.875rem !important;
+    }
+  } 
+  .menu { 
+    margin-left: -110px;
+  }
+}

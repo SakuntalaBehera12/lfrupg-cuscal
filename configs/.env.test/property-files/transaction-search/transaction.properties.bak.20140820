@@ -1,0 +1,105 @@
+# dev Web service WSDL url ------
+
+#webservice.transaction.url=https://services.cuscal-d.com.au:8080/transaction-services/TransactionService?wsdl
+#webservice.common.url=https://services.cuscal-d.com.au:8080/transaction-services/CommonService?wsdl
+
+# Nick Pc
+
+#webservice.transaction.url = http://168.217.134.94:8080/transaction-services/TransactionService?wsdl
+#webservice.common.url = http://168.217.134.94:8080/transaction-services/CommonService?wsdl
+
+# Test/UAT Web service WSDL url ------
+
+#webservice.transaction.url=http://testapp20:8080/transaction-services/TransactionService?wsdl
+#webservice.common.url=http://testapp20:8080/transaction-services/CommonService?wsdl
+
+# Production Web service WSDL url ------
+
+
+
+#Account Identification 1 and 2 values
+account.identi.0=Default account
+account.identi.1=Savings account
+account.identi.2=Cheque account
+account.identi.3=Credit facility
+account.identi.4=Universal account
+account.identi.5=Investment account
+account.identi.6=Reserved for ISO use
+account.identi.7=Reserved for ISO use
+account.identi.8=IEP value account
+account.identi.9=Reserved for private use
+
+# Message properties 
+allowed.messageCode.Groups=0100,0200,0400
+ui.messageOption.display=Authorisation (01##),Financial Transaction (02##),Reversal (04##)
+Auth=Authorisation Messages
+Fina=Financial Messages
+Reve=Reversal Messages
+
+# Status code from Web service Header
+status.header.cods=1,SYSTEM_ERROR
+status.header.alaric=2,SYSTEM_ERROR
+status.header.cods.alaric=2,SYSTEM_ERROR,IN COMPLETE
+status.header.error=0,SYSTEM_ERROR
+status.header.validation=VALIDATION_FAILURE
+status.header.system.error=SYSTEM_ERROR
+
+# Status code from Web service Header for Transaction details
+status.header.hsm.error=4,SYSTEM_ERROR
+
+# Pin Present constants
+Yes=Yes
+NoOrUnknown=No or Unknown
+
+# Pin Change History Search
+pin.change.transaction.codes=74,75,76
+
+# Liferay organisationId override - use for developer debugging only!!
+# this is required to be present... empty out in non-developer environments.
+organisation.id.override=
+
+cuscal.organisation.name=cuscal
+organisation.shortname.override=cuscal
+
+# UI items
+transaction.search.ui.start.mins=00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59
+transaction.search.ui.start.hr=00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23
+transaction.search.ui.end.mins=00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59
+transaction.search.ui.end.hr=24,00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23
+
+
+file.attachment.types=jpg,jpeg,gif,tif,tiff,pdf
+file.attachment.size=2097152
+
+service.request.role.add=SelfServiceAdd
+service.request.role.view=SelfService
+
+
+bin.search.days.allowed=1
+
+tc40.product.code=1
+tc52.product.code=2
+atmpos.product.code=3
+generic.product.code=1
+
+tc40.type.id=23
+tc52.type.id=38
+pos.type.id=22
+atm.type.id=14
+
+transaction.search.ui.visibile.rrn=true
+transaction.search.ui.visibile.stan=true
+transaction.search.ui.visibile.cuscalId=true
+transaction.search.ui.visibile.dateType=true
+transaction.search.ui.visibile.arn=true
+#transaction.search.ui.visibile.rrn=false
+#transaction.search.ui.visibile.stan=false
+#transaction.search.ui.visibile.cuscalId=false
+#transaction.search.ui.visibile.dateType=false
+#transaction.search.ui.visibile.arn=false
+
+atm.reason.type.id=20,22,23,24
+pos.reason.type.id=23,26,27,28
+
+eft.connect.uri=group/eft-connect/transactions
+self.service.uri=self-service

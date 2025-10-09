@@ -1,0 +1,170 @@
+# Workflow name, which will appear in the GitHub Actions UI
+name: Deploy
+
+# Define the events that trigger the workflow, along with the inputs required
+on: 
+  workflow_call:
+    inputs:
+      environment-name:
+        description: "The Environment to Deploy to"
+        required: true
+        default: dev # Defaults to 'dev' if no environment is specified
+        type: string
+      post-deployment-tests:
+        description: "Whether to Run Post-Deployment Tests"
+        required: true
+        default: false # Defaults to 'false' if no value is specified
+        type: boolean
+      test-suite-name:
+        description: "The Test Suite to Run"
+        required: false
+        default: sanity # Defaults to 'sanity' if no test suite is specified
+        type: string
+      run-id:
+        description: "This is the Run that Artifacts will be Downloaded From"
+        required: false
+        default: ${{ github.run_id }}
+        type: string
+      
+      github-token:
+        description: "The GITHUB_TOKEN secret, used to Download Artifacts from workflow"
+        default: ${{ github.token }}
+        required: false
+        type: string
+
+      environment-number:
+        description: "Number of environment to be used"
+        default: ""
+        required: false
+        type: string
+env:
+  ASSET_FILES: 'liferay-bundle.zip' # Placeholder for asset files
+jobs:
+  # Job 1: Deploy the artifact to the specified environment
+  deploy:
+    name: "Deploy Artifact to ${{ inputs.environment-name }}"
+    runs-on:
+      - self-hosted
+      - env-${{ inputs.environment-name }}
+    environment: ${{ inputs.environment-name }} # Sets the deployment environment
+
+    steps:
+
+      # Step 2: Download the artifact that was previously built
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifacts
+          run-id: ${{ inputs.run-id }}
+          github-token: ${{ inputs.github-token }}
+
+      # Step 4: Unzip the downloaded artifact
+      - name: Unzip Downloaded Artifact
+        run: |
+          unzip -o -q ${{ env.ASSET_FILES}} -d $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE
+         
+      # Step 5: Create environment-specific configuration files - Updated to use read-properties action
+      - name: Read classname from config.properties
+        id: read_classname
+        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/read-properties@v1.0
+        with:
+          file: 'configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/config.properties'
+          key: 'classname'
+
+      - name: Read db_url from config.properties
+        id: read_db_url
+        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/read-properties@v1.0
+        with:
+          file: 'configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/config.properties'
+          key: 'db_url'
+
+      - name: Read db_username from config.properties
+        id: read_db_username
+        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/read-properties@v1.0
+        with:
+          file: 'configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/config.properties'
+          key: 'db_username'
+
+      - name: Read server connection from config.properties
+        id: read_liferay_server_connection
+        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/read-properties@v1.0
+        with:
+          file: 'configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/config.properties'
+          key: 'liferay_server_connection'
+
+      - name: Create db.properties file
+        run: |
+          cat > "configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/db.properties" <<EOF
+          jdbc.default.driverClassName=${{ steps.read_classname.outputs.value }}
+          jdbc.default.url=${{ steps.read_db_url.outputs.value }}
+          jdbc.default.username=${{ steps.read_db_username.outputs.value }}
+          jdbc.default.password=${{ secrets.DB_PASSWORD }}
+          EOF
+
+      # Step: Read report_username and report_db_url from config.properties
+      - name: Read report_username from config.properties
+        if: ${{ inputs.environment-name == 'uat' || inputs.environment-name == 'prod' }}
+        id: read_report_username
+        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/read-properties@v1.0
+        with:
+          file: 'configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/config.properties'
+          key: 'report_username'
+
+      - name: Read report_db_url from config.properties
+        if: ${{ inputs.environment-name == 'uat' || inputs.environment-name == 'prod' }}
+        id: read_report_db_url
+        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/read-properties@v1.0
+        with:
+          file: 'configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/config.properties'
+          key: 'report_db_url'
+
+      # Step: Update context.xml with report credentials
+      - name: Update context.xml with report credentials
+        if: ${{ inputs.environment-name == 'uat' || inputs.environment-name == 'prod' }}
+        run: |
+          report_username="${{ steps.read_report_username.outputs.value }}"
+          report_db_url="${{ steps.read_report_db_url.outputs.value }}"
+          report_password="${{ secrets.REPORT_PASSWORD }}"
+          cd "configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/tomcat-9.0.43/conf"
+          sed -i "s/report_username/$report_username/g" context.xml
+          sed -i "s/report_password/$report_password/g" context.xml
+          sed -i "s/report_db_url/$report_db_url/g" context.xml
+          cd $GITHUB_WORKSPACE
+          
+      # Step 6: Deploy Liferay Code
+      - name: Deploy Liferay Code
+        env:
+          onprem-ci-service-user-name: ${{ inputs.environment-name == 'prod' && vars.PROD_ONPREM_CI_SERVICE_USER_NAME || vars.NONPROD_ONPREM_CI_SERVICE_USER_NAME }}
+          onprem-ci-service-user-password: ${{ inputs.environment-name == 'prod' && secrets.PROD_ONPREM_CI_SERVICE_USER_PASSWORD || secrets.NONPROD_ONPREM_CI_SERVICE_USER_PASSWORD }}
+        run: |
+          export SSHPASS=${{ env.onprem-ci-service-user-password }}
+          # Check if the folder exists before deleting
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.onprem-ci-service-user-name }}@${{ steps.read_liferay_server_connection.outputs.value }} "@echo off && if exist D:\Upload\temp (echo Y | del D:\Upload\temp\*.* /S /Q 1>nul && rmdir D:\Upload\temp /S /Q) else (echo D:\Upload\temp does not exist, skipping.)"
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.onprem-ci-service-user-name }}@${{ steps.read_liferay_server_connection.outputs.value }} "@echo off && if exist D:\Upload\configs (echo Y | del D:\Upload\configs\*.* /S /Q 1>nul && rmdir D:\Upload\configs /S /Q) else (echo D:\Upload\configs does not exist, skipping.)"
+          sshpass -e sftp -o StrictHostKeyChecking=no ${{ env.onprem-ci-service-user-name }}@${{ steps.read_liferay_server_connection.outputs.value }} << !
+          cd /D:/Upload
+          rmdir configs /S /Q
+          rm *.*
+          mkdir configs
+          bye
+          !
+
+          filename=`ls CUSCAL-BUNDLE*.zip`
+          echo "Copying $filename name as CUSCAL-${{ inputs.environment-name }}-BUNDLE-${{ github.run_number }}.zip" 
+          [ ! -f CUSCAL-${{ inputs.environment-name }}-BUNDLE-${{ github.run_number }}.zip ] && cp -rpf $filename CUSCAL-${{ inputs.environment-name }}-BUNDLE-${{ github.run_number }}.zip
+          # Transfer artifact and configuration files
+          sshpass -e scp -o StrictHostKeyChecking=no CUSCAL-${{ inputs.environment-name }}-BUNDLE-${{ github.run_number }}.zip ${{ env.onprem-ci-service-user-name }}@${{ steps.read_liferay_server_connection.outputs.value }}:/D:/Upload/
+          sshpass -e scp -rp -o StrictHostKeyChecking=no configs/common/* ${{ env.onprem-ci-service-user-name }}@${{ steps.read_liferay_server_connection.outputs.value }}:/D:/Upload/configs/
+          sshpass -e scp -rp -o StrictHostKeyChecking=no configs/.env.${{ inputs.environment-name }}${{ inputs.environment-number }}/* ${{ env.onprem-ci-service-user-name }}@${{ steps.read_liferay_server_connection.outputs.value }}:/D:/Upload/configs/
+          sshpass -e scp -o StrictHostKeyChecking=no configs/liferay/sdlc/deploy/install_bundle_modules.bat ${{ env.onprem-ci-service-user-name }}@${{ steps.read_liferay_server_connection.outputs.value }}:/D:/Upload/
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ env.onprem-ci-service-user-name }}@${{ steps.read_liferay_server_connection.outputs.value }} "D:\Upload\install_bundle_modules.bat"
+          
+          echo "Liferay Deployment completed. ."
+
+
+
+
+
+
+

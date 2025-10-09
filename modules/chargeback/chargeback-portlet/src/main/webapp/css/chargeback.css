@@ -1,0 +1,207 @@
+div .hidden,
+div#reasons {
+	display: none;	
+}
+
+.portlet-msg-info,
+.portlet-msg-error {
+	padding-left: 30px !important;
+	background-position: 6px 14px !important;	
+}
+
+/* table#ticket {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table#ticket th {
+	padding: 3px;
+}
+
+table#ticket td {
+	border: solid 1px #999;
+	border-width: 1px 0;
+	padding: 3px;
+	vertical-align: top;
+}
+
+table#ticket td:first-child {
+	border-left: solid 1px #999;
+}
+
+table#ticket td:last-child {
+	border-right: solid 1px #999;
+}
+
+table#ticket tr.even td {
+	background-color: #cecece;
+}
+
+table#ticket tr:hover td {
+	background-color: #c5cdde;
+}
+
+table#ticket td.first {
+	border-width: 1px 0 1px 1px;
+}
+
+table#ticket td.last {
+	border-width: 1px 1px 1px 0;
+}
+
+table#ticket td.product {
+	width: 30%;
+}
+
+table#ticket th {
+	color: #000;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: bottom;
+} */
+
+textarea {
+	height: 120px;
+	width: 100%;
+}
+
+table.transaction-details td.first-column,
+table.transaction-details td.second-column {
+	font-weight: bold;
+	width: 170px;
+}
+
+table.dispute-info td.first-column {
+	font-weight: bold;
+	width: 250px;
+}
+
+label {
+	display: inline-block;
+}
+
+.small {
+	width: 210px;
+}
+
+.small-medium {
+	width: 230px;
+}
+
+.medium {
+	width: 300px;
+}
+
+.large {
+	width: 390px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+fieldset div {
+	margin-bottom: 6px;
+}
+
+#elabInfoAuth > div,
+#elabInfoProcessingError > div {
+	display: none;
+}
+
+div#disclaimer-wrap {
+	margin-bottom: 6px;
+}
+
+input[type="submit"].request-buttons,
+input[type="button"].request-buttons,
+input[type="submit"].request-buttons:hover,
+input[type="button"].request-buttons:hover {
+	background-color: #fe5402 !important;
+	background-image: none !important;
+	border: none !important;
+	border-radius: 3px !important;
+	box-shadow: none !important;
+	color: #fff !important;
+	font-weight: normal !important;
+	padding: 4px 8px;
+	text-shadow: none !important;
+	width: auto;
+}
+
+input[type="submit"].request-buttons:disabled {
+	background-color: #dedede;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+input[type="radio"] {
+	margin-right: 0;
+}
+
+table.dispute-info td.first-column {
+	font-weight: bold;
+	width: 250px;
+}
+
+.message-text-note {
+	font-style: italic;
+}
+
+.update-message {
+	width: 415px;
+}
+
+.error {
+	color: #f00;
+	font-weight: bold;
+	vertical-align: top;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="password"] {
+	padding: 2px 1px !important;
+	vertical-align: top !important;
+}
+
+select {
+	vertical-align: top !important;
+}
+
+table#file-table {
+	margin-bottom: 10px;
+}
+
+span.spacer {
+	display: inline-block;
+	width: 50px;
+}
+
+.padded {
+	margin-left: 1em;
+}
+
+.mandatory {
+	color: #c00;
+}
+
+#cancellationInfo div,
+#elaborationInfoQuestionnaire div,
+#returnInfo div,
+#creditInformationFieldset div {
+	display: none;
+}
+
+#fileTable {
+	margin-bottom: 10px;
+}
+
+label em {
+	color: #f00;
+	font-weight: bold;
+}

@@ -1,0 +1,72 @@
+form.cuscal-julian-date-converter {
+    display: block;
+    margin: 12px;
+    padding: 12px;
+    color: #000;
+    border: solid 1px #c2c2c2;
+    border-radius: 10px;
+    /* background-image: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        color-stop(0.28, rgb(153,153,153)),
+        color-stop(0.64, rgb(199,199,199)),
+        color-stop(0.82, rgb(227,227,227))
+    );
+    background-image: -moz-linear-gradient(
+        left top,
+        rgb(153,153,153) 28%,
+        rgb(199,199,199) 64%,
+        rgb(227,227,227) 82%
+    ); */
+
+    /* ---------- IE 10 gradient ---------- */
+    background-image: -ms-linear-gradient(bottom right, #FFFFFF 0%, #C2C2C2 100%);
+
+    /* ---------- Mozilla firefox ---------- */
+    background-image: -moz-linear-gradient(bottom right, #FFFFFF 0%, #C2C2C2 100%);
+
+    /* ---------- Opera ---------- */
+    background-image: -o-linear-gradient(bottom right, #FFFFFF 0%, #C2C2C2 100%);
+
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, right bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #C2C2C2));
+
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(bottom right, #FFFFFF 0%, #C2C2C2 100%);
+
+    /* W3C Markup, IE10 Release Preview */
+    background-image: linear-gradient(to top left, #FFFFFF 0%, #C2C2C2 100%);
+
+    /* ---------- < IE 9 ---------- */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c2c2c2', endColorstr='#ffffff', GradientType=0);
+}
+form.cuscal-julian-date-converter h6 {
+    margin-bottom: 5px;
+}
+form.cuscal-julian-date-converter label {
+    font-size: 0.9em;
+}
+form.cuscal-julian-date-converter input {
+    vertical-align: middle;
+}
+form.cuscal-julian-date-converter div {
+    margin: 5px 0;
+}
+form.cuscal-julian-date-converter div label {
+    margin-right: 5px;
+}
+form.cuscal-julian-date-converter input.btn {
+    margin-top: 5px;
+    padding: 8px 12px;
+    background-image: none;
+    background-color: #fe5402;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: normal;
+    text-shadow: none;
+    border: none;
+}
+form.cuscal-julian-date-converter input[type="radio"] {
+    background-color: transparent;
+}

@@ -1,0 +1,90 @@
+buildscript {
+	dependencies {
+		classpath group: "com.liferay", name: "com.liferay.css.builder", version: "3.1.6"
+		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.css.builder", version: "5.0.16"
+	}
+
+	repositories {
+		maven {
+			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+		}
+	}
+}
+
+apply plugin: "com.liferay.css.builder"
+
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	cssBuilder group: "com.liferay", name: "com.liferay.css.builder", version: "3.1.6"
+
+	portalCommonCSS group: "com.liferay", name: "com.liferay.frontend.css.common"
+
+	compileOnly group: "javax.mail", name: "mail", version: "1.4"
+	implementation group: "org.slf4j", name: "slf4j-api" , version: "1.7.25"
+	implementation group: "org.slf4j", name: "slf4j-log4j12" , version: "1.7.25"
+
+	// Need to refer to this version.
+	// Because displaytag uses an older version of jcl104-over-slf4j-1.4.2.jar,
+	// which is known as collison with slf4j version in latest Spring.s
+	implementation "org.slf4j:jcl-over-slf4j:1.7.25"
+
+	implementation group: "commons-lang", name: "commons-lang", version: "2.6"
+	implementation group: "org.apache.commons", name: "commons-lang3", version: "3.1"
+	implementation(group: "displaytag", name: "displaytag", version: "1.2") {
+		exclude group: "org.slf4j", module: "jcl104-over-slf4j"
+	}
+	implementation ("com.sun.xml.ws:jaxws-rt:2.3.1") {
+		exclude group: "org.glassfish.jaxb", module: "txw2"
+	}
+	// For easyconf that is used commonly in Cuscal modules and utils
+	implementation(group: "easyconf", name: "easyconf", version: "0.9.5") {
+		exclude group: "dom4j", module: "dom4j"
+		exclude group: "javax.sql", module: "jdbc-stdext"
+		exclude group: "servletapi", module: "servletapi"
+		exclude group: "xdoclet", module: "xdoclet"
+		exclude group: "xdoclet", module: "xdoclet-web-module"
+		exclude group: "xpp3", module: "xpp3_min"
+	}
+	// Include dom4j with excluding jaxen and saxpath to avoid conflicts about XML builder
+	implementation(group: "dom4j", name: "dom4j", version: "1.4") {
+		// TODO verify when we can really verifying execution relates to easyconf
+		exclude group: "jaxen", module: "jaxen"
+		exclude group: "saxpath", module: "saxpath"
+	}
+
+	implementation "log4j:log4j:1.2.17"
+
+	implementation group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.framework", version: "5.1.0"
+	implementation group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.security", version: "5.1.0"
+
+	// Only required for portlets that use Spring Web Flow
+	//implementation group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.webflow", version: "5.1.0"
+
+	implementation "javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.2"
+	implementation "javax.servlet.jsp.jstl:jstl:1.2"
+	implementation group: "commons-pool", name: "commons-pool", version: "1.6"
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.5'
+
+	compileOnly project(":modules:utils:audit-framework-dxp")
+	compileOnly project(":modules:utils:cuscal-ticketing-framework-dxp")
+	compileOnly project(":modules:utils:resource-util-dxp")
+	compileOnly project(":modules:utils:webservices-client-dxp")
+
+	// refer to :modules:utils:shared-props to include properties files
+	compileOnly project(":modules:utils:shared-props")
+
+	compileOnly rootProject.files("libs/AuditFramework-0.0.30.jar")
+	compileOnly rootProject.files("libs/AuditCategories-0.0.8.jar")
+	compileOnly rootProject.files("libs/AuditWebServicesUtil-0.0.3.jar")
+
+	//NOT USED DIRECTLY? => Used by WebServices-Client JAR => Maven project accepts any version
+	compileOnly rootProject.files("libs/CuscalPerformance-0.0.10-20201130.235634-8.jar")
+	implementation project(":modules:utils:cuscal-performance-override-0010")
+
+	// Only one version! 1.1
+	compileOnly rootProject.files("libs/CuscalTicketingFramework-1.1.jar")
+
+	compileOnly rootProject.files("libs/resource-utils-0.0.5.jar")
+	compileOnly rootProject.files("libs/WebServices-Client-0.0.77-SNAPSHOT-20250218.jar")
+
+}

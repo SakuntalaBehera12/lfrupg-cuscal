@@ -1,0 +1,589 @@
+@media print {	
+	.portlet-topper-toolbar,
+	#dockbar,
+	#primaryNav,
+	#bannerAd,
+	#loggedIn,
+	#headerLogo span,
+	input[type="submit"],
+	input[type="button"],
+	input[type="text"],
+	#footer {
+		display: none;
+	}
+	
+	#headerLogo {
+		display: block;
+	}
+	
+	.no-print {
+		display: none;
+	}
+}
+
+br {
+	clear: both;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+p.intro {
+	margin: 10px 0 15px 0;
+}
+
+span.display-hidden {
+	display: none;
+}
+
+#contentWrapper2 {
+	float: none !important;
+}
+
+#service-request-wrapper {
+	font-size: 12px;
+	padding: 0 10px;
+	width: 946px;
+}
+
+#service-request-wrapper h1 {
+	background-color: #dedede;
+	color: #fe5402;
+	font-size: 20px;
+	line-height: 38px;
+	margin: 0;
+	padding: 0 5px;
+}
+
+.error {
+	color: #f00;
+	font-weight: bold;
+}
+
+table#ticket {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table#ticket th {
+	padding: 3px;
+}
+
+table#ticket td {
+	border: solid 1px #999;
+	border-width: 1px 0;
+	padding: 3px;
+	vertical-align: top;
+}
+
+table#ticket tr.even td {
+	background-color: #cecece;
+}
+
+table#ticket tr:hover td {
+	background-color: #c5cdde;
+}
+
+table#ticket td.first {
+	border-width: 1px 0 1px 1px;
+}
+
+.new-ticket {
+	display: block;
+	float: left;
+	font-weight: bold;
+	width: 8px;
+}	
+
+.unread {
+	background: url("../images/flag.png") no-repeat;
+	padding: 4px;
+}
+
+table#ticket td.last {
+	border-width: 1px 1px 1px 0;
+}
+
+table#ticket td.product {
+	width: 30%;
+}
+
+table#ticket th {
+	color: #000;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+table#ticket thead th.ascending {
+	background: url("../images/sort-arrow-ascending.png") left 50% no-repeat transparent;
+	padding-left: 12px;
+}
+
+table#ticket thead th.descending {
+	background: url("../images/sort-arrow-descending.png") left 50% no-repeat transparent;
+	padding-left: 12px;
+}
+
+div.section {
+	margin-top: 5px;
+}
+
+div.section div {
+	display: inline-block;
+	vertical-align: top;
+}
+
+div.section div.title {
+	font-weight: bold;
+	width: 11.3%;
+}
+
+.ie7 div.section div {
+	display: inline;
+}
+
+div.request-details,
+div.attachments {
+	float: left;
+	margin-bottom: 5px;
+	width: 30%;
+}
+
+div.attachments span {
+	font-weight: bold;
+}
+
+div.attachments div {
+	display: inline;
+}
+
+div.request-details div.title {
+	float: left;
+	font-weight: bold;
+	width: 24%;
+}
+
+div.description {
+	height: 25em;
+	overflow-y: scroll;
+}
+
+div.attachments {
+	width: auto;
+}
+
+table.transaction-details td {
+	vertical-align: top;
+	width: 324px;
+}
+
+table.transaction-details td.first-column,
+table.transaction-details td.second-column {
+	font-weight: bold;
+	width: 140px;
+}
+
+div.section div.value {
+	width: 85%;
+}
+
+div.updates div.value {
+	display: block;
+	float: none;
+	width: 100%;
+}
+
+div.section div.note {
+	border-radius: 5px;
+	display: block;
+	margin: 0 0 5px 0;
+	padding: 5px;
+}
+
+div.section div.note pre.note-comment {
+	display: block;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 1em;
+	margin: 5px 0;
+	width: 936px;
+	
+	/* ---------- for pre tag word wraping ---------- */
+	white-space: pre-wrap;       /* css-3 */
+  	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  	white-space: -pre-wrap;      /* Opera 4-6 */
+  	white-space: -o-pre-wrap;    /* ---------- Opera 7 ---------- */
+  	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+div.note span.date {
+	clear: both;
+	color: #999;
+	float: right;
+	font-size: 0.8em;
+	font-style: italic;
+}
+	
+
+div.section div.note-user {
+	display: block;
+	font-weight: bold;
+}
+
+div.section div.new-date {
+	background-color: #eee;
+	border-radius: 2px;
+	clear: both;
+	color: #999;
+	display: block;
+	font-weight: bold;
+	margin: 0 auto 5px auto;
+	padding: 4px;
+	text-align: center;
+	width: 100px;
+}
+
+div.section div.cuscal-user {
+	background-color: #cecece;
+	border: solid 1px #999;
+}
+
+div.section div.original-user {
+	background-color: #fff;
+	border: solid 1px #999;
+	margin-left: 25px;
+}
+
+input[type="text"] {
+	border-color: #bfbfbf #dedede #dedede #bfbfbf !important;
+}
+
+input[type="file"] {
+	padding: 1px !important;
+}
+
+input[type="submit"].request-buttons,
+input[type="button"].request-buttons,
+input[type="submit"].request-buttons:hover,
+input[type="button"].request-buttons:hover {
+	background-color: #fe5402 !important;
+	background-image: none !important;
+	border: none !important;
+	border-radius: 3px !important;
+	box-shadow: none !important;
+	color: #fff !important;
+	font-weight: normal !important;
+	padding: 4px 8px;
+	text-shadow: none !important;
+	width: auto;
+}
+
+form.calls-form div {
+	margin: 5px 0;
+}
+
+form.calls-form label {
+	font-weight: bold;
+}
+
+form.calls-form input[type="text"] {
+	padding: 5px !important;
+	vertical-align: middle;
+}
+
+form.calls-form input[type="submit"].request-buttons {
+	margin-left: 5px;
+}
+
+fieldset.filter-fieldset div {
+	float: left;
+	margin-bottom: 5px;
+	overflow: hidden;
+	width: 16.5%;
+}
+
+fieldset.filter-fieldset div#serviceType{
+	float: left;
+	margin-bottom: 5px;
+	overflow: hidden;
+	width: 25%;
+}
+
+fieldset.filter-fieldset div * {
+	display: block;
+}
+
+fieldset.filter-fieldset select {
+	width: 95%;
+}
+
+fieldset.filter-fieldset input[type="text"] {
+	padding: 2px 1px;
+	width: 95%;
+}
+
+fieldset.transactions input[type="submit"],
+fieldset.transactions input[type="button"] {
+	margin-top: 10px;
+}
+
+fieldset.request-fieldset div.request-details {
+	margin-bottom: 0;
+	width: 49%;
+}
+
+fieldset.request-fieldset div.submitted-by {
+	display: block;
+	float: none;
+	width: auto;
+}
+
+div.submitted-by div.title {
+	width: 11.7%
+}
+
+fieldset.attachment-fieldset form {
+	margin-top: 5px;
+}
+
+fieldset.attachment-fieldset a {
+	background-color: transparent;
+	border: none;
+	color: #fe5402;
+	float: none;
+	font-weight: normal;
+	line-height: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+textarea {
+	height: 150px;
+	width: 100%;
+}
+
+form#ticketNote input {
+	display: block;
+}
+
+form#ticketNote div {
+	display: block;
+}
+
+form#ticketNote input[type="submit"] {
+	margin-top: 5px;
+}
+
+a.buttons,
+a.buttons:hover {
+	display: inline-block;
+	margin: 10px 0;	
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff !important;
+	font-weight: normal;
+	padding: 6px 10px;
+	text-decoration: none !important;
+}
+
+a.masked-details,
+a.masked-details:hover,
+a.masked-details:active {
+	float: none;
+}
+
+a.modal-close {
+	text-align: center;
+}
+
+ul.masked-fields-output li {
+	color: #000;
+	font-size: 12px;
+	list-style-type: none;
+}
+
+.disclaimer {
+	font-style: italic;
+}
+
+form label.sc-list-label {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	width: 150px;
+	/* font-weight: bold; */
+	vertical-align: top;
+}
+
+pre.description {
+	display: inline-block;
+	height: 25em;
+	overflow-y: scroll;
+	vertical-align: top;
+	width: 85%;
+	font-family: Verdana
+}
+
+form#ticketDetailsForm *{
+	float:left;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+form#ticketDetailsForm label{
+	padding: 5px;
+}
+
+form#ticketDetailsForm input[type="text"]{
+	width: 20%;
+}
+
+table#actionTicket {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table#actionTicket th {
+	padding: 3px;
+}
+
+table#actionTicket td {
+	border: solid 1px #999;
+	border-width: 1px 0;
+	padding: 3px;
+	vertical-align: top;
+}
+
+table#actionTicket tr.even td {
+	background-color: #cecece;
+}
+
+table#actionTicket tr:hover td {
+	background-color: #c5cdde;
+}
+
+table#actionTicket td.first {
+	border-width: 1px 0 1px 1px;
+}
+
+table#actionTicket td.last {
+	border-width: 1px 1px 1px 0;
+}
+
+table#actionTicket td.product {
+	width: 30%;
+}
+
+table#actionTicket th {
+	color: #000;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+table#actionTicket thead th.ascending {
+	background: url("../images/sort-arrow-ascending.png") left 50% no-repeat transparent;
+	padding-left: 12px;
+}
+
+table#actionTicket thead th.descending {
+	background: url("../images/sort-arrow-descending.png") left 50% no-repeat transparent;
+	padding-left: 12px;
+}
+
+.pagination-text {
+	float: right;
+	margin-top: 7px;
+}
+
+.pagination-links {
+	display: block;
+	font-weight: normal;
+	margin-top: 5px;
+	text-align: center;
+}
+
+a.cancel-request,
+a.cancel-request:hover,
+a.cancel-request:active,
+a.reverse-request,
+a.reverse-request:hover,
+a.reverse-request:active,
+a.cancel-request-close,
+a.cancel-request-close:hover,
+a.cancel-request-close:active {	
+	display: inline-block;	
+	margin: 10px 0;	
+	color: #fff !important;
+	padding: 6px 10px;
+	text-decoration: none !important;	
+	float: none;	
+	width: auto;	
+	background-color: #fe5402 !important;
+	background-image: none !important;	
+	border: none !important;
+	border-radius: 3px !important;
+	box-shadow: none !important;
+	font-size: 1.15em;
+	font-weight: normal !important;
+	text-shadow: none !important;
+}
+
+a.cancel-this-request,
+a.cancel-this-request:hover,
+a.cancel-this-request:active,
+a.reverse-this-request,
+a.reverse-this-request:hover,
+a.reverse-this-request:active {
+	display: inline-block;
+	float: right;
+	margin: 10px 0;	
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff !important;
+	font-weight: normal;
+	padding: 6px 10px;
+	text-decoration: none !important;
+}
+
+ul.reverse-request-output,
+ul.cancel-request-output {	
+	color: #f00;
+	font-weight: bold;
+	list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    overflow-x:hidden;
+	white-space:nowrap; 
+	display:inline;
+}
+
+td.text {
+	color: #000;
+	font-size: 12px;
+	width: 435px;	
+}
+
+td.right{
+	text-align: right;
+}
+
+div.cancelThisRequestDiv {
+	margin-top: 0px;
+	position: relative;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+	float: right;
+	
+}
+
+.cancel-note-ta{
+	box-sizing: border-box;
+	width: 460px; 
+	height: 80px;
+	margin-top: 10px;
+}
+
+

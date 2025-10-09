@@ -1,0 +1,459 @@
+br {
+	clear: both;
+}
+
+.preTag {
+    border: 1px solid #CECECE;
+    display: block;
+    height: 800px;
+    overflow: auto;
+    width: 100%;  
+}
+
+#leftpane {
+    float: left;  
+    width: 375px;
+}
+
+#rightpane {
+    float: right; 
+    width: 375px;
+}
+
+/* ---------- -- ---------- */
+.px150 {
+    width: 150px;
+    float: left;
+}
+
+.px100 {
+    width: 150px;
+    float: left;
+}
+
+/* ---------- -- ---------- */
+.onethird {
+    width: 33%;
+    float: left;
+}
+
+.twothirds {
+    width: 66%;
+    float: left;
+}
+
+.quarter {
+    width: 25%;
+    float: left;
+}
+
+.fifty {
+    width: 50%;
+    float: left;
+}
+
+.sixty {
+    width: 60%;
+    float: left;
+}
+
+.forty {
+    width: 40%;
+    float: left;
+}
+
+.centered {
+    text-align: center;
+}
+
+.curved {
+    border: solid 1px #F38F1D;
+    border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+    padding: 5px;
+}
+
+.curved:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.dialogbox {
+    display: none;
+    text-align:left;
+}
+
+.filter-elements div {
+	display: block;
+	float: left;
+	margin: 5px;
+}
+
+.filter-elements label {
+	display: inline-block;
+	font-weight: bold;
+	text-align: right;
+	width: 100px;
+}
+
+.filter-elements .page-size label {
+	width: 150px;
+}
+
+.filter-elements div .error {
+	display: block;
+	text-align: center;
+}
+
+.filter-elements label em {
+	color: #f00;
+}
+
+.from-date, .to-date {
+	width: 255px;
+}
+
+.date-pick {
+	width: 85px;
+}
+
+.ie input,
+.ie select {
+	vertical-align: middle;
+}
+
+.filter-elements a,
+.filter-elements a:hover,
+.modal-wrapper a,
+.modal-wrapper a:hover {
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	margin-top: 5px;
+	padding: 4px 8px;
+	text-decoration: none;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.modal-wrapper a {
+	font-weight: bold;
+}
+
+.modal-header a,
+.modal-header a:hover {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 4px;
+	line-height: 24px;
+}
+
+.modal-wrapper a.padlock {
+	background: url("../images/padlock-white.png") 95% 7px #fe5402 no-repeat;
+	display: inline-block;
+	padding-right: 25px;
+}
+
+/**
+ * a table that needs to be embedded within a div.
+ * the div may or maynot provide the curved corners
+ */
+table.embeddedCuscalTable {
+    padding: 5px;
+    width: 100%;
+}
+
+table.embeddedCuscalTable td {
+    padding: 0px 10px 0 0;
+}
+
+table.embeddedCuscalTable thead tr {
+    background-color: #FE5402;
+}
+
+/**
+ * a table with curved corners
+ */
+table.cuscalTable {
+    padding: 5px;
+    width: 100%;
+	vertical-align: top;
+}
+
+table.cuscalTable td ,
+table.cuscalTable th {
+    padding: 4px;
+}
+table.cuscalTable thead tr {
+    font-weight:bold;
+	color:#FE5402;	
+}
+table.cuscalTable tbody tr:hover {
+   background-color:#C5CDDE;
+}
+
+.cus_button {
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.margintop {
+    margin-top: 26px;
+}
+
+.spacer {
+    content: "&nbsp;";
+}
+.spacer:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.error {
+    font-weight:bold;
+    color: #f00;
+}
+
+.titles {
+    font-weight:bold;
+}
+
+.titles:before {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.resetStyles {
+    clear: both;
+    margin: 0px;
+}
+
+.lastblock {
+    clear: both; 
+    display: block; 
+    height: 13px; 
+}
+
+.double{
+    height: 26px; 
+}
+
+.graybackground {
+    background-color: #E3E4DF;
+}
+
+/* ---------- displaytag specific styling ---------- */
+.tableHeaderRow {
+    background-color: #F38F1D;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.paddingRight {
+    padding-right: 10px;
+}
+
+.nowrap {
+    white-space: nowrap; 
+}
+
+.odd {
+   background-color: #CECECE;
+   border: 1px solid #999999;
+}
+
+.even {
+	background-color: #FFFFFF;
+    border: 1px solid #999999;
+}
+
+.field_title {
+    font-weight:bold;
+    display: inline-block;
+    width: 100px;
+    vertical-align: top;
+}
+
+.field_title_wide {
+    font-weight:bold;
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+}
+.field {
+    display: inline-block;
+}
+
+/* ---------- Styles for the filter section ---------- */
+h4.section-header {
+	background-color: #fff;
+	color: #FE5402;
+	margin: 0;
+}
+div.warning-msg{
+	color: #FE5402;
+	font-weight:bold;
+	font-size: 12px;
+}
+
+.modal-wrapper {
+    display: none;
+    position: relative;
+    padding: 4px 4px 0 4px;
+    min-width: 400px;
+    max-width: 630px;
+    background-color: #fff;
+    color: #fe5402;
+    border: solid 1px #000;
+    border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+	
+.modal-header {
+    display: block;
+    position: relative;
+    height: 40px;
+    width: 100%;
+}
+
+.modal-header h5, .modal-header h6{
+    display: inline-block;
+    margin: 0 4px;
+    line-height: 40px;
+    font-size: 1em;
+    font-weight: normal;
+}
+.modal-header h5 {
+	background-color: transparent;
+	color: #fe5402;
+	font-weight: bold;
+}
+
+.modal-content {
+    padding: 10px;
+	color: #000;
+}
+
+.modal-buttons {
+    clear: both;
+    text-align: right;
+    line-height: 40px;
+}
+
+#simplemodal-overlay {
+	cursor: wait;
+}
+
+table td {
+	vertical-align: top;
+}
+
+table.report-details td {
+	padding: 0 5px;
+}
+
+table.report-details td.report-titles {
+	font-weight: bold;
+	text-align: right;
+	width: 135px;
+}
+
+.report-buttons-left,
+.report-buttons-right {
+	float: left;
+	margin-bottom: 10px;
+	width: 70%;
+}
+
+.report-buttons-right {
+	text-align: right;
+	width: 30%;
+}
+
+.report-buttons-left a,
+.report-buttons-right a {
+	float: none;
+}
+form#reportForm {
+	position: relative;
+}
+.pagination-text {
+	float: right;
+	margin-top: 7px;
+}
+.pagination-links {
+	display: block;
+	font-weight: normal;
+	margin-top: 5px;
+	text-align: center;
+}
+span.pagination-links strong {
+	font-weight: normal;
+}
+
+/* ---------- Override liferay default fonts for input elements ---------- */
+input[type="text"],
+input[type="password"],
+input[type="file"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+select,
+textarea,
+.textarea,
+button {
+	font: 1em verdana, Arial, Sans-Serif, Helvetica !important;
+}
+
+a.csv-file {
+	background: url("../images/padlock.png") left 2px no-repeat transparent;
+	display: inline-block;
+	height: 25px;
+	padding-left: 15px;
+}
+
+form#reportForm input[type="submit"],
+form#reportForm input[type="button"] {
+	background-color: #fe5402 !important;
+	background-image: none !important;
+	border: none !important;
+	color: #fff;
+	text-shadow: none !important;
+}
+
+p.intro {
+	margin: 10px 0 15px 0;
+}
+
+#report-disclaimer-wrapper {
+	font-size: 12px;
+	padding: 0 10px;
+}
+
+#report-disclaimer-wrapper h1 {
+	background-color: #dedede;
+	color: #fe5402;
+	font-size: 20px;
+	line-height: 38px;
+	margin: 0;
+	padding: 0 5px;
+}

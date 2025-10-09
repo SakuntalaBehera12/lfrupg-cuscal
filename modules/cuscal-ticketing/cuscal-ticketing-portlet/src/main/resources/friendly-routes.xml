@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 7.4.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_7_4_0.dtd">
+
+<routes>
+	<!-- details from the home screen. -->
+	<route>
+		<pattern>/details/{i:\d+}</pattern>
+		<implicit-parameter name="p_p_id">cuscalticketingportlet_WAR_cuscalticketingportlet</implicit-parameter>
+		<!-- lifecycle will be 0 for render, 1 for action, 2 for resource -->
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="p_p_mode">view</implicit-parameter>
+		<!--<implicit-parameter name="p_p_col_id">column-1</implicit-parameter>
+		<implicit-parameter name="p_p_col_count">1</implicit-parameter>-->
+		<implicit-parameter name="render">ticketDetails</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/view</pattern>
+		<implicit-parameter name="p_p_id">cuscalticketingportlet_WAR_cuscalticketingportlet</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="p_p_mode">view</implicit-parameter>
+		<!--<implicit-parameter name="p_p_col_id">column-1</implicit-parameter>
+		<implicit-parameter name="p_p_col_count">1</implicit-parameter>-->
+		<implicit-parameter name="render">loadTicket</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/filter</pattern>
+		<implicit-parameter name="p_p_id">cuscalticketingportlet_WAR_cuscalticketingportlet</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="p_p_mode">view</implicit-parameter>
+		<!--<implicit-parameter name="p_p_col_id">column-1</implicit-parameter>
+		<implicit-parameter name="p_p_col_count">1</implicit-parameter>-->
+		<implicit-parameter name="render">ticketFilterRender</implicit-parameter>
+	</route>
+
+	<route>
+		<pattern>/add-note</pattern>
+		<implicit-parameter name="p_p_id">cuscalticketingportlet_WAR_cuscalticketingportlet</implicit-parameter>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="p_p_mode">view</implicit-parameter>
+		<!--<implicit-parameter name="p_p_col_id">column-1</implicit-parameter>
+		<implicit-parameter name="p_p_col_count">1</implicit-parameter>-->
+		<implicit-parameter name="action">addNote</implicit-parameter>
+	</route>
+</routes>

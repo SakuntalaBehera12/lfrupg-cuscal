@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="applicationContext.xml" />
+
+	<bean class="au.com.cuscal.transactions.controllers.CudTransactionSearchController" id="cudTransactionSearchController">
+		<property name="organisationIdOverride" value="${organisation.id.override}" />
+	</bean>
+<!--	<bean-->
+<!--		autowire-candidate="true"-->
+<!--		class="au.com.cuscal.transactions.services.client.TransactionArchiveServiceImpl"-->
+<!--		id="transactionArchiveServiceImpl"-->
+<!--	>-->
+<!--		<property name="transactionServicesUrl" value="${webservice.transaction.url}" />-->
+<!--		<property name="entityServicesUrl" value="${webservice.entity.url}" />-->
+<!--		<property name="commonServicesUrl" value="${webservice.common.url}" />-->
+<!--		<property name="transactionArchiveUrl" value="${webservice.transactionArchive.url}" />-->
+<!--	</bean>-->
+
+</beans>

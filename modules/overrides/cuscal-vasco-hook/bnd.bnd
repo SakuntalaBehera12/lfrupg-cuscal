@@ -1,0 +1,6 @@
+Bundle-Name: Vasco Hook
+Bundle-SymbolicName: au.com.cuscal.vasco
+Bundle-Version: 1.0.0
+Web-ContextPath: /cuscal-vasco-hook
+-dsannotations-options: inherit
+-includeresource: META-INF/lib/cuscal.shared.props.jar=cuscal.shared.props-*.jar;lib:=true

@@ -1,0 +1,36 @@
+{
+	"dependencies": {
+		"clay-css": "^2.18.0"
+	},
+	"devDependencies": {
+		"compass-mixins": "0.12.12",
+		"gulp": "4.0.2",
+		"liferay-frontend-css-common": "6.0.8",
+		"liferay-frontend-theme-styled": "6.0.95",
+		"liferay-frontend-theme-unstyled": "6.0.77",
+		"liferay-theme-tasks": "^11.5.6"
+	},
+	"keywords": [
+		"liferay-theme"
+	],
+	"liferayTheme": {
+		"baseTheme": "styled",
+		"fontAwesome": false,
+		"screenshot": "",
+		"templateLanguage": "ftl",
+		"version": "7.4"
+	},
+	"main": "package.json",
+	"name": "cuscal-theme",
+	"scripts": {
+		"build": "gulp build",
+		"deploy": "gulp deploy",
+		"extend": "gulp extend",
+		"init": "gulp init",
+		"kickstart": "gulp kickstart",
+		"status": "gulp status",
+		"upgrade": "gulp upgrade",
+		"watch": "gulp watch"
+	},
+	"version": "1.0.0"
+}

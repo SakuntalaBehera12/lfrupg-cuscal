@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:component-scan base-package="au.com.cuscal.connect" />
+<import resource="applicationContext.xml" />
+
+<bean class="au.com.cuscal.framework.webservices.client.impl.ReportsServiceImpl" id="reportsService" />
+<bean class="au.com.cuscal.connect.services.ReportServiceImpl" id="reportService">
+	<property name="reportsFileMimeType" value="${report.file.mime.types}" />
+	<property name="reportsService" ref="reportsService" />
+</bean>
+
+<bean class="au.com.cuscal.connect.controllers.ReportViewController" id="reportViewController">
+	<property name="orgIdOverride" value="${organisation.id.override}" />
+	<property name="articleId" value="${report.web.articleId}" />
+	<property name="groupId" value="${report.web.groupId}" />
+	<constructor-arg>
+		<ref bean="reportService" />
+	</constructor-arg>
+</bean>
+
+<bean
+	class="org.springframework.context.support.ResourceBundleMessageSource"
+	id="messageSource"
+>
+	<property name="basenames">
+		<list>
+			<value>content.messages</value>
+		</list>
+	</property>
+</bean>
+
+<bean
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+	id="viewResolver"
+>
+	<property
+		name="viewClass"
+		value="com.liferay.portletmvc4spring.PortletJstlView"
+	/>
+	<property name="prefix" value="/WEB-INF/jsp/" />
+	<property name="suffix" value=".jsp" />
+</bean>
+
+<bean class="org.springframework.cache.support.SimpleCacheManager" id="cacheManager">
+	<property name="caches">
+		<set>
+			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="mimeTypeMap" />
+		</set>
+	</property>
+</bean>
+</beans>

@@ -1,0 +1,4 @@
+Bundle-Name: julian-date-web
+Bundle-SymbolicName: julian.date.web
+Bundle-Version: 1.0.0
+Export-Package: au.com.cuscal.portal.julian.date.constants

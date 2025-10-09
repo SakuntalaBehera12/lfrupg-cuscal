@@ -1,0 +1,64 @@
+buildscript {
+	dependencies {
+		classpath group: "com.liferay", name: "com.liferay.css.builder", version: "3.1.6"
+		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.css.builder", version: "5.0.16"
+	}
+
+	repositories {
+		maven {
+			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+		}
+	}
+}
+
+apply plugin: "com.liferay.css.builder"
+
+dependencies {
+	implementation group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.framework", version: "5.2.2"
+	implementation group: "com.liferay.portletmvc4spring", name: "com.liferay.portletmvc4spring.security", version: "5.2.2"
+
+	cssBuilder group: "com.liferay", name: "com.liferay.css.builder", version: "3.1.6"
+
+	portalCommonCSS group: "com.liferay", name: "com.liferay.frontend.css.common"
+	compileOnly group: "commons-logging", name: "commons-logging", version: "1.1.3"
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+
+	compileOnly group: 'org.apache.commons', name: 'commons-csv', version: '1.0'
+	compileOnly group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+	compileOnly group: 'commons-lang', name: 'commons-lang', version: '2.1'
+	implementation (group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.26')
+	implementation(group: "displaytag", name: "displaytag", version: "1.2") {
+		exclude group: "org.slf4j", module: "slf4j-log4j12"
+		exclude group: "org.slf4j", module: "slf4j-api"
+		exclude group: "org.slf4j", module: "jcl104-over-slf4j"
+	}
+
+	// For easyconf that is used commonly in Cuscal modules and utils
+	compileOnly(group: "easyconf", name: "easyconf", version: "0.9.5") {
+		exclude group: "dom4j", module: "dom4j"
+		exclude group: "javax.sql", module: "jdbc-stdext"
+		exclude group: "servletapi", module: "servletapi"
+		exclude group: "xdoclet", module: "xdoclet"
+		exclude group: "xdoclet", module: "xdoclet-web-module"
+		exclude group: "xpp3", module: "xpp3_min"
+	}
+
+	// Include dom4j with excluding jaxen and saxpath to avoid conflicts about XML builder
+	compileOnly(group: "dom4j", name: "dom4j", version: "1.4") {
+		// TODO verify when we can really verifying execution relates to easyconf
+		exclude group: "jaxen", module: "jaxen"
+		exclude group: "saxpath", module: "saxpath"
+	}
+
+	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+	implementation group: 'commons-pool', name: 'commons-pool', version: '1.6'
+	compileOnly project(":modules:utils:shared-props")
+	compileOnly project(":modules:utils:audit-framework-dxp")
+	compileOnly project(":modules:utils:cuscal-ticketing-framework-dxp")
+	compileOnly project(":modules:utils:cuscal-performance-override-0010")
+
+	compileOnly rootProject.files("libs/WebServices-Client-0.0.33-20130219.025752-3.jar")
+	compileOnly rootProject.files("libs/AuditFramework-0.0.23-20130213.070337-1.jar")
+	compileOnly rootProject.files("libs/CuscalPerformance-0.0.2-20130214.071843-1.jar")
+
+}

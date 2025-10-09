@@ -1,0 +1,10 @@
+<div id="cuscalContent">
+<h1 id="contentHeading">$headline.getData()</h1>
+</div>
+<script>
+ if( document.getElementById('contentWrapper2')!=null) document.getElementById('contentWrapper2').style.width = 790 +'px';
+var lineSpaceDiv = document.createElement('div');
+lineSpaceDiv.id = 'lineSpaceDiv';
+lineSpaceDiv.style.height=2+'em';
+document.getElementById('contentWrapper2').appendChild(lineSpaceDiv);
+</script>

@@ -1,0 +1,4 @@
+Bundle-Name: cuscal-performance-override-0010
+Bundle-SymbolicName: cuscal.performance.override.0010
+Bundle-Version: 1.0.0
+Export-Package: au.com.cuscal.common.framework.memory

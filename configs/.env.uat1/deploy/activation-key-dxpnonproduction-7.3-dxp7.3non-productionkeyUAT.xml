@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<license>
+	<account-name>Cuscal Portal Project</account-name>
+	<owner>Cuscal Portal Project</owner>
+	<description>UATCluster</description>
+	<product-name>DXP Non-Production</product-name>
+	<product-version>7.3</product-version>
+	<license-name>DXP Non-Production</license-name>
+	<license-type>production</license-type>
+	<license-version>6</license-version>
+	<start-date>Monday, February 28, 2022 12:00:00 AM GMT</start-date>
+	<expiration-date>Wednesday, October 6, 2123 12:00:00 AM GMT</expiration-date>
+	<max-servers>2</max-servers>
+	<instance-size>Sizing 1</instance-size>
+	<servers>
+		<server>
+			<host-names>
+				<host-name>ULUWAS48V</host-name>
+			</host-names>
+			<ip-addresses>
+				<ip-address>10.161.156.148</ip-address>
+			</ip-addresses>
+			<mac-addresses>
+				<mac-address>00:50:56:83:D0:0D</mac-address>
+			</mac-addresses>
+		</server>
+		<server>
+			<host-names>
+				<host-name>ULUWAS49V</host-name>
+			</host-names>
+			<ip-addresses>
+				<ip-address>10.161.156.149</ip-address>
+			</ip-addresses>
+			<mac-addresses>
+				<mac-address>00:50:56:83:FF:8D</mac-address>
+			</mac-addresses>
+		</server>
+	</servers>
+	<key>b737c8d5ac5e859f767cfcb9f06a02dbd6bb0866cef8e30b0e36cc26f54419e44781be0a89480e5bbe6dae37230b722673aed140ad446248928a304c9680ab96e0c9d4d005a5d74ce34335d1be6607cccfe8a2b541ac1ab07c831418f01b903a10f41e305ca1dcedc07dcf930b0e71648227fd92fd2cb0766fe3248d8f1370062de33dc6</key>
+</license>

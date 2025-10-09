@@ -1,0 +1,4 @@
+Bundle-Name: cuscal-shared-props
+Bundle-SymbolicName: cuscal.shared.props
+Bundle-Version: 1.0.0
+Export-Package: au.com.cuscal.common.shared.props.util

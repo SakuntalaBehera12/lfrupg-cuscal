@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="applicationContext.xml" />
+
+<context:component-scan base-package="au.com.cuscal.cards" />
+
+<bean class="au.com.cuscal.cards.controllers.CardsSearchController" id="cardsSearchController">
+	<property name="organisationIdOverride" value="${organisation.id.override}" />
+	<property name="organisationShortNameOverride" value="${organisation.shortname.override}" />
+	<property name="mobileTabBlurb" value="${card.mobile.blurb}" />
+	<property name="mobileDeviceRole" value="${card.mobile.tab.role}" />
+	<property name="tokenLastUpdatedByBlurb" value="${token.lastUpdatedBy.blurb}" />
+</bean>
+
+<!-- 	<bean id="cardsSearchService" class="au.com.cuscal.cards.services.CardsSearchServiceImpl" >
+		<property name="cardService" ref="cardService"></property>
+	</bean>
+-->
+<!--<bean class="au.com.cuscal.cards.services.client.LocalCardServiceImpl" id="cardService">-->
+<!--	<property name="transactionServicesUrl" value="${webservice.transaction.url}" />-->
+<!--	<property name="cardServicesUrl" value="${webservice.cards.url}" />-->
+<!--	<property name="entityServicesUrl" value="${webservice.entity.url}" />-->
+<!--	<property name="commonServicesUrl" value="${webservice.common.url}" />-->
+<!--</bean>-->
+
+<bean class="au.com.cuscal.cards.services.client.LocalSchemeServiceImpl" id="schemeService">
+	<property name="schemeServicesUrl" value="${webservice.scheme.url}" />
+</bean>
+
+<bean class="au.com.cuscal.cards.services.client.LocalCuscalApiServiceImpl" id="cuscalApiService">
+	<constructor-arg type="java.lang.String" value="${webservice.cuscalapi.url}" />
+</bean>
+
+<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean" id="propUtil">
+	<property name="locations">
+		<list>
+			<value>file:${catalina.home}/../property-files/cards-search/cardsManagement.properties</value>
+		</list>
+	</property>
+</bean>
+
+<bean class="au.com.cuscal.cards.commons.CardSearchAppProperties" id="cardSearchAppProperties">
+	<property name="cardsProps" ref="propUtil" />
+</bean>
+
+<bean
+	class="org.springframework.context.support.ResourceBundleMessageSource"
+	id="messageSource"
+>
+	<property name="basenames">
+		<list>
+			<value>content.messages</value>
+		</list>
+	</property>
+</bean>
+
+<bean
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+	id="viewResolver"
+>
+	<property
+		name="viewClass"
+		value="com.liferay.portletmvc4spring.PortletJstlView"
+	/>
+	<property name="prefix" value="/WEB-INF/jsp/" />
+	<property name="suffix" value=".jsp" />
+</bean>
+
+<!-- Other configuration details -->
+<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer" id="configurationPropertyConfigurer">
+	<property name="locations">
+		<list>
+			<value>file:${catalina.home}/../property-files/cards-search/cardsManagement.properties</value>
+			<value>file:${catalina.home}/../property-files/webservice.properties</value>
+		</list>
+	</property>
+</bean>
+
+</beans>

@@ -1,0 +1,31 @@
+<%--
+/**
+* Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+*
+* This library is free software; you can redistribute it and/or modify it under
+* the terms of the GNU Lesser General Public License as published by the Free
+* Software Foundation; either version 2.1 of the License, or (at your option)
+* any later version.
+*
+* This library is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+* FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+* details.
+*/
+--%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ taglib uri="http://xmlns.jcp.org/portlet_3_0" prefix="portlet" %>
+
+<portlet:defineObjects />
+
+<c:if test="${status eq 'success'}">
+	<%-- <c:out value="${preamble}" /> --%>
+	<form action="<portlet:renderURL />" method="post" name="form">
+		User Name: <input type="text" name="username" value="${username}" />
+		<input type="submit" value="Go" />
+	</form>
+
+	<p style="color: red;"><c:out value="${errorMessage}" /></p>
+</c:if>

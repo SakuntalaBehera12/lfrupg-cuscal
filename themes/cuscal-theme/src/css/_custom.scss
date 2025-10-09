@@ -1,0 +1,465 @@
+@import "components/breadcrumb";
+@import "components/color";
+@import "components/group-item";
+@import "components/info-panel";
+@import "components/navbars";
+@import "components/sidebar";
+@import "components/table";
+@import "components/widget";
+@import "components/header";
+@import "components/home";
+@import "portlet/portlet";
+@import "portlet/portlet_decorators";
+@import "custom_properties/cuscal_custom.scss";
+body {
+  header {
+    .field-wrapper {
+      position: absolute;
+      right: 4px;
+      top: 2px;
+
+      a {
+        color: #fff;
+      }
+    }
+
+    .field-wrapper,
+    .form-group {
+      margin-bottom: 0;
+    }
+
+    .portlet {
+      margin-bottom: 0;
+
+      &:hover {
+        z-index: 1034;
+      }
+    }
+
+    .search-input {
+      font-size: 0.88rem;
+      padding: 0.28rem 2rem 0.28rem 1rem;
+ 
+    }
+
+    .text-default {
+      color: #6b6c7e;
+      font-weight: 600;
+    }
+
+    .user-personal-bar {
+      .fieldset {
+        position: relative;
+      }
+
+      .user-avatar-link .panel-notifications-count {
+        right: calc(100% - 0.75rem);
+        top: -0.35rem;
+      }
+    }
+  }
+
+  .user-avatar-link {
+    display: block;
+    position: relative;
+
+    .panel-notifications-count {
+      display: block;
+      margin: 0;
+      max-width: none;
+      position: absolute;
+      right: calc(100% - 0.7rem);
+      top: -0.4rem;
+    }
+
+    .text-default {
+      align-items: center;
+      display: flex;
+
+      .user-full-name {
+        margin-left: 0.5rem;
+
+        @include media-breakpoint-down(xs) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.banner-top {
+  max-width: 600px;
+}
+
+.btn-group + .info-panel {
+  @include media-breakpoint-up(sm) {
+    top: auto;
+  }
+}
+
+#footer {
+  color: #fff;
+  margin-top: 1rem;
+
+  > .container {
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+  }
+}
+
+#footer-block {
+  FONT-SIZE: 65%;
+  FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+
+// Footer styling
+.footer-fragment {
+  background-color: #C8C9CB;
+  FONT-SIZE: 1.16em;
+  color: #000000;
+}
+.footer-fragment__list {
+  display: flex;
+  list-style: none;
+  position: relative;
+  height: 27px;
+  align-items: center;
+  padding-left: 10px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+.footer-fragment__list__item {
+  display: flex;
+}
+.footer-fragment__list__item:not(:last-child):after {
+  display: inline-block;
+  content: "|";
+  margin: 0 8px 0 5px;
+}
+.footer-fragment__list__item #footer-link {
+  text-decoration: none;
+  color: #000000;
+}
+.footer-fragment__list__item #footer-link:hover {
+  text-decoration: underline;
+}
+
+// Control Panel and left Side bar issue
+
+@media (min-width: 576px) {
+  .applications-menu-modal  .modal-dialog {
+    max-width: none !important;
+  }
+}
+
+.product-menu.sidenav-menu .sidebar-body {
+  position: static !important;
+}
+
+
+.product-menu.sidenav-menu .nav>li>a {
+  display: block;
+  padding: .625rem 1rem;
+}
+
+
+.product-menu.sidenav-menu .sidebar-body .panel-title {
+  display: grid;
+}
+
+.product-menu.sidenav-menu .sidebar-body  a:hover {
+  text-decoration: none;
+}
+
+
+// Search Bar
+
+#page-search input[type="text"] {
+	position: absolute;
+	top: 10px;
+  width: 112px;
+  height: 22px;
+}
+
+#page-search input[type="image"] {
+	position: absolute;
+	top: 10px;
+	left: 127px;
+}
+
+/* Hack to master override some imported var */
+@media (min-width: 768px) {
+  html:not(#__):not(#___) .controls-visible .portlet:hover > .portlet-topper, html:not(#__):not(#___) .controls-visible .portlet.open > .portlet-topper, html:not(#__):not(#___) .controls-visible .portlet.focus > .portlet-topper {
+    transform: translateY(0);
+    .lfr-icon-menu > a {
+      color: #fff;
+    }
+  }
+}
+
+/* apply styles to all web contents */
+
+.autofit-float.autofit-row.portlet-header {
+  display: none;
+}
+
+#contentHeading {
+  padding: 0 10px 0 17px;
+  FONT-WEIGHT: bold;
+  font-size: 20px !important;
+  MIN-HEIGHT: 41px;
+  COLOR: #fe5402;
+  LINE-HEIGHT: 38px;
+  margin: -5px 0;
+  background-color: #DEDEDE;
+}
+
+#contentBody {
+  margin-left: 15px;
+  a {
+    color: #fe5402;
+  }
+
+  ul {
+    padding-inline-start: 20px;
+  }
+
+  li ul {
+    padding-inline-start: 30px;
+  }
+
+  p {
+    font-size: 12px;
+    color: #4A4B4B;
+  }
+}
+
+#contentBody ul li::before {
+  content: "\2022";
+  color: #fe5402;
+  padding-right: 8px;
+}
+
+#content {
+  .layouts li li.lfr-nav-item.open.selected.active {
+    BACKGROUND: url(../images/orangeLinkDot.png) no-repeat;
+    BACKGROUND-POSITION: 0px 8px !important;
+  }
+  .layouts.level-1 li.lfr-nav-item.open.selected.active {
+    BACKGROUND: url(../images/orangeLinkDot.png) no-repeat;
+    BACKGROUND-POSITION: 4px 14px;
+  }
+}
+
+#content li.lfr-nav-item {
+  padding-left: 12px;
+}
+
+#content > #main-content > .lfr-layout-structure-item-container, #content > .lfr-layout-structure-item-container > .lfr-layout-structure-item-row, #content > #main-content > .container{
+  background: url(../images/background/contentGradient.png) #fff repeat-x !important; 
+  position: relative;
+  overflow: hidden;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important ;
+  FONT-SIZE: 1.2em;
+}
+
+#content > #main-content > .lfr-layout-structure-item-container .lfr-layout-structure-item-container, #content > #main-content > .container{
+  FONT-SIZE: 1.16em;
+}
+
+#rightBar {
+  FLOAT: right;
+  MARGIN: 20px 0 0 15px;
+  width: 200px;
+}
+
+#contactDetails {
+  width: 250px;
+  overflow: hidden;
+  background-color: #838485;
+  color: #fff;
+  font-size: .9em;
+  margin: 0;
+  padding-top: 3px;
+  padding-left: 8px;
+  border-radius: 3px;
+
+  a {
+    text-decoration: underline;
+    color: var(--white) !important;
+  }
+
+  a:hover{
+    border-bottom: none !important;
+  }
+
+}
+
+#information {
+  margin-top: 6px;
+
+  ul {
+    list-style: none;
+  }
+
+  p {
+    padding: 3px 0px;
+    margin: 5px 0px 3px 0px;
+    line-height: 1.4em;
+    color: #4A4B4B;
+  }
+
+  table {
+    color: #4A4B4B;
+  }
+}
+
+.modal-wrapper {
+	display: none;
+	position: relative;
+	padding: 4px 4px 0 4px;
+	min-width: 400px;
+	max-width: 630px;
+	background-color: #fff;
+	color: #fe5402;
+	border: solid 1px #000;
+	border-radius: 4px;
+}
+
+.modal-wrapper .modal-header {
+	display: block;
+	position: relative;
+	height: 40px;
+	width: 100%;
+	background: url("../images/header-main-back.png") top left repeat-x transparent;
+	color: #fff;
+	border-radius: 3px;
+}
+
+.modal-wrapper .modal-header h6 {
+	display: inline-block;
+	margin: 0 4px;
+	line-height: 40px;
+	font-size: 1.2em;
+	font-weight: normal;
+}
+
+.modal-wrapper .modal-header a.links {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: 1px; //fix link position on modal
+}
+
+.modal-wrapper a.links {
+	padding: 8px;
+	background-color: #fe5402;
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 3px;
+}
+
+.modal-wrapper .modal-content {
+	padding: 10px 5px;
+	background-color: transparent;
+	color: #000;
+}
+
+.modal-wrapper .modal-buttons {
+	clear: both;
+	text-align: right;
+	line-height: 40px;
+}
+
+// terms of use updated
+
+.terms-of-use.modal-wrapper {
+	display: none;
+	position: relative;
+	padding: 4px 4px 0 4px;
+	min-width: 400px;
+	max-width: 630px;
+	background-color: #fff;
+	color: #fe5402;
+	border: solid 1px #000;
+	border-radius: 4px;
+}
+
+/*
+    Legacy Cuscal does not have sheet-header.
+    sheet-header simply shows the Terms Of Use title and the language selector
+*/
+#content #portlet_terms-of-use .sheet-header {
+    display: none;
+}
+
+// journal article content custom style
+
+.portlet-boundary {
+  .portlet-boundary_com_liferay_journal_content_web_portlet_JournalContentPortlet_ {
+    .portlet-content {
+       padding-left: 0px !important;
+       padding-right: 0px !important;
+    }
+  }
+}
+
+// Widget page custom style
+.widget-container-wrapper-lv1, .left-navigation-menu-container, .portlet-content-include-container {
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0px;
+    opacity: 1.0;
+}
+
+.widget-container-wrapper-lv2 {
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0px;
+    opacity: 1.0;
+    overflow: hidden;
+}
+.left-navigation-menu-parent-container {
+    padding-top: 1.2rem !important;
+}
+#secondaryNav, #rightNav {
+    font-size: 1.06em;
+}
+
+// Asset publisher title list custom style
+
+.custom-css-title-list  {
+  li{
+    background-color: unset !important;
+    border: none !important;
+    padding: 0rem 0.5rem;
+  }
+  li p a {
+    color: #FE5402 !important;
+    line-height: 1.5em;
+    font-size: 12.48px;
+  }
+  li::before {
+    content: "•";
+    color: #fe5402;
+  }
+  .asset-date {
+    color: #999;
+    font-size: 12.48px;
+  }
+  .asset-summary {
+      color: #000;
+      text-decoration: none;
+      font-size: 12px;
+  }
+}
+.asset-content {
+    p {
+        font-size: 12px;
+        color: #4A4B4B;
+    }
+}
+// end asset publisher title list custom style

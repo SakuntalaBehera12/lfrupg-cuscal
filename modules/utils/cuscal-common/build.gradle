@@ -1,0 +1,15 @@
+dependencies {
+	// refer to : modules: utils: shared-props to include properties files
+	//Thanks for using https: //jar-download.com
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly group: "javax.mail", name: "mail", version: "1.4"
+	compileOnly group: "regexp", name: "regexp", version: "1.3"
+	compileInclude group: "commons-codec", name: "commons-codec", version: "1.9"
+	compileInclude group: "commons-lang", name: "commons-lang", version: "2.6"
+	compileInclude group: "commons-net", name: "commons-net", version: "3.6"
+	compileOnly group: "commons-pool", name: "commons-pool", version: "1.6"
+	compileInclude group: "log4j", name: "log4j", version: "1.2.17"
+	compileInclude group: "org.apache.commons", name: "commons-lang3", version: "3.1"
+	compileInclude group: "xerces", name: "xercesImpl", version: "2.12.0"
+	compileOnly project(":modules:utils:shared-props")
+}

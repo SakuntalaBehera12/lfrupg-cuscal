@@ -1,0 +1,13 @@
+buildscript {
+	dependencies {
+		classpath group: "com.liferay.gulp", name: "com.liferay.gulp.gradle.plugin", version: "2.0.79"
+	}
+
+	repositories {
+		maven {
+			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+		}
+	}
+}
+
+apply plugin: "com.liferay.gulp"

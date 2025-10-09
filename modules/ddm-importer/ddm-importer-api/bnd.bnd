@@ -1,0 +1,4 @@
+Bundle-Name: Common DDM Importer API
+Bundle-SymbolicName: com.liferay.common.ddm.importer.api
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.common.ddm.importer

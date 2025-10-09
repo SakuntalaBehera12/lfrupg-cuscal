@@ -1,0 +1,20 @@
+<style>
+.key-points {
+margin-top: -2px;
+}
+<#call information> OL {
+font: 1em Verdana;
+}
+</style>
+<div id="cuscalContentFull" style="margin: 0px 0px 0px 14px;float: none;">
+<div id="information" style="margin-top: 0px;">
+<#if headline.getData() != ""><h1 id="contentHeadingFull">${headline.getData()}</h1>
+</#if><div style="margin-left: 15px;">
+<#if content.getData() != "">${content.getData()}</#if></div>
+</div>
+</div>
+<script>
+if(document.getElementById('contentWrapper2') != null) {
+document.getElementById('contentWrapper2') .style.width = 966 + 'px';
+}
+</script>

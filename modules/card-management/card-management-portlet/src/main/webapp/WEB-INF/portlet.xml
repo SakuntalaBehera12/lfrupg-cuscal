@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<portlet-app version="3.0" xmlns="http://xmlns.jcp.org/xml/ns/portlet" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/portlet http://xmlns.jcp.org/xml/ns/portlet/portlet-app_3_0.xsd">
+	<portlet>
+		<portlet-name>card-management</portlet-name>
+		<display-name>card-management-portlet</display-name>
+		<portlet-class>com.liferay.portletmvc4spring.DispatcherPortlet</portlet-class>
+		<init-param>
+			<name>contextConfigLocation</name>
+			<value>/WEB-INF/card-management-portlet.xml</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.messages</resource-bundle>
+		<portlet-info>
+			<title>Cards Management</title>
+		</portlet-info>
+		<container-runtime-option>
+			<name>javax.portlet.actionScopedRequestAttributes</name>
+			<value>true</value>
+			<value>numberOfCachedScopes</value>
+			<value>10</value>
+		</container-runtime-option>
+	</portlet>
+	<filter>
+		<filter-name>SpringSecurityPortletFilter</filter-name>
+		<filter-class>com.liferay.portletmvc4spring.security.SpringSecurityPortletFilter</filter-class>
+		<lifecycle>ACTION_PHASE</lifecycle>
+		<lifecycle>RENDER_PHASE</lifecycle>
+		<lifecycle>RESOURCE_PHASE</lifecycle>
+	</filter>
+	<filter-mapping>
+		<filter-name>SpringSecurityPortletFilter</filter-name>
+		<portlet-name>card-management</portlet-name>
+	</filter-mapping>
+</portlet-app>

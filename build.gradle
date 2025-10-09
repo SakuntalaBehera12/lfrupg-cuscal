@@ -1,0 +1,67 @@
+subprojects {
+//    afterEvaluate {
+//        if (plugins.hasPlugin("com.liferay.source.formatter")) {
+//            compileJava.dependsOn formatSource
+//        }
+//    }
+    
+	ext.env = project.hasProperty('liferay.workspace.environment') ? project.getProperty('liferay.workspace.environment') : '.env.local'
+	ext.cuscalEnv = env != '.env.local' && project.hasProperty('useCuscalNexus')
+
+	if (cuscalEnv) {
+		repositories {
+			maven {
+				url 'https://nexus.dev.cuscalad.com/repository/maven-public/'
+			}
+		}
+	}
+}
+
+distBundle {
+    exclude "**/au.com.cuscal.connect.util.resource.dxp-*.jar"
+    exclude "**/au.com.cuscal.portal.search.web-*.jar"
+    exclude "**/audit.framework.dxp-*.jar"
+    exclude "**/com.cuscal.common-*.jar"
+    exclude "**/cuscal.performance.override*.jar"
+    exclude "**/cuscal.shared.props-*.jar"
+    exclude "**/cuscal.ticketing.framework.dxp-*.jar"
+    exclude "**/webservices.client.dxp-*.jar"
+}
+
+def sdlcPropsFile = new File(System.getProperty('user.home') + "/.liferay/sdlc.properties");
+def sdlcProps = new Properties()
+
+if (sdlcPropsFile.exists()) {
+    sdlcProps.load(new FileInputStream(sdlcPropsFile));
+}
+
+def sdlcUsername = sdlcProps.get('username') ?: sdlcProps.get('nexusUsername');
+def sdlcPassword = sdlcProps.get('password') ?: sdlcProps.get('nexusPassword');
+
+ext {
+    nexusUsername = System.getenv("NEXUS_USER") ?: sdlcUsername;
+    nexusPassword = System.getenv("NEXUS_PASSWORD") ?: sdlcPassword;
+}
+downloadBundle {
+    username nexusUsername
+    password nexusPassword
+    onlyIf {
+        String url = downloadBundle.src.toString()
+        File cachedFile = new File(downloadBundle.dest, url.substring(url.lastIndexOf("/") + 1))
+        if (cachedFile.exists()) {
+            return false
+        }
+        return true
+    }
+}
+
+allprojects {
+	repositories {
+		maven {
+			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+		}
+		maven {
+			url "https://repository.liferay.com/nexus/content/groups/public"
+		}
+	}
+}

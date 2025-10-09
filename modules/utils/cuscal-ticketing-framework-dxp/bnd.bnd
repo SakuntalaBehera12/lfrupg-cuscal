@@ -1,0 +1,13 @@
+Bundle-Name: cuscal-ticketing-framework-dxp
+Bundle-SymbolicName: cuscal.ticketing.framework.dxp
+Bundle-Version: 1.0.0
+Export-Package: au.com.cuscal.common.framework.dxp.service.request.*
+Import-Package: \
+	!com.jamesmurty.utils,\
+	!com.sun.xml.ws.wsdl.parser,\
+	!javax.jms,\
+	!org.apache.commons.pool,\
+	!org.apache.commons.pool.impl,\
+	!org.junit,\
+	\
+	*

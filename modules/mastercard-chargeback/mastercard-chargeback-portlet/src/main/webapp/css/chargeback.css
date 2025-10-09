@@ -1,0 +1,344 @@
+div .hidden,
+div#reasons {
+	display: none;	
+}
+
+.portlet-msg-info,
+.portlet-msg-error {
+	padding-left: 30px !important;
+	background-position: 6px 14px !important;	
+}
+
+/* table#ticket {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table#ticket th {
+	padding: 3px;
+}
+
+table#ticket td {
+	border: solid 1px #999;
+	border-width: 1px 0;
+	padding: 3px;
+	vertical-align: top;
+}
+
+table#ticket td:first-child {
+	border-left: solid 1px #999;
+}
+
+table#ticket td:last-child {
+	border-right: solid 1px #999;
+}
+
+table#ticket tr.even td {
+	background-color: #cecece;
+}
+
+table#ticket tr:hover td {
+	background-color: #c5cdde;
+}
+
+table#ticket td.first {
+	border-width: 1px 0 1px 1px;
+}
+
+table#ticket td.last {
+	border-width: 1px 1px 1px 0;
+}
+
+table#ticket td.product {
+	width: 30%;
+}
+
+table#ticket th {
+	color: #000;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: bottom;
+} */
+
+textarea {
+	height: 120px;
+	width: 100%;
+}
+
+table.transaction-details td.first-column,
+table.transaction-details td.second-column {
+	font-weight: bold;
+	width: 170px;
+}
+
+table.transaction-details td.first-column-value,
+table.transaction-details td.second-column-value {
+	width: 400px;	
+}
+
+table.dispute-info td.first-column {
+	font-weight: bold;
+	width: 250px;
+}
+
+label {
+	display: inline-block;
+}
+
+.small {
+	width: 210px;
+}
+
+.small-medium {
+	width: 230px;
+}
+
+.medium {
+	width: 300px;
+}
+
+.large {
+	width: 390px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+fieldset div {
+	margin-bottom: 6px;
+}
+
+#elabInfoAuth > div,
+#elabInfoProcessingError > div {
+	display: none;
+}
+
+div#disclaimer-wrap {
+	margin-bottom: 6px;
+}
+
+input[type="submit"].request-buttons,
+input[type="button"].request-buttons,
+input[type="submit"].request-buttons:hover,
+input[type="button"].request-buttons:hover {
+	background-color: #fe5402 !important;
+	background-image: none !important;
+	border: none !important;
+	border-radius: 3px !important;
+	box-shadow: none !important;
+	color: #fff !important;
+	font-weight: normal !important;
+	padding: 4px 8px;
+	text-shadow: none !important;
+	width: auto;
+}
+
+input[type="submit"].request-buttons:disabled {
+	background-color: #dedede;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+input[type="radio"] {
+	margin-right: 0;
+}
+
+table.dispute-info td.first-column {
+	font-weight: bold;
+	width: 250px;
+}
+
+.message-text-note {
+	font-style: italic;
+}
+
+.update-message {
+	width: 415px;
+}
+
+.error {
+	color: #f00;
+	font-weight: bold;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="password"] {
+	padding: 2px 1px !important;
+	vertical-align: top !important;
+}
+
+select {
+	vertical-align: top !important;
+}
+
+table#file-table {
+	margin-bottom: 10px;
+}
+
+span.spacer {
+	display: inline-block;
+	width: 50px;
+}
+
+.padded {
+	margin-left: 1em;
+}
+
+.mandatory {
+	color: #c00;
+}
+
+#cancellationInfo div,
+#elaborationInfoQuestionnaire div,
+#returnInfo div,
+#creditInformationFieldset div {
+	display: none;
+}
+
+#fileTable {
+	margin-bottom: 10px;
+}
+
+.modal-wrapper fieldset {
+	padding: 4px;
+}
+
+.modal-wrapper fieldset.pos,
+.modal-wrapper fieldset.response-details,
+.modal-wrapper fieldset.amounts,
+.modal-wrapper fieldset.date-time,
+.modal-wrapper fieldset.acquirer,
+.modal-wrapper fieldset.issuer,
+.modal-wrapper fieldset.original-acquirer,
+.modal-wrapper fieldset.card-acceptor {
+	clear: both;
+	float: none;
+	width: auto;
+}
+
+a.search-button,
+a.clear-button,
+a.export-button,
+.modal-wrapper a.modal-close,
+.modal-wrapper a.print-button,
+.modal-wrapper a.prev-button,
+.modal-wrapper a.next-button,
+.modal-wrapper a.close-button {
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff !important;
+	display: inline-block;
+	float: left;
+	line-height: 1.4em;
+	margin-right: 5px;
+	padding: 4px 8px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+a.search-button:hover,
+a.clear-button:hover,
+a.export-button:hover,
+.modal-wrapper a.modal-close:hover,
+.modal-wrapper a.print-button:hover,
+.modal-wrapper a.prev-button:hover,
+.modal-wrapper a.next-button:hover,
+.modal-wrapper a.close-button:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.modal-wrapper a.disabled,
+.modal-wrapper a.disabled:hover {
+	background-color: #ddd;
+	cursor: default;
+}
+
+.modal-wrapper a.next-button {
+	margin-right: 15px;
+}
+
+.modal-wrapper {
+	background-color: #fff;
+	border: solid 1px #000;
+	border-radius: 4px;
+	color: black;
+	display: none;
+	font-size: 0.85em;
+	max-width: 600px;
+	min-width: 200px;
+	overflow: auto;
+	padding: 4px 4px 0 4px;
+	position: relative;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+ .modal-wrapper a,
+ .modal-wrapper a:hover {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.modal-wrapper a.normal-link {
+	background-color: transparent;
+	border-radius: 0;
+	color: #fe5402;
+	font-weight: normal;
+	padding: 0;
+	text-decoration: none;
+}
+
+.modal-wrapper a.normal-link:hover {
+	text-decoration: underline;
+}
+
+.modal-header {
+	color: #000;
+	display: block;
+	height: 32px;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+
+.modal-header h6,
+.modal-header h5 {
+	display: inline-block;
+	font-size: 1em;
+	font-weight: normal;
+	margin: 0 4px;
+}
+
+.modal-header h5 {
+	background-color: transparent;
+	/* color: #fe5402; */
+	font-weight: bold;
+	line-height: 37px;
+}
+
+.modal-header a {
+	margin: 4px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.modal-header a.print-button {
+	right: 35px;
+}
+
+table.tx-details,
+p.error-message {
+	margin: 10px 0;
+}
+
+abbr {	
+	border-bottom: 1px dotted #b1b0a7 !important; 
+}

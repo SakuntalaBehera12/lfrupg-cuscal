@@ -1,0 +1,14 @@
+dependencies {
+	compileOnly "com.liferay.portal:release.dxp.api"
+	compileInclude rootProject.files("libs/AuditFramework-0.0.30.jar")
+	compileInclude group: "com.jamesmurty.utils", name: "java-xmlbuilder", version: "0.6"
+	compileInclude group: "commons-lang", name: "commons-lang", version: "2.6"
+	compileInclude group: "log4j", name: "log4j", version: "1.2.17"
+	testCompileOnly group: "junit", name: "junit", version: "4.8.2"
+	testCompileOnly rootProject.files("libs/AuditFramework-0.0.30.jar")
+}
+
+// Set compileTestJava to false to avoid compiling test classes during upgrade as it is out of scope
+tasks.named('compileTestJava') {
+	enabled = false
+}

@@ -1,0 +1,52 @@
+table.saf-list {
+	clear: right;
+	float: left;
+	margin-right: 15px;
+	width: 300px;
+}
+
+table.saf-list th {
+	color: #fe5402;
+	text-align: center;
+}
+
+table.saf-list td {
+	border: solid 1px #999;
+	border-collapse: collapse;
+	border-width: 1px 0;
+	padding: 4px;
+	text-align: center;
+}
+
+table.saf-list td.first {
+	border-width: 1px 0 1px 1px;
+}
+
+table.saf-list td.last {
+	border-width: 1px 1px 1px 0;
+	width: 65px;
+}
+
+table.saf-list tr.even td {
+	background-color: #fff;
+}
+
+table.saf-list tr.odd td {
+	background-color: #cecece;
+}
+
+table.saf-list tr:hover td {
+	background-color: #c5cdde;
+}
+
+input[type="button"],
+input[type="button"]:hover {
+	background-color: #fe5402 !important;
+	background-image: none !important;
+	border: none !important;
+	color: #fff !important;
+	font-weight: normal !important;
+	text-decoration: none !important;
+	text-shadow: none !important;
+}
+	

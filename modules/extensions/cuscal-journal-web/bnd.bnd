@@ -1,0 +1,8 @@
+Bundle-Name: cuscal-journal-web
+Bundle-SymbolicName: cuscal.journal.web
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.journal.web.internal.asset.model,\
+	com.liferay.journal.web.internal.configuration,\
+	com.liferay.journal.web.internal.util
+Fragment-Host: com.liferay.journal.web

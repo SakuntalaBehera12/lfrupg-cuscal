@@ -1,0 +1,7 @@
+webservice.transaction.url=https://services.cuscal.com.au:8443/transaction-services/TransactionService?wsdl
+webservice.cards.url=https://services.cuscal.com.au:8443/transaction-services/CardService?wsdl
+webservice.entity.url=https://services.cuscal.com.au:8443/transaction-services/EntityService?wsdl
+webservice.common.url=https://services.cuscal.com.au:8443/transaction-services/CommonService?wsdl
+webservice.atm.url=https://services.cuscal.com.au:8443/transaction-services/AtmService?wsdl
+webservice.pct.url=https://services.cuscal.com.au:8443/transaction-services/PCTService?wsdl
+

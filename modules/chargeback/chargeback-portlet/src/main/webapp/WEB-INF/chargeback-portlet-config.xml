@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/cache
+		http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+<import resource="applicationContext.xml" />
+<cache:annotation-driven />
+
+<context:component-scan base-package="au.com.cuscal" />
+<mvc:annotation-driven/>
+
+<!--<bean class="au.com.cuscal.framework.webservices.client.impl.CustomerSelfServiceServiceImpl" id="ticketingService" />-->
+<!--<bean class="au.com.cuscal.framework.webservices.client.impl.ReportsServiceImpl" id="reportsService" />-->
+<!--<bean class="au.com.cuscal.framework.webservices.client.impl.EntityServiceImpl" id="entityService" />-->
+<!--<bean class="au.com.cuscal.framework.webservices.client.impl.CardServiceImpl" id="cardService" />-->
+<!--<bean class="au.com.cuscal.framework.webservices.client.impl.TransactionServiceImpl" id="transactionService" />-->
+
+<!--<bean class="au.com.cuscal.common.framework.dxp.service.request.services.ServiceRequestServiceImpl" id="dxpServiceRequestService">-->
+<!--	<property name="ticketingService" ref="ticketingService" />-->
+<!--	<property name="transactionService" ref="transactionService" />-->
+<!--</bean>-->
+
+<bean
+	class="au.com.cuscal.chargeback.controller.VisaChargebackController"
+	depends-on="propUtil"
+	id="visaChargebackController"
+	lazy-init="true"
+>
+	<property
+		name="organisationIdOverride"
+		value="#{propUtil['organisation.id.override']}"
+	/>
+</bean>
+
+<!--
+	NOTE: Requires commons-fileupload dependency and transitive commons-io dependency (see pom.xml)
+	<bean class="com.liferay.portletmvc4spring.multipart.CommonsPortletMultipartResolver" id="portletMultipartResolver" />
+	-->
+<bean class="com.liferay.portletmvc4spring.multipart.StandardPortletMultipartResolver" id="portletMultipartResolver" />
+
+<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer" id="configurationPropertyConfigurer">
+	<property name="locations">
+		<list>
+			<value>file:${catalina.home}/../property-files/self-service/self-service.properties</value>
+			<value>file:${catalina.home}/../property-files/webservice.properties</value>
+		</list>
+	</property>
+</bean>
+
+<bean class="org.springframework.cache.support.SimpleCacheManager" id="cacheManager">
+	<property name="caches">
+		<set>
+			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="productList" />
+			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="ticketStatusList" />
+			<!--<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="typeList" />-->
+		</set>
+	</property>
+</bean>
+</beans>

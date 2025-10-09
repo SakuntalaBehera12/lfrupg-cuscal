@@ -1,0 +1,16 @@
+dependencies {
+	compileOnly "com.liferay.portal:release.dxp.api"
+
+	compileOnly rootProject.files("libs/AuditFramework-0.0.30.jar")
+	compileOnly rootProject.files("libs/WebServices-Client-0.0.76-SNAPSHOT.jar")
+
+	compileOnly project(":modules:utils:audit-framework-dxp")
+
+	compileInclude group: "commons-lang", name: "commons-lang", version: "2.6"
+	compileInclude group: "log4j", name: "log4j", version: "1.2.17"
+	compileInclude group: "commons-pool", name: "commons-pool", version: "1.6"
+}
+
+group = 'au.com.cuscal.common.framework.dxp'
+version = '2.0.1'
+description = 'WebServices-Client-DXP'

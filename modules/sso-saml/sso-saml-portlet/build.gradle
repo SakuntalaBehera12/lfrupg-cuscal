@@ -1,0 +1,43 @@
+buildscript {
+	dependencies {
+		classpath group: "com.liferay", name: "com.liferay.css.builder", version: "3.1.6"
+		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.css.builder", version: "5.0.16"
+	}
+
+	repositories {
+		maven {
+			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+		}
+	}
+}
+
+apply plugin: "com.liferay.css.builder"
+
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+
+	// For easyconf that is used commonly in Cuscal modules and utils
+	compileOnly(group: "easyconf", name: "easyconf", version: "0.9.5") {
+		exclude group: "dom4j", module: "dom4j"
+		exclude group: "javax.sql", module: "jdbc-stdext"
+		exclude group: "servletapi", module: "servletapi"
+		exclude group: "xdoclet", module: "xdoclet"
+		exclude group: "xdoclet", module: "xdoclet-web-module"
+		exclude group: "xpp3", module: "xpp3_min"
+	}
+
+	// Include dom4j with excluding jaxen and saxpath to avoid conflicts about XML builder
+	compileOnly(group: "dom4j", name: "dom4j", version: "1.4") {
+		// TODO verify when we can really verifying execution relates to easyconf
+		exclude group: "jaxen", module: "jaxen"
+		exclude group: "saxpath", module: "saxpath"
+	}
+
+	implementation group: "log4j", name: "log4j", version: "1.2.17"
+	implementation group: "org.apache.commons", name: "commons-lang3", version: "3.4"
+	compileOnly project(":modules:utils:shared-props")
+	compileOnly project(":modules:utils:webservices-client-dxp")
+	compileOnly rootProject.files("libs/CuscalPerformance-0.0.4-20130912.223759-1.jar")
+	compileOnly rootProject.files("libs/SAML-Webservice-Client_v1_0.jar")
+	compileOnly rootProject.files("libs/WebServices-Client-0.0.68-20150323.010946-1.jar")
+}

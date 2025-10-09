@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<license>
+	<account-name>Liferay, Inc.</account-name>
+	<owner>Maurice Sepe</owner>
+	<description>Liferay, Inc. Developer Activation Keys</description>
+	<product-name>DXP Development</product-name>
+	<product-version>7.3</product-version>
+	<license-name>Digital Enterprise Development</license-name>
+	<license-type>developer</license-type>
+	<license-version>6</license-version>
+	<start-date>Monday, November 1, 2021 7:23:44 AM GMT</start-date>
+	<expiration-date>Wednesday, October 8, 2121 7:23:44 AM GMT</expiration-date>
+	<max-http-sessions>5</max-http-sessions>
+	<key>bd58aeb385d784c22ae426fc15cf5b60bbe66f221567a7c8272cc6c0d46ecd90796943efde0609c39eabcf59f0cc1b8c30c5c99fded04270f014fe53394b1c71c88b17df874eeae0282314ee54793a8b968b2fa5ec12e4ecad479827d7bbc8384c41cc0353b642cdf962a0a791850356788e06cc95985836addd9274578e4e02f0e98f8d</key>
+</license>

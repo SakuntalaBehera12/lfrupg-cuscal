@@ -1,0 +1,10 @@
+Bundle-Name: audit-framework-dxp
+Bundle-SymbolicName: audit.framework.dxp
+Bundle-Version: 1.0.0
+Export-Package: au.com.cuscal.framework.audit.liferay.dxp
+Import-Package: \
+	!com.jamesmurty.utils,\
+	!org.apache.log4j,\
+	!org.junit,\
+	\
+	*

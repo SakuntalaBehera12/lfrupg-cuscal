@@ -1,0 +1,14 @@
+Bundle-Name: webservices-client-dxp
+Bundle-SymbolicName: webservices.client.dxp
+Bundle-Version: 1.0.0
+Export-Package: au.com.cuscal.framework.webservices.*
+Import-Package: \
+    !au.com.cuscal.service._switch.v1_0,\
+	!com.jamesmurty.utils,\
+	!com.sun.xml.ws.wsdl.parser,\
+	!org.apache.commons.pool,\
+	!org.apache.commons.pool.impl,\
+	!org.apache.log4j,\
+	!org.junit,\
+	\
+	*

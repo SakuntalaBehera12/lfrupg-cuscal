@@ -1,0 +1,1 @@
+#cp /mnt/liferay/scripts/activation.xml /mnt/liferay/deploy

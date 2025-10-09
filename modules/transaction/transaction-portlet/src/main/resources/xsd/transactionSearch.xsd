@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" xmlns="http://connect.cuscal.com.au/transactionSearch/1.0"
+	targetNamespace="http://connect.cuscal.com.au/transactionSearch/1.0">
+	<xsd:element name="TransactionSearchRequest" type="TransactionSearchRequestType" />
+	<xsd:element name="TransactionSearchResponse" type="TransactionSearchResponseType" />
+	<xsd:complexType name="TransactionSearchRequestType">
+		<xsd:sequence>
+			<xsd:element name="PAN" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="BIN" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="TerminalID" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="MerchantID" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="StartDateTime" type="xsd:dateTime"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="EndDateTime" type="xsd:dateTime"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="Amount" type="xsd:decimal" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="AmountComparator" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="ResponseCode" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="MessageTypeCode" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="IssuerID" type="xsd:string" minOccurs="0"
+				maxOccurs="1" />
+			<xsd:element name="AcquirerID" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+			<xsd:element name="MaxResults" type="xsd:int" minOccurs="0"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TransactionSearchResponseType">
+		<xsd:sequence>
+			<xsd:element name="TransactionSearchResult" minOccurs="0" type="TransactionSearchResultType"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TransactionSearchResultType">
+			<xsd:sequence>
+				<xsd:element name="MaskedPAN" type="xsd:string" minOccurs="0"
+					maxOccurs="1" />
+				<xsd:element name="TerminalID" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="CardAcceptorID" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="ResponseCode" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="MessageTypeCode" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="MessageCategory" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="SystemTrace" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="TransactionDateTime" type="xsd:dateTime"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="ProcessingCode" type="xsd:dateTime"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="ProcessingDesc" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="FromAccount" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="ToAccount" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="Amount" type="xsd:decimal" minOccurs="0"
+				maxOccurs="1" />
+				<xsd:element name="AcquirerReference" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="TransactionLogID" type="xsd:string"
+					minOccurs="1" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+</xsd:schema> 
+
+

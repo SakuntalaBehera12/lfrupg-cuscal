@@ -1,0 +1,170 @@
+# Name of the GitHub Actions workflow
+name: Push Release
+
+# This workflow is triggered manually through the GitHub Actions UI
+on:
+  workflow_dispatch:
+    inputs:
+      # Input to determine if the release should be deployed to all environments
+      deploy-to-all:
+        description: Deploy to All Environments?
+        required: false
+        default: false
+        type: boolean
+       # Select the environment to which the release should be deployed
+      environment-name:
+        description: Environment Name
+        required: false
+        default: 'test'
+        type: choice
+        # Available options for the environment name
+        options:
+          - dev # remove this once deployment is tested in dev environment 
+          - test
+      # Input for the tag of the release to be deployed
+      release-tag:
+        description: The Tag of the Release to Deploy
+        required: true
+        type: string
+
+jobs:
+  # Job 1: Print the inputs to the GitHub Job Summary
+  print-inputs:
+    name: Print Inputs to Job Summary
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Display Input Parameters
+        run: |
+          echo "## Audit Information" >> $GITHUB_STEP_SUMMARY
+          echo "Triggered by: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "Release Tag: ${{ inputs.release-tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "Target Environment: ${{ inputs.environment-name }}" >> $GITHUB_STEP_SUMMARY
+          echo "Is Target Environment Production?: ${{ inputs.environment-name == 'prod' && 'Yes' || 'No' }}" >> $GITHUB_STEP_SUMMARY
+          echo "Deployment to All Environments Requested: ${{ inputs.deploy-to-all }}" >> $GITHUB_STEP_SUMMARY
+
+  # Job 2: Fetch the release artifact from the repository
+  get-release:
+    name: Fetch Release
+    runs-on: ubuntu-22.04
+    needs: print-inputs
+
+    # Default shell for all run steps within this job is bash
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Step 1: Use a custom action to fetch the release
+      - name: Fetch Release
+        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/fetch-release@v1.0
+        with:
+          artifact-name: artifacts # Replace with the name of the artifact to fetch
+          release-tag:  ${{ inputs.release-tag }} # Use the release tag input
+
+
+  # Job 3: Deploy the release to the specified environment
+  deploy-to-dev:
+    name: Deploy Release to Dev
+    if: ${{ inputs.deploy-to-all || inputs.environment-name == 'dev'}}
+    uses: ./.github/workflows/wf-deploy.yml
+    needs: get-release
+    with:
+      environment-name: dev
+      post-deployment-tests: true
+      test-suite-name: regression
+    secrets: inherit      
+
+  # Job 4: Deploy the release to the specified environment
+  deploy-to-test:
+    name: Deploy Release to Test
+    if: ${{ inputs.deploy-to-all || inputs.environment-name == 'test'}}
+    uses: ./.github/workflows/wf-deploy.yml
+    needs: get-release
+    with:
+      environment-name: test
+      post-deployment-tests: true
+      test-suite-name: regression
+    secrets: inherit
+
+  deploy-to-uat1:
+    name: Deploy Release to UAT1
+    if: ${{ inputs.deploy-to-all || inputs.environment-name == 'uat'}}
+    uses: ./.github/workflows/wf-deploy.yml
+    needs: deploy-to-test
+    with:
+      environment-name: uat
+      post-deployment-tests: true
+      test-suite-name: regression
+      environment-number: 1
+    secrets: inherit
+  deploy-to-uat2:
+    name: Deploy Release to UAT2
+    if: ${{ inputs.deploy-to-all || inputs.environment-name == 'uat'}}
+    uses: ./.github/workflows/wf-deploy.yml
+    needs: deploy-to-test
+    with:
+      environment-name: uat
+      post-deployment-tests: true
+      test-suite-name: regression
+      environment-number: 2
+    secrets: inherit
+
+  
+
+  
+
+  # Job 7: Deploy the release to the specified environment
+  deploy-to-prod1:
+    name: Deploy Release to Prod1
+    if: ${{ inputs.deploy-to-all || inputs.environment-name == 'prod'}}
+    uses: ./.github/workflows/wf-deploy.yml
+    needs: 
+      - deploy-to-uat1
+      - deploy-to-uat2
+    with:
+      environment-name: prod
+      post-deployment-tests: true
+      test-suite-name: sanity
+      environment-number: 1
+    secrets: inherit
+
+  deploy-to-prod2:
+    name: Deploy Release to Prod2
+    if: ${{ inputs.deploy-to-all || inputs.environment-name == 'prod'}}
+    uses: ./.github/workflows/wf-deploy.yml
+    needs: 
+      - deploy-to-prod1
+    with:
+      environment-name: prod
+      post-deployment-tests: true
+      test-suite-name: sanity
+      environment-number: 2
+    secrets: inherit
+
+  # DR Servers
+  deploy-to-prod3:
+    name: Deploy Release to Prod3
+    if: ${{ inputs.deploy-to-all || inputs.environment-name == 'prod'}}
+    uses: ./.github/workflows/wf-deploy.yml
+    needs: 
+      - deploy-to-prod2
+    with:
+      environment-name: prod
+      post-deployment-tests: true
+      test-suite-name: sanity
+      environment-number: 3
+    secrets: inherit
+
+  deploy-to-prod4:
+    name: Deploy Release to Prod4
+    if: ${{ inputs.deploy-to-all || inputs.environment-name == 'prod'}}
+    uses: ./.github/workflows/wf-deploy.yml
+    needs: 
+      - deploy-to-prod3
+    with:
+      environment-name: prod
+      post-deployment-tests: true
+      test-suite-name: sanity
+      environment-number: 4
+    secrets: inherit
+

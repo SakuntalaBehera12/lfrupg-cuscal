@@ -1,0 +1,379 @@
+/* ---------- Normal styles for the screen ---------- */
+br {
+	clear: both;
+}
+
+a {
+	outline: none;
+}
+
+#service-request-wrapper {
+    padding: 0px 10px;
+    font-size: 12px;
+    width: 946px;
+}
+
+#service-request-wrapper h1 {
+	background-color: #dedede;
+	color: #fe5402;
+	font-size: 20px;
+	line-height: 38px;
+	margin: 0;
+	padding: 0 5px;
+}
+
+/*
+.ie input,
+.ie select {
+	vertical-align: middle;
+}
+*/
+
+form label {
+	display: block;
+	float: left;
+	/* margin-right: 5px; */
+	/*width: 88px;*/
+	font-weight: bold;
+}
+
+
+form fieldset legend {
+	color: #000;
+}
+
+.tiny {
+	width: 100px;
+}
+
+.small {
+	width: 210px;
+}
+
+.medium {
+	width: 260px;
+}
+
+.large {
+	width: 320px;
+}
+
+.extra {
+	width: 360px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+
+span.pagination-links strong {
+	font-weight: normal;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.error {
+	color: #c00;
+	font-weight: bold;
+	width : 500px;
+}
+
+input[type="checkbox"] {
+	float: left;
+	margin-right: 5px;
+}
+
+form label.label-fixed-width {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	width : 265px;
+	font-weight: bold;
+	
+}
+
+form label.mistaken-payment-label-fixed-width {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	width : 300px;
+	font-weight: bold;
+	
+}
+
+form label.claims-label-fixed-width {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	width : 410px;
+	font-weight: bold;
+	
+}
+
+.more-amounts-label-width {
+display: block;
+float: left;
+font-weight: bold;
+}
+
+form input#processedDate{
+	/*width: 100px;*/
+}
+
+
+form input#faxNumberFrom,
+form input#phoneNumberFrom,
+form input#contactOfficerFirstName,
+form input#contactOfficerLastName,
+form input#clientRefNumber{
+	width: 175px;
+}
+
+form input#transactionRefNumber,
+form input#customerRefNumber,
+form input#correctCRN,
+form input#reason,
+form input#payerName{
+	width: 200px;
+}
+
+form input#reqInstFullNamefrom,
+form input#reqInstACNorARBNfrom,
+form input#emailFrom,
+form input#emailTo,
+form input#receiverAccountName{
+	/* width: 275px; */
+}
+
+form input#additionalInfo{
+	width: 300px;
+}
+
+form input#organisation,
+form input#billerCode,
+form input#paymentAmount
+{
+	width: 100px;
+}
+
+
+form fieldset div.de-input-wrapper {
+	/* width : 946px; */
+	margin-bottom: 6px;
+	margin-top: 6px;
+}
+
+form label.submit-label-fixed-width {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	/*width: 88px;*/
+	width : 275px;
+	font-weight: bold;
+	
+}
+
+form label.mistaken-payment-submit-label-fixed-width {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	/*width: 88px;*/
+	width : 310px;
+	font-weight: bold;
+	
+}
+
+form label.claims-submit-label-fixed-width {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	/*width: 88px;*/
+	width : 410px;
+	font-weight: bold;
+	
+}
+
+form fieldset div.disputed-amounts {
+	clear: both;
+}
+
+form fieldset div.disputed-amounts input{
+	display: block;
+	margin-bottom: 5px;
+}
+
+form fieldset div.divTable {
+    display:  table;
+    width:auto;
+    /*background-color:#eee;*/
+    /*border:0px solid  #666666;*/
+    border-spacing:5px;/*cellspacing:poor IE support for  this*/
+   /* border-collapse:separate;*/
+}
+
+form fieldset div div.divRow{
+   display:table-row;
+   width:auto;
+}
+
+form fieldset div div div.divCell{
+    float:left;/*fix for  buggy browsers*/
+    display:table-column;
+    width:200px;
+    /*background-color:#ccc;*/
+}
+
+fieldset div {
+	margin-bottom: 3px;
+	margin-top: 3px;
+}
+
+table.contact-details td.first-column,
+table.contact-details td.second-column {
+	font-weight: bold;
+	width: 170px;
+}
+
+.mandatory {
+	color: #c00;
+	display: inline;
+}
+
+textarea {
+	height: 120px;
+	width: 100%;
+}
+
+form input[type="text"],
+form input[type="file"],
+form input[type="password"] {
+	padding: 2px 1px !important;	
+	color:#000000;	
+}
+
+input[type="submit"].request-buttons,
+input[type="button"].request-buttons,
+input[type="submit"].request-buttons:hover,
+input[type="button"].request-buttons:hover {
+	background-color: #fe5402 !important;
+	background-image: none !important;
+	border: none !important;
+	border-radius: 3px !important;
+	box-shadow: none !important;
+	color: #fff !important;
+	font-weight: normal !important;
+	padding: 4px 8px;
+	text-shadow: none !important;
+	width: auto;
+}
+
+
+span.message {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+form fieldset div.searchField {
+    display: block;
+    margin-bottom: 10px;
+    width: 50%;
+    float: left;
+}
+
+.pagination-text {
+	float: right;
+	margin-top: 7px;
+}
+
+.pagination-links {
+	display: block;
+	font-weight: normal;
+	margin-top: 5px;
+	text-align: center;
+}
+
+table#tran {
+	border-collapse: collapse;
+	font-size: 11px;
+	width: 100%;
+}
+
+table#tran th {
+	color: #000;
+	font-weight: bold;
+	padding: 3px;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+table#tran thead th.ascending {
+	background: url("../images/sort-arrow-ascending.png") left 50% no-repeat transparent;
+	padding-left: 12px;
+}
+
+table#tran thead th.descending {
+	background: url("../images/sort-arrow-descending.png") left 50% no-repeat transparent;
+	padding-left: 12px;
+}
+
+table#tran tr.even td {
+	background-color: #cecece;
+}
+
+table#tran tr:hover td {
+	background-color: #c5cdde;
+}
+
+table#tran td {
+	border: solid 1px #999;
+	border-width: 1px 0;
+	padding: 3px;
+	vertical-align: top;
+}
+
+table#tran td.first {
+	border-width: 1px 0 1px 1px;
+}
+
+table#tran td.last {
+	border-width: 1px 1px 1px 0;
+}
+
+input[type="text"][readonly="readonly"],
+input[type="text"][readonly="readonly"]:focus{
+	background-image: none;
+    background: none repeat scroll 0 0 transparent;
+    border: medium none !important;
+    color: #000000;
+    cursor:text;
+}
+
+.contact-info{
+	display: block;
+	float: left;
+	width: 50%;
+}
+
+.contact-info label{
+	width: 105px;
+}
+
+form div.de-input-wrapper span {
+	margin-right: 5px;
+}
+
+.instruction{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+fieldset div span label {
+	
+	float: none;
+	
+}
+

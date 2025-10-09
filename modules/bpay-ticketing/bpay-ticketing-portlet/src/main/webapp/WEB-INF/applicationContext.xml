@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+<context:component-scan base-package="au.com.cuscal" />
+
+<bean
+	class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+	id="propUtil"
+>
+	<property name="locations">
+		<list>
+			<!-- Common properties file -->
+			<value>classpath:content/common.properties</value>
+
+			<!-- Environment-specific properties file -->
+			<value>file:${catalina.home}/../property-files/bpay/bpay.properties</value>
+		</list>
+	</property>
+</bean>
+
+<bean
+	class="au.com.cuscal.bpay.ticketing.common.BPayProperties"
+	id="bpayProperties"
+>
+	<property name="bpayProperty" ref="propUtil" />
+</bean>
+
+</beans>

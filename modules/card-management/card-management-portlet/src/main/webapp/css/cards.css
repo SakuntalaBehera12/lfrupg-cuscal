@@ -1,0 +1,786 @@
+@media print {
+	@page {
+		size: auto;
+	}
+	body {
+		font-family: Verdana, Arial, Helvetica !important;
+		font-size: 11px !important;
+	}
+	a, a.print-button, .no-print {
+		display: none !important;
+	}
+	ul.card-details-menu li.selected a, .print, table#cardFrm a {
+		color: #000 !important;
+		display: inline !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	ul.card-details-menu li {
+		display: none !important;
+	}
+	ul.card-details-menu li.selected {
+		display: block !important;
+		font-size: 12px !important;
+		padding: 5px !important;
+	}
+	table#cardFrm a#panCard {
+		display: none !important;
+	}
+	ul.card-details-menu {
+		border: solid 1px #C8C9CB !important;
+	}
+	ul.card-details-menu li {
+		background-color: transparent !important;
+		border: none !important;
+	}
+	#navigation, #bannerTable, #transaction-search-form, #footer, #dockbar {
+		display: none !important;
+	}
+	select {
+		background-image: none !important;
+		border: none !important;
+	}
+}
+
+a {
+	outline: none;
+}
+
+br {
+	clear: both;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+span.message {
+	clear: both;
+	display: block;
+	margin: 0 0 10px 30px;
+}
+
+span.note {
+	float: left;
+	font-weight: bold;
+}
+
+/* ---------- New styles for the card search form ---------- */
+#cardSearch fieldset {
+	margin: 10px 0;
+}
+
+fieldset label {
+	display: inline-block;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: top;
+	width: 80px;
+}
+
+.ie fieldset label {
+	margin-right: 3px;
+}
+
+fieldset.user-details .issuer {
+	width: 105px;
+}
+
+fieldset.card-status label {
+	width: 97px;
+}
+
+fieldset label em,
+.error {
+	color: #f00;
+	font-weight: bold;
+}
+
+p.error {
+	margin: 1em;
+	text-align: center;
+}
+
+div.or {
+	margin-left: 100px;
+}
+
+#cardSearchForm .user-details div,
+#cardSearchForm .card-status div {
+	float: left;
+	margin: 10px 0;
+	width: 32%;
+}
+
+#cardSearchForm .card-status div {
+	float: left;
+	margin: 10px 0;
+	width: 28%;
+}
+
+fieldset.user-details label.cardholder-name {
+	width: 135px;
+}
+
+input.postcode {
+	width: 70px;
+}
+
+input.expiry-month {
+	width: 31px;
+}
+
+input.expiry-year {
+	width: 50px;
+}
+
+#cardSearchForm .card-status div.non-expired {
+	width: 21%;
+}
+
+#cardSearchForm .card-status div.expiry-date {
+	float: left; 
+	margin: 10px 0; 
+	width: 23%;
+}
+
+fieldset.card-status .non-expired input {
+	vertical-align: middle;
+}
+
+fieldset.card-status .non-expired label {
+	text-align: left;
+	width: 165px;
+}	
+
+/* ---------- Card details menu ---------- */
+ul.card-details-menu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	z-index: 2;
+}
+
+ul.card-details-menu li {
+	background-color: #c8c9cb;
+	border: solid 1px #c8c9cb;
+	border-radius: 3px 3px 0 0;
+	border-width: 1px 1px 0 1px;
+	color: #000;
+	display: inline-block;
+	line-height: 21px;
+	margin: 0 2px;
+	padding: 4px 11px;
+	position: relative;
+	top: -1px;
+}
+
+.firefox ul.card-details-menu li {
+	top: 0;
+}
+
+ul.card-details-menu li.selected {
+	background-color: #fff;
+}
+
+ul.card-details-menu li.first-tab {
+	margin-left: 0;
+}
+
+ul.card-details-menu li a {
+	color: #000;
+	display: block;
+}
+
+ul.card-details-menu li.selected a {
+	color: #fe5402;
+}
+
+#cardInfoDiv,
+#cardLimitDiv,
+#cardDevicesDiv,
+#accountInfoDiv,
+#tokenWalletsDiv,
+#tokenStatusDiv,
+#cardControlsDiv,
+#mccControlsDiv,
+#cardLimitsDiv{
+	background-color: #fff;
+	border: solid 1px #c8c9cb;
+	color: #000;
+	position: relative;
+	top: -2px;
+}
+
+#cardInfoDiv table,
+#cardLimitDiv table,
+#cardDevicesDiv table,
+#accountInfoDiv table,
+#tokenWalletsDiv table,
+#tokenStatusDiv table
+ {
+	margin: 5px;
+}
+
+#accountInfoDiv table {
+	width: 99%;
+}
+
+.pan, .institution {
+	float: left;
+	margin: 5px;
+	width: 30%;
+}
+
+.institution {
+	width: 60%;
+}
+
+table td {
+	padding: 0 5px;
+	vertical-align: top;
+}
+
+table td.card-titles,
+table td.card-titles-right {
+	color: #fe5402;
+	font-weight: bold;
+	text-align: left;
+}
+
+table td.card-titles-right {
+	text-align: right;
+}
+
+.secondary-switch, .important-info {
+	font-style: italic;
+}
+
+#accountInfoDiv th {
+	font-weight: bold;
+	text-align: center;
+}
+
+.pagination-text {
+	float: right;
+	margin-top: 7px;
+}
+
+.primary-account,
+.funding-account,
+.account-qualifier {
+	text-align: center;
+}
+
+.amount,
+.usage {
+	text-align: right;
+}
+
+#cardLimitDiv .amount,
+#cardLimitDiv .usage,
+#accountInfoDiv th.amount {
+	width: 15%;
+}
+
+#accountInfoDiv th {
+	padding: 0 5px;
+	text-align: left;
+}
+
+#accountInfoDiv th.amount {
+	text-align: right;
+}
+
+.history-links {
+	font-weight: normal;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.pagination-links {
+	display: block;
+	font-weight: normal;
+	margin-top: 5px;
+	text-align: center;
+}
+
+span.pagination-links strong {
+	font-weight: normal;
+}
+
+form#cardSearchForm {
+	position: relative;
+}
+
+.nowrap {
+    white-space: nowrap; 
+}
+
+.print-wrapper {
+	clear: both;
+	display: block;
+	margin: 10px 0;
+	text-align: right;
+}
+
+div#reference-list-parent {
+	display: none;
+	position: absolute;
+	padding: 0 5px; 
+	background-color: transparent;
+	right: 0;
+	top: -12px;
+	z-index: 1000;
+}
+
+div#reference-list-wrapper {
+	background-color: #fff;
+	border: solid 1px #c8c8c9;
+	border-radius: 3px;
+	display: none;
+	padding: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+div#reference-list-wrapper span {
+	font-weight: bold;
+}
+
+div#reference-list-wrapper p {
+	display: block;
+	margin: 2px 0;
+	padding: 0;
+}
+
+div#reference-list-wrapper p a {
+	padding: 0;
+}
+
+a.update-shortlist,
+a.update-shortlist:hover,
+a.update-shortlist:active {
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff;
+	float: left;
+	font-family: monospace;
+	padding: 1px 5px;
+	text-decoration: none;
+}
+
+input.search-button[type="submit"],
+input.search-button[type="submit"]:hover,
+input.search-button[type="submit"]:active,
+input.clear-button[type="button"],
+input.clear-button[type="button"]:hover,
+input.clear-button[type="button"]:active {
+	background-color: #fe5402;
+	background-image: none;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	float: left;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 1em;
+	font-weight: normal;
+	margin-right: 5px;
+	padding: 4px 8px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: none;
+	text-shadow: none;
+}
+
+.firefox input.search-button[type="submit"],
+.firefox input.clear-button[type="button"] {
+	padding: 5px 8px 6px 8px;
+}
+
+.ie input.search-button[type="submit"],
+.ie input.clear-button[type="button"] {
+	padding: 1px 8px 4px 8px;
+}
+
+#cardSearchForm a.search-button, #cardDetailsForm a.search-button, #cardSearchForm a.clear-button,
+#cardDetailsForm a.clear-button, #cardSearchForm a.print-button, #cardDetailsForm a.print-button,
+#cardSearchForm a.update-button, #cardDetailsForm a.update-button, #cardSearchForm a.close-button,
+#cardDetailsForm a.close-button, #cardSearchForm a.recentTx-button, #cardDetailsForm a.recentTx-button {
+	color: #fff;
+}
+
+a.search-button, a.clear-button, a.print-button,
+a.update-button, a.close-button, a.recentTx-button {
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff !important;
+	display: inline-block;
+	float: left;
+	margin-right: 5px;
+	padding: 4px 8px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+a.search-button:hover, a.clear-button:hover, a.print-button:hover,
+a.close-button:hover, a.update-button:hover, a.recentTx-button:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+a.print-button {
+	float: none;
+}
+
+.ie a.search-button,.ie a.clear-button,.ie a.print-button,
+.ie a.update-button,.ie a.close-button,.ie a.recentTx-button {
+	padding-top: 0;
+}
+
+select#cardAvalStatus {
+	vertical-align: middle;
+}
+
+a.update-button {
+	float: none;
+	vertical-align: middle;
+}
+
+/**
+ * a table with curved corners
+ */
+table.cuscalTable {
+    padding: 5px;
+    width: 100%;
+	vertical-align: top;
+}
+
+table.cuscalTable td ,
+table.cuscalTable th {
+    padding: 4px;
+}
+
+table.cuscalTable thead tr {
+    font-weight:bold;
+	color:#FE5402;	
+}
+
+table.cuscalTable td {
+	border: solid 1px #999;
+	border-width: 1px 0;
+}
+
+table.cuscalTable th.results-pan {
+	width: 14%;
+}
+
+table.cuscalTable th.address {
+	width: 25%;
+}
+
+table.cuscalTable th.last-modified {
+	width: 11%;
+}
+
+table.cuscalTable td.first {
+	border-width: 1px 0 1px 1px;
+}
+
+table.cuscalTable td.last {
+	border-width: 1px 1px 1px 0;
+}
+
+table.cuscalTable tbody tr:hover {
+   background-color:#C5CDDE;
+}
+
+td.card-access-response {
+	font-weight: bold;
+	width: 11%;
+}
+
+/* ---------- displaytag specific styling ---------- */
+.tableHeaderRow {
+    background-color: #F38F1D;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.paddingRight {
+    padding-right: 10px;
+}
+
+.nowrap {
+    white-space: nowrap; 
+}
+
+.odd {
+   background-color: #ddd;
+}
+
+.even {
+	background-color: #fff;
+}
+
+.sorted {
+  	background-color: #F38F1D;
+}
+
+.field_title {
+    font-weight:bold;
+    display: inline-block;
+    width: 100px;
+    vertical-align: top;
+}
+
+.field_title_wide {
+    font-weight:bold;
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+}
+
+.field {
+    display: inline-block;
+}
+
+.heading {
+   color: #000;
+}
+
+div.warning-msg{
+	color: #fe5402;
+	font-weight:bold;
+	font-size: 12px;
+}
+
+/* ---------- For sorted columns ---------- */
+.sorted.descending,
+.sorted.ascending {
+	background: url("../images/sort-arrow-descending.png") left 50% transparent no-repeat;
+	padding-left: 12px;
+}
+
+.sorted.ascending {
+	background: url("../images/sort-arrow-ascending.png") left 50% transparent no-repeat;
+}
+
+form#cardSearchForm input[type="text"].disabled,
+form#cardSearchForm input[type="text"].readonly {
+	background-color: #e0e0e0;
+	background-image: none;
+}
+
+ul.ui-autocomplete {
+	border: solid 1px #000;
+	display: inline-block;
+	list-style: none;
+	list-style-image: none;
+	list-style-type: none;
+	margin: 0;
+	max-height: 150px;
+	overflow: auto;
+	padding-inline-start: 0px;
+}
+
+ul.ui-autocomplete li {
+	background-color: #f5f5f5;
+	border-bottom: solid 1px #000;
+	cursor: pointer;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+ul.ui-autocomplete li a {
+	color: #000;
+	display: block;
+	margin: 0;
+	padding: 5px;
+}
+
+ul.ui-autocomplete li a:hover,
+ul.ui-autocomplete li a.ui-state-hover {
+	background-color: #fe5402;
+	color: #fff;
+	text-decoration: none;
+}
+
+.print {
+	display: none;
+}
+
+.ie ul.ui-autocomplete {
+	display: inline;
+}
+
+select, 
+input[type="text"] {
+	font-family: Verdana, Arial, Helvetica !important;
+	font-size: 1em !important;
+}
+
+.portlet-msg-info,
+.portlet-msg-alert {
+	padding-left: 36px !important; 
+	background-position: 12px 50% !important;
+	color: #000 !important;
+}
+
+.vigil-logo {
+	background: url("../images/vigil-logo.png") left 50% no-repeat transparent;
+	background-size: 1em;
+	display: inline-block;
+	width: 20px;
+}
+
+.action-title{
+    color: #fe5402;
+	font-weight: bold;
+	text-align: left;
+}
+
+.comment-textarea {
+   resize: none;
+}
+
+
+
+.modal-wrapper a.modal-close {
+	background-color: #fe5402;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	float: left;
+	line-height: 1.4em;
+	margin-right: 5px;
+	padding: 4px 8px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.modal-wrapper a.modal-close:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.modal-wrapper {
+	background-color: #fff;
+	border: solid 1px #000;
+	border-radius: 4px;
+	color: black;
+	display: none;
+	font-size: 0.85em;
+	max-width: 1200px;
+	min-width: 400px;
+	overflow: auto;
+	padding: 4px 4px 0 4px;
+	position: relative;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+ .modal-wrapper a,
+ .modal-wrapper a:hover {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.modal-header {
+	color: #000;
+	display: block;
+	height: 32px;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+
+.modal-header h5 {
+	display: inline-block;
+	font-size: 1em;
+	font-weight: normal;
+	margin: 0 4px;
+}
+
+.modal-header h5 {
+	background-color: transparent;
+	/* color: #fe5402; */
+	font-weight: bold;
+	line-height: 37px;
+}
+
+.modal-header a {
+	margin: 4px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+table#tokenLastUpdatedByBlurb {
+	/* padding-top: 10px; */
+	background-color: #fff;
+	border-top: solid 1px #c8c9cb;
+	color: #000;
+	padding: 10px 0;
+	width: 100%;
+}
+
+
+div#cardControlsDiv input[type="checkbox"] {
+	margin: 20px 10px 10px 20px;	
+}
+
+div#cardControlsDiv abbr {
+	border-bottom: none;
+	margin: 10px 5px;
+	color: #FE5402;	
+	font-weight: bold;
+}
+
+span.active {
+	color: #fe5402;
+}
+
+.mandatory-field {
+	color: #f00;
+	font-weight: bold;
+}
+
+div#mccControlsDiv input[type="checkbox"] {
+	margin: 20px 10px 10px 20px;
+}
+
+div#mccControlsDiv label {
+    width: 80%;
+ 	display: inline-block;
+     vertical-align: middle;
+}
+
+div#mccControlsDiv label span {
+ 	font-size: 11px;
+}
+
+
+div#cardLimitsDiv table th,
+div#cardLimitsDiv table td {
+	padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+div#cardLimitsDiv .entry {
+	font-size: 12px;
+    font-weight: bold;
+}
+
+div#cardLimitsDiv .subEntry {
+	font-size: 11px;
+}

@@ -1,0 +1,238 @@
+package au.com.cuscal.bpay.ticketing.services;
+
+import au.com.cuscal.bpay.ticketing.common.Constants;
+import au.com.cuscal.bpay.ticketing.forms.RequestContactInformation;
+import au.com.cuscal.bpay.ticketing.forms.RequestTypeInformation;
+import au.com.cuscal.bpay.ticketing.forms.ServiceRequestForm;
+import au.com.cuscal.framework.audit.Audit;
+import au.com.cuscal.framework.audit.context.PortletContext;
+import au.com.cuscal.framework.audit.impl.log4j.Log4jAuditor;
+import au.com.cuscal.framework.audit.liferay.Auditor;
+import au.com.cuscal.framework.webservices.client.CustomerSelfServiceService;
+import au.com.cuscal.framework.webservices.selfservice.AddServiceRequestRequest;
+import au.com.cuscal.framework.webservices.selfservice.AddServiceRequestResponse;
+import au.com.cuscal.framework.webservices.client.EntityService;
+//import au.com.cuscal.framework.webservices.selfservice.AddSimpleServiceRequestRequest;
+//import au.com.cuscal.framework.webservices.selfservice.AddSimpleServiceRequestResponse;
+import au.com.cuscal.framework.webservices.selfservice.ContactType;
+import au.com.cuscal.framework.webservices.selfservice.RequestTypeType;
+import au.com.cuscal.framework.webservices.selfservice.ServiceRequestRequestType;
+import au.com.cuscal.framework.webservices.selfservice.TktRequestHeader;
+
+import javax.activation.DataHandler;
+import javax.mail.util.ByteArrayDataSource;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+//old
+@Service(value = Constants.CUSCAL_TICKETING_SERVICE)
+public class CuscalTicketingServiceImpl implements CuscalTicketingService {
+	
+	private static Logger logger = Logger
+			.getLogger(CuscalTicketingServiceImpl.class);
+	
+	/**
+	 * Audit object
+	 */
+	private static final Audit _audit = new Log4jAuditor();
+	private static final Auditor audit = new Auditor(_audit);
+	
+	private CustomerSelfServiceService ticketingService;
+	
+	private EntityService entityService;
+	
+		public EntityService getEntityService() {
+		return entityService;
+	}
+
+	public void setEntityService(EntityService entityService) {
+		this.entityService = entityService;
+	}
+	
+	public CustomerSelfServiceService getTicketingService() {
+		return ticketingService;
+	}
+
+	public void setTicketingService(CustomerSelfServiceService ticketingService) {
+		this.ticketingService = ticketingService;
+	}
+	
+	public String getOrgShortName(Long liferayOrgId){
+	
+	return "";
+	}
+	
+	/**
+	 * Add Service Request for transaction.
+	 * 
+	 * @param 	form 		<code>ServiceRequestForm</code>
+	 * @param 	header		<code>TktRequestHeader</code>
+	 * @return 	String
+	 * @throws Exception 
+	 */
+	public String addServiceRequest(ServiceRequestForm form, TktRequestHeader header, PortletContext portletContext) throws Exception {
+		logger.debug("addServiceRequest - start");
+		System.out.println("----addServiceRequest - start");//TODO
+		
+		String message = null;
+//		AddSimpleServiceRequestResponse response = null;
+//		AddSimpleServiceRequestRequest request = new AddSimpleServiceRequestRequest();
+		
+		AddServiceRequestResponse response = null;
+		AddServiceRequestRequest request = new AddServiceRequestRequest();
+		
+		//fill the ServiceRequestForm form manually for now.
+		//doing in controller with forms for now, so will have view form side more visibility.
+
+		
+		if (null != header) {
+			request.setHeader(header);
+			if (null != form) {
+				ServiceRequestRequestType requestType = setupServiceRequest(form);//TODO-handshake between form data vs domain.
+				request.setServiceRequestRequest(requestType);
+				//===========================
+				try{
+					response=ticketingService.addServiceRequest(request);//TODO-actual framework web service request integration.
+					//response=ticketingService.addSimpleServiceRequest(request);//TODO-actual framework web service request integration.
+				} catch (Exception ex){
+					ex.printStackTrace();
+				}
+				
+				
+				if (null != response) {
+					if (null != response.getHeader()) {
+						String statusCode = response.getHeader().getStatusCode();
+						
+						if (StringUtils.equalsIgnoreCase("SUCCESS", statusCode)) {//TODO-skip the audit for now.
+							message = statusCode;
+							logger.debug("addServiceRequest - Successfully added ticket. Status Code:" + statusCode);
+							System.out.println("-----addServiceRequest - Successfully added ticket. Status Code:" + statusCode);//TODO
+						} else {
+							message = statusCode;
+							logger.error("addServiceRequest - Response header is not successful. Status Code:" + statusCode);
+							System.out.println("----addServiceRequest - Response header is not successful. Status Code:" + statusCode);//TODO
+						}
+					} else {
+						logger.error("addServiceRequest - Response header is null");
+						System.out.println("-----addServiceRequest - Response header is null");//TODO
+					}
+				} else {
+					logger.error("addServiceRequest - Response is null");
+					System.out.println("----addServiceRequest - Response is null");//TODO
+				}
+			} else {
+				logger.error("addServiceRequest - ServiceRequestForm is null. Cannot add ticket");
+				System.out.println("----addServiceRequest - ServiceRequestForm is null. Cannot add ticket");//TODO
+			}
+		} else {
+			logger.error("addServiceRequest - RequestHeader is null. Cannot add ticket");
+			System.out.println("----addServiceRequest - RequestHeader is null. Cannot add ticket");//TODO
+		}
+		
+		
+		logger.debug("addServiceRequest - end");
+		System.out.println("-----addServiceRequest - end");//TODO
+		return message;
+	}
+
+	
+	//-------------------
+	
+	/**
+	 * Create the ContactType Object to add Contact Information to the database.
+	 * 
+	 * @param 	form	<code>ServiceRequestForm</code>
+	 * @return	ContactType
+	 */
+	private ContactType setupServiceRequestForContactInfo(
+			RequestContactInformation form) throws Exception {
+			ContactType contact =new ContactType();
+			
+			//Contact Information section
+			contact.setFirstName(form.getGivenName());
+			contact.setSurname(form.getSurname());
+			contact.setEmail(form.getEmail());
+			contact.setPhoneNo(form.getPhoneNumber());
+			contact.setOrganisation(form.getOrganisation());
+
+		return contact;
+	}
+	
+	private ServiceRequestRequestType setupServiceRequest(
+			ServiceRequestForm form) throws Exception {
+		ServiceRequestRequestType request = null;
+		
+		if (null != form) {
+			request = new ServiceRequestRequestType();
+			
+			//Contact Information section.
+			if (null != form.getContactInformation()) {
+				ContactType contact=setupServiceRequestForContactInfo(form.getContactInformation());
+				request.setContact(contact);
+			} 
+			
+			//Request Type Information section.
+			if (null != form.getRequestTypeInformation()){
+				RequestTypeType  requestType=setupRequestTypeInformationForServiceRequest(form.getRequestTypeInformation());
+				request.setRequestType(requestType);
+			}
+			
+		}
+		
+		return request;
+	}
+	
+	
+	/**
+	 * Setup the Request Type for the Service Request.
+	 * 
+	 * @param 	requestTypeInformation	<em>RequestTypeInformation</em>
+	 *  
+	 * @return	RequestTypeType
+	 */
+	
+	private RequestTypeType setupRequestTypeInformationForServiceRequest(RequestTypeInformation requestTypeInformation) {
+		
+		RequestTypeType requestType = new RequestTypeType();
+		if (StringUtils.isNotBlank(requestTypeInformation.getRequestTypeId())) {
+			
+			if (StringUtils.equalsIgnoreCase("2",
+					requestTypeInformation.getRequestTypeId())) {//TODO-will be replaced by BPay1
+				//requestType.setTypeDescription("TC52");
+				requestType.setTypeDescription("BPay1");
+				
+				requestType.setProductId(new Long(1L));//TODO-hard code for now.
+				requestType.setTypeId(new Long(38L));//TODO-hard code for now.
+				
+			} else {
+				//requestType.setTypeDescription("TC40");
+				requestType.setTypeDescription("BPay2");
+				requestType.setProductId(new Long(1L));//TODO-hard code for now.
+				requestType.setDisputeTypeId(new Long(29L));
+				
+
+				//requestType.setTypeId(new Long(22L));//TODO-hard code for now.========<<
+				//requestType.setTypeId(new Long(26303L));//TODO-hard code for now.========<<
+				requestType.setTypeId(new Long(requestTypeInformation.getRequestTypeId()));
+				//requestType.setReason(new Long(23L));
+				
+				
+			}
+			
+			//TODO- commented since don't see in SOAPUI Request.
+//			if (StringUtils.isNotBlank(visaTrans.getComments())){
+//				transaction.setComments(visaTrans.getComments());
+//			}
+			
+		}
+		
+		return requestType;
+	}
+	//-------------------
+}

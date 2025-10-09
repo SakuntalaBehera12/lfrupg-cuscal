@@ -1,0 +1,59 @@
+.header-box .banner-top .img-fluid {
+	height: 60px;
+}
+
+header .header-box .navbar { 
+	font-size: 1.16em;	
+}	
+
+.header-box .site-logo-fragment a:hover { 
+	border-bottom: none !important;
+}	
+
+.header-box .my-account a { 
+		text-decoration: none !important;
+	 	padding: 0 10px 0 10px;
+		FONT-WEIGHT: bold;
+		font-size: 1em;
+		COLOR: #fe5402;
+		LINE-HEIGHT: 30px;
+		background-color: #DEDEDE;
+}
+
+.header-box .my-account a:hover,
+.header-box .user-personal-bar-fragment a:hover,
+.header-box #contact-us a:hover{ 
+	border-bottom: none !important;
+}
+
+@media only screen and (max-width: 767px){
+	.mobile-display-none {
+		display:none;
+	}
+}
+
+.header-box .user-personal-bar-fragment a { 
+		text-decoration: none !important;
+	 	padding:6px 10px;
+		FONT-WEIGHT: bold;
+		font-size: 1em;
+		COLOR: #fff !important;
+		background-color: #fe5402;
+		text-transform: uppercase;
+}
+
+.header-box #contact-us a#customer-login { 
+		text-decoration: none !important;
+    font-size: 1em;
+    COLOR: #fff !important;
+    LINE-HEIGHT: 28px;
+    background-color: #fe5402;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0px 10px;
+		border-radius: 3px;
+}
+
+.header-box #contact-us a#email { 
+		color: #fe5402;
+}

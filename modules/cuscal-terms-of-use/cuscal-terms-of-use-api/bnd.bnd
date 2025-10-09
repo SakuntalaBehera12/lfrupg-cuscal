@@ -1,0 +1,10 @@
+Bundle-Name: Cuscal Terms of Use API
+Bundle-SymbolicName: au.com.cuscal.termsofuse.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	au.com.cuscal.termsofuse.exception,\
+	au.com.cuscal.termsofuse.model,\
+	au.com.cuscal.termsofuse.service,\
+	au.com.cuscal.termsofuse.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../cuscal-terms-of-use-service/service.xml

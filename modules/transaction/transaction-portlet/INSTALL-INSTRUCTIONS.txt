@@ -1,0 +1,39 @@
+To install the portlet you will need to copy the  to your external properties folder.
+
+Step 1) Create a folder called 'transaction-search' on the filesystem. For example inside C:\ext_cfg since my tomcat is loading the external properties file from C:\ext_cfg
+
+Step 2) Copy 'transaction.properties' into the newly created folder in step 1.
+
+Step 3) Stop the tomcat instance where Liferay is running and edit 'catalina.properties' as follows:
+	Step 3.1) Search for a line 'shared.loader='
+	Step 3.2) Enter the path of the shared folder where you put the file from Step 1. For example C:/ext_cfg
+	***Note: Make sure that you enter the right slash. Tomcat uses the UNIX style slashes and not the Windows style. This is an important step otherwise tomcat will not read the right folder.
+	Step 3.3) Save and close the file
+	
+Step 4) Restart the tomcat instance.
+
+
+Installing the SSL certificate. Preparing for the https connection to devapp20.
+-------------------------------------------------------------------------------
+
+To build the wsdl classes using maven you will need to install the self signed certificate for devapp20 on your local machine and add an entry to the hosts file.
+
+Step 1) Copy the 'devapp20.cer' file to a folder on your computer. Try to keep the folder name and path simple. For eg: C:\certificates
+
+Step 2) Install the certificate in the local repository using the following command. You can only run this command from the command line.
+`keytool -keystore %JAVA_HOME%\jre\lib\security\cacerts -alias devapp20 -import -storepass changeit -file C:\certificates\devapp20.cer`
+	Step 2.1) It will ask you if you want to install the certificate. Type in yes and hit Enter.
+	***This will install the certificate on your local computer.
+	
+Step 3) You will need to edit the hosts file to enter a hosts file entry for services.cuscal-d.com.au.
+	Step 3.1) Open the following file in notepad:
+		C:\windows\system32\drivers\etc\hosts
+	Step 3.2) Add the following line at the end of the file:
+		10.181.74.50	services.cuscal-d.com.au
+	Step 3.3) Save the file and then close it.
+	
+Step 4) Close the command window currently open and open a new one.
+
+Step 5) Navigate to the folder where the src of the portlet is and build the portlet using maven.
+
+*** If you followed the steps above to install the certificate then you should not have any error building the war file from maven. ***
