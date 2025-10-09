@@ -67,23 +67,23 @@ jobs:
   #       GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
   #       GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
 
-    # Step 3: Prints a link to the GitHub Advanced Security scan report
-    - name: Print Security, Secrets & Dependency Scan Report
-      if: ${{ inputs.security-check }}
-      run: |
-        echo "## GitHub Advanced Security Report" >> $GITHUB_STEP_SUMMARY
-        echo "[CodeQL Alerts](https://github.com/$GITHUB_REPOSITORY/security/code-scanning)" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
+    # # Step 3: Prints a link to the GitHub Advanced Security scan report
+    # - name: Print Security, Secrets & Dependency Scan Report
+    #   if: ${{ inputs.security-check }}
+    #   run: |
+    #     echo "## GitHub Advanced Security Report" >> $GITHUB_STEP_SUMMARY
+    #     echo "[CodeQL Alerts](https://github.com/$GITHUB_REPOSITORY/security/code-scanning)" >> $GITHUB_STEP_SUMMARY
+    #     echo "" >> $GITHUB_STEP_SUMMARY
 
 
-    # Step 2: SAST & SCA Scans
-    - name: Run SAST and SCA Scans
-      if: ${{ inputs.security-check }}
-      uses: cuscal/app-eengineering-shared-githubactions/actions/dist/checkmarx-one@v1.0
-      with:
-        # cx-client-id & cx-client-secret is needed for authentication with CXONE server. 
-        cx-client-id: ${{ vars.CX_CLIENT_ID }}
-        cx-client-secret: ${{ secrets.CX_CLIENT_SECRET }}
+    # # Step 2: SAST & SCA Scans
+    # - name: Run SAST and SCA Scans
+    #   if: ${{ inputs.security-check }}
+    #   uses: cuscal/app-eengineering-shared-githubactions/actions/dist/checkmarx-one@v1.0
+    #   with:
+    #     # cx-client-id & cx-client-secret is needed for authentication with CXONE server. 
+    #     cx-client-id: ${{ vars.CX_CLIENT_ID }}
+    #     cx-client-secret: ${{ secrets.CX_CLIENT_SECRET }}
 
   # Job 2: Code Quality Scans
   code_quality_scans:
@@ -121,18 +121,26 @@ jobs:
           GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
           GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
 
-  # Job 3: Create and Upload Artifact after Code Quality and Security Checks
-  # Job 3: Build the liferay application and package it for deployment
+  # # Job 3: Create and Upload Artifact after Code Quality and Security Checks
+  # # Job 3: Build the liferay application and package it for deployment
+  # create_and_upload_artifact:
+  #   name:  Create and Upload Artifact
+  #   runs-on: ubuntu-22.04
+  #   env:
+  #     PROJECT_CODE: "liferay"
+  #     SANITIZED_BRANCH_NAME: ${{ github.ref_name }}
+  #   needs:
+  #     - security_scans # Ensure this job runs after the security scans job
+  #     - code_quality_scans # Ensure this job runs after the code quality scans job
   create_and_upload_artifact:
     name:  Create and Upload Artifact
     runs-on: ubuntu-22.04
-    env:
-      PROJECT_CODE: "liferay"
-      SANITIZED_BRANCH_NAME: ${{ github.ref_name }}
-    needs:
-      - security_scans # Ensure this job runs after the security scans job
-      - code_quality_scans # Ensure this job runs after the code quality scans job
-
+    # env:
+    #   PROJECT_CODE: "liferay"
+    #   SANITIZED_BRANCH_NAME: ${{ github.ref_name }}
+    # needs:
+      # - security_scans # Ensure this job runs after the security scans job
+      # - code_quality_scans # Ensure this job runs after the code quality scans job
     steps:
       # Step 1: Checkout the repository
       - name: Checkout Code
