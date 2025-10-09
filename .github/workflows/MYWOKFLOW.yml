@@ -24,7 +24,7 @@ jobs:
           curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh
           echo "✅ Blade CLI Installed Successfully"
           # Add Blade to PATH for current session
-          echo "/home/runner/jpm/bin" >> $GITHUB_PATH
+          # echo "/home/runner/jpm/bin" >> $GITHUB_PATH
           # Verify installation
           blade version
 
