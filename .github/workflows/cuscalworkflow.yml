@@ -1,9 +1,23 @@
 # Workflow name, which will appear in the GitHub Actions UI
 name: Scan, Build and Package Application
 
-on:
-  workflow_dispatch:
+# on:
+#   workflow_dispatch:
 
+on: 
+ workflow_dispatch:
+ workflow_call: # Allow this workflow to be called from other workflows
+    inputs:
+      security-check:
+        description: Run Security Check
+        required: false
+        default: true
+        type: boolean
+      code-quality-check:
+        description: Run Code Quality Check
+        required: false
+        default: true
+        type: boolean
   
 jobs:
   build:
