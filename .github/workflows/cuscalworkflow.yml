@@ -1,0 +1,244 @@
+# Workflow name, which will appear in the GitHub Actions UI
+name: Java 21 Manual Build with Gradle
+
+on:
+  workflow_dispatch:
+    inputs:
+      security-check:
+        description: Run Security Check
+        required: false
+        default: true
+        type: boolean
+      code-quality-check:
+        description: Run Code Quality Check
+        required: false
+        default: true
+        type: boolean
+
+# Define environment variables used throughout the workflow steps
+env:
+  JAVA_VERSION: '21.0.8'
+  JAVA_DISTRIBUTION: 'adopt'
+  DEPENDENCY_COMMANDS: 'blade gw initBundle "-Pliferay.workspace.environment=common"'
+  BUILD_COMMANDS: 'blade gw deploy "-Pliferay.workspace.environment=common"'
+  CODEQUALITY_BUILD_COMMANDS: './gradlew clean test "-Pliferay.workspace.environment=common"' # Removed sonarqube task
+  MATRIX_LANGUAGES: 'java'
+  VERSION: 1.0.0-SNAPSHOT # Artifact Version
+  ASSET_FILES: 'liferay-bundle.zip' # Placeholder for artifact ID
+  
+
+jobs:
+  # Job 1: Security Scans
+  security_scans:
+    name: Security Scans
+    runs-on: ubuntu-22.04
+
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout Code
+      uses: actions/checkout@v4.1.7
+
+    # Step 2: Secrets & Dependency Scans
+    - name: Security, Secrets and Dependency Scans
+      env:
+          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
+          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+      if: ${{ inputs.security-check }}
+      uses: cuscal/app-eengineering-shared-githubactions/actions/dist/codeql-java@v1.0
+      with:
+        # java-version is the version of java to be used for compilation. 
+        java-version: ${{ env.JAVA_VERSION }}
+        # build-commands is the custom script to be used to build the code so that it can build and scan the code. 
+        build-commands: | 
+          chmod +x ./gradlew
+          ${{ env.DEPENDENCY_COMMANDS }} -x formatSource
+          ${{ env.BUILD_COMMANDS }} -x formatSource
+      
+        # matrix-languages to be used
+        matrix-languages: ${{ env.MATRIX_LANGUAGES }}
+
+        # username & password for read access to Github packages.
+        GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
+        GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+
+    # Step 3: Prints a link to the GitHub Advanced Security scan report
+    - name: Print Security, Secrets & Dependency Scan Report
+      if: ${{ inputs.security-check }}
+      run: |
+        echo "## GitHub Advanced Security Report" >> $GITHUB_STEP_SUMMARY
+        echo "[CodeQL Alerts](https://github.com/$GITHUB_REPOSITORY/security/code-scanning)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+
+
+    # Step 2: SAST & SCA Scans
+    - name: Run SAST and SCA Scans
+      if: ${{ inputs.security-check }}
+      uses: cuscal/app-eengineering-shared-githubactions/actions/dist/checkmarx-one@v1.0
+      with:
+        # cx-client-id & cx-client-secret is needed for authentication with CXONE server. 
+        cx-client-id: ${{ vars.CX_CLIENT_ID }}
+        cx-client-secret: ${{ secrets.CX_CLIENT_SECRET }}
+
+  # Job 2: Code Quality Scans
+  code_quality_scans:
+    name: Code Quality Scans
+    runs-on: [self-hosted, env-nonprod]  # The type of runner that the job will run on.
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    environment: nonprod # This job is run in the nonprod runner environment.
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4.1.7
+
+      # Step 2: Get the branch name.
+      - name: Get Branch Name
+        shell: bash
+        id: get-branch
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_OUTPUT"
+
+      # Step 3: Code Quality Check
+      - name: Code Quality Check
+        env:
+          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
+          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+        if: ${{ inputs.code-quality-check }}
+        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/sonarqube-java@v1.0
+        with:
+          # Specifies the version of Java to be used for compilation.
+          java-version: ${{ env.JAVA_VERSION }}
+          # Specifies the custom script to be used to build the code so that it can build and scan the code.
+          build-commands: | 
+            chmod +x ./gradlew
+            ${{ env.CODEQUALITY_BUILD_COMMANDS }} -x formatSource
+          # Specifies the username and password for read access to Github packages.
+          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
+          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+
+  # Job 3: Create and Upload Artifact after Code Quality and Security Checks
+  # Job 3: Build the liferay application and package it for deployment
+  create_and_upload_artifact:
+    name:  Create and Upload Artifact
+    runs-on: ubuntu-22.04
+    env:
+      PROJECT_CODE: "liferay"
+      SANITIZED_BRANCH_NAME: ${{ github.ref_name }}
+    needs:
+      - security_scans # Ensure this job runs after the security scans job
+      - code_quality_scans # Ensure this job runs after the code quality scans job
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4.1.7
+
+      # Step 2: Set up Java
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+      # Step 3: Set environment variables for Gradle build
+      - name: Set Environment Variables
+        run: |
+          echo "GH_MAVEN_PACKAGES_READ_USER_NAME=${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}" >> $GITHUB_ENV
+          echo "GH_MAVEN_PACKAGES_READ_PASSWORD=${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}" >> $GITHUB_ENV
+
+      # Step 4: Grant execute permissions to gradlew
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # Step 5: Add fragments to deploy folder
+      - name: Add fragments to deploy folder
+        run: |
+          mkdir -p configs/common/deploy
+          cd fragments/
+          for file in *; do zip -r ${file%.*}.zip $file/; done
+          cp *.zip ../configs/common/deploy/
+          rm *.zip
+
+      # Step 6: Build Liferay Bundle
+      - name: Build Liferay Bundle
+
+        env:
+          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
+          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+        run: |
+          #!/bin/sh
+          npm -v
+          node -v
+          npm config set strict-ssl false
+          export GRADLE_OPTS="-Xms1724m -Xmx5048m"
+          java -version
+          ./gradlew clean
+          ./gradlew "-Pliferay.workspace.environment=common" distBundleZip 
+
+      # Step 7: Package Liferay Bundle
+      - name: Package Liferay Bundle
+    
+        run: |
+          # Verify the existence of required files and folders
+          echo "Checking if required files and folders exist..."
+          ls -latr build || echo "Build folder does not exist!"
+          ls -latr configs || echo "Configs folder does not exist!"
+          
+          # Ensure the build file is not empty
+          if [ -f build/onprem-gshared-ang-portals-liferay.zip ]; then
+            if [ ! -s build/onprem-gshared-ang-portals-liferay.zip ]; then
+              echo "Error: build/onprem-gshared-ang-portals-liferay.zip is empty!"
+              exit 1
+            fi
+          else
+            echo "Error: build/onprem-gshared-ang-portals-liferay.zip does not exist!"
+            exit 1
+          fi
+          
+          # Create a folder in the current directory
+          mkdir -p temp_dir
+          
+          # Copy necessary files to the folder
+          echo "Copying files to the folder..."
+          cp -v build/onprem-gshared-ang-portals-liferay.zip temp_dir/CUSCAL-BUNDLE-${{ github.run_number }}.zip
+            
+            if [ -d configs ]; then
+            cp -r configs temp_dir/
+            else
+              echo "Error: configs folder does not exist!"
+              exit 1
+          fi
+          
+          # Zip the contents of the folder
+          cd temp_dir
+          
+          # Replace '/' with '-' in ${{ github.ref_name }} and pass as environment variable
+          sanitized_branch_name=$(echo "${{ github.ref_name }}" | sed 's|/|-|g')
+          echo "SANITIZED_BRANCH_NAME=${sanitized_branch_name}" >> $GITHUB_ENV
+          
+            zip -r -q ${{ env.ASSET_FILES }} .
+          
+          # Move the zip file to the current directory
+            mv ${{ env.ASSET_FILES }} "$GITHUB_WORKSPACE/"
+
+          # Clean up the folder
+          cd "$GITHUB_WORKSPACE"
+          rm -rf temp_dir
+          echo "Liferay Packaging completed successfully!"
+
+      # # Step 8: Publish Artifact
+      # - name: Upload Artifact
+      #   uses: actions/upload-artifact@v4.3.1
+      #   id: artifact-upload-step
+      #   with:
+      #     name: artifacts
+      #     path: ${{ env.ASSET_FILES }}
+
+      
+
+
