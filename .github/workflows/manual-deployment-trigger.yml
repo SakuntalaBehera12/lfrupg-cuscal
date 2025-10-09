@@ -1,140 +1,140 @@
-# Name of the GitHub Actions workflow
-name: Build and Deploy Manually
+# # Name of the GitHub Actions workflow
+# name: Build and Deploy Manually
 
-# Concurrency ensures that only a single job or workflow using the same concurrency group will run at a time
-concurrency:  
-  group: build-deploy-${{ github.ref_name }} # The concurrency group name is dynamically generated based on the branch name  
-  cancel-in-progress: false # If another workflow run is in progress, it will not be cancelled
+# # Concurrency ensures that only a single job or workflow using the same concurrency group will run at a time
+# concurrency:  
+#   group: build-deploy-${{ github.ref_name }} # The concurrency group name is dynamically generated based on the branch name  
+#   cancel-in-progress: false # If another workflow run is in progress, it will not be cancelled
 
-# This workflow is triggered manually through the GitHub Actions UI
-on:
-  workflow_dispatch:
-    inputs:
-      # Input to determine if the deployment should be executed
-      execute-deployment:
-        description: Deploy Application to Environment
-        required: false
-        default: false
-        type: boolean
-      # Input to determine if post-deployment tests should be executed
-      post-deployment-tests:
-        description: Run Post-Deployment Tests
-        required: false
-        default: false
-        type: boolean
-      # Input to select the target environment for deployment
-      environment-name:
-        description: Environment Name
-        required: false
-        default: dev
-        type: choice
-        options:
-          - dev
-          - test
-          - uat
-      # Input to decide whether to run security checks or not
-      security-check:
-        description: Run Security Check
-        required: false
-        default: true
-        type: boolean
-      # Input to decide whether to run code quality checks or not
-      code-quality-check:
-        description: Run Code Quality Check
-        required: false
-        default: true
-        type: boolean
+# # This workflow is triggered manually through the GitHub Actions UI
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       # Input to determine if the deployment should be executed
+#       execute-deployment:
+#         description: Deploy Application to Environment
+#         required: false
+#         default: false
+#         type: boolean
+#       # Input to determine if post-deployment tests should be executed
+#       post-deployment-tests:
+#         description: Run Post-Deployment Tests
+#         required: false
+#         default: false
+#         type: boolean
+#       # Input to select the target environment for deployment
+#       environment-name:
+#         description: Environment Name
+#         required: false
+#         default: dev
+#         type: choice
+#         options:
+#           - dev
+#           - test
+#           - uat
+#       # Input to decide whether to run security checks or not
+#       security-check:
+#         description: Run Security Check
+#         required: false
+#         default: true
+#         type: boolean
+#       # Input to decide whether to run code quality checks or not
+#       code-quality-check:
+#         description: Run Code Quality Check
+#         required: false
+#         default: true
+#         type: boolean
 
       
 
-# Access scope for the workflow's GitHub token. Adjust as needed.
-permissions:
-  contents: write         # Allows updating repository files (e.g., pushing changes)
-  packages: write         # Enables publishing to GitHub Packages
-  checks: write           # Allows creating status checks for PRs and commits
-  id-token: write         # Required for OIDC token generation in deployment
-  security-events: write  # Allows posting security scan results
-  actions: read           # Needed to query workflow run status
+# # Access scope for the workflow's GitHub token. Adjust as needed.
+# permissions:
+#   contents: write         # Allows updating repository files (e.g., pushing changes)
+#   packages: write         # Enables publishing to GitHub Packages
+#   checks: write           # Allows creating status checks for PRs and commits
+#   id-token: write         # Required for OIDC token generation in deployment
+#   security-events: write  # Allows posting security scan results
+#   actions: read           # Needed to query workflow run status
 
-jobs:
-  # Job 1: Print the inputs to the GitHub Job Summary
-  print-inputs:
-    name: Print Inputs to Job Summary
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Display Input Parameters
-        run: |
-          echo "## Audit Information" >> $GITHUB_STEP_SUMMARY
-          echo "**Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Deployment Execution Requested:** ${{ inputs.execute-deployment }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Target Environment:** ${{ inputs.environment-name }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Is Target Environment Production?:** ${{ inputs.environment-name == 'prod' && 'Yes' || 'No' }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Security Check Requested:** ${{ inputs.security-check }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Code Quality Check Requested:** ${{ inputs.code-quality-check }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Post-Deployment Tests Requested:** ${{ inputs.post-deployment-tests }}" >> $GITHUB_STEP_SUMMARY
+# jobs:
+#   # Job 1: Print the inputs to the GitHub Job Summary
+#   print-inputs:
+#     name: Print Inputs to Job Summary
+#     runs-on: ubuntu-22.04
+#     steps:
+#       - name: Display Input Parameters
+#         run: |
+#           echo "## Audit Information" >> $GITHUB_STEP_SUMMARY
+#           echo "**Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+#           echo "**Deployment Execution Requested:** ${{ inputs.execute-deployment }}" >> $GITHUB_STEP_SUMMARY
+#           echo "**Target Environment:** ${{ inputs.environment-name }}" >> $GITHUB_STEP_SUMMARY
+#           echo "**Is Target Environment Production?:** ${{ inputs.environment-name == 'prod' && 'Yes' || 'No' }}" >> $GITHUB_STEP_SUMMARY
+#           echo "**Security Check Requested:** ${{ inputs.security-check }}" >> $GITHUB_STEP_SUMMARY
+#           echo "**Code Quality Check Requested:** ${{ inputs.code-quality-check }}" >> $GITHUB_STEP_SUMMARY
+#           echo "**Post-Deployment Tests Requested:** ${{ inputs.post-deployment-tests }}" >> $GITHUB_STEP_SUMMARY
 
 
-  # Job 2: Build the application and run security and code quality checks (if requested)
-  build:
-    name: Scan, Build and Package Application
-    uses: ./.github/workflows/wf-build.yml
-    with:
-      security-check: ${{ inputs.security-check}}
-      code-quality-check: ${{ inputs.code-quality-check}}
-    secrets: inherit
+#   # Job 2: Build the application and run security and code quality checks (if requested)
+#   build:
+#     name: Scan, Build and Package Application
+#     uses: ./.github/workflows/wf-build.yml
+#     with:
+#       security-check: ${{ inputs.security-check}}
+#       code-quality-check: ${{ inputs.code-quality-check}}
+#     secrets: inherit
 
-  deploy-to-dev:
-    name: Deploy to Dev
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'dev' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: dev
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-    # This allows passing secrets as environment variables
-    secrets: inherit
+#   deploy-to-dev:
+#     name: Deploy to Dev
+#     needs: build
+#     if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'dev' }} 
+#     uses: ./.github/workflows/wf-deploy.yml
+#     with:
+#       environment-name: dev
+#       post-deployment-tests: true
+#       test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+#     # This allows passing secrets as environment variables
+#     secrets: inherit
       
-  deploy-to-test:
-    name: Deploy to Test
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'test' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: test
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-    # This allows passing secrets as environment variables
-    secrets: inherit
+#   deploy-to-test:
+#     name: Deploy to Test
+#     needs: build
+#     if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'test' }} 
+#     uses: ./.github/workflows/wf-deploy.yml
+#     with:
+#       environment-name: test
+#       post-deployment-tests: true
+#       test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+#     # This allows passing secrets as environment variables
+#     secrets: inherit
 
-  deploy-to-uat1:
-    name: Deploy to UAT1
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'uat' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: uat
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-      environment-number: 1
-    # This allows passing secrets as environment variables
-    secrets: inherit
+#   deploy-to-uat1:
+#     name: Deploy to UAT1
+#     needs: build
+#     if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'uat' }} 
+#     uses: ./.github/workflows/wf-deploy.yml
+#     with:
+#       environment-name: uat
+#       post-deployment-tests: true
+#       test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+#       environment-number: 1
+#     # This allows passing secrets as environment variables
+#     secrets: inherit
 
-  deploy-to-uat2:
-    name: Deploy to UAT2
-    needs: 
-      - build
-      - deploy-to-uat1
+#   deploy-to-uat2:
+#     name: Deploy to UAT2
+#     needs: 
+#       - build
+#       - deploy-to-uat1
 
-    if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'uat' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: uat
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-      environment-number: 2
-    # This allows passing secrets as environment variables
-    secrets: inherit
+#     if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'uat' }} 
+#     uses: ./.github/workflows/wf-deploy.yml
+#     with:
+#       environment-name: uat
+#       post-deployment-tests: true
+#       test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+#       environment-number: 2
+#     # This allows passing secrets as environment variables
+#     secrets: inherit
   
   
 
