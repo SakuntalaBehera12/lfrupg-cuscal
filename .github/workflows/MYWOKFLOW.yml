@@ -28,9 +28,9 @@ jobs:
           cp *.zip ../configs/common/deploy/
           rm *.zip
 
-      - name: 🚀 Install Liferay Blade CLI (official installer)
+      - name: Install Liferay Blade CLI (official installer)
         run: |
-          echo "🚀 Installing Liferay Blade CLI..."
+          echo " Installing Liferay Blade CLI..."
           curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh
         # Add Blade CLI to PATH for the rest of the workflow
       - name: Add Blade CLI to PATH
@@ -46,7 +46,7 @@ jobs:
           node -v
           npm config set strict-ssl false
           export GRADLE_OPTS="-Xms1724m -Xmx5048m"
-          echo "🚀 Running Liferay Workspace build via Blade CLI..."
+          echo " Running Liferay Workspace build via Blade CLI..."
           # blade gw clean
           # blade gw "-Pliferay.workspace.environment=common" distBundleZip
           ./gradlew clean
