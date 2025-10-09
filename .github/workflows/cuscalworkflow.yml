@@ -1,8 +1,10 @@
 # Workflow name, which will appear in the GitHub Actions UI
 name: Scan, Build and Package Application
- 
+
 on:
   workflow_dispatch:
+
+  
 jobs:
   build:
     runs-on: ubuntu-latest
