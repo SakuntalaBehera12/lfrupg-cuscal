@@ -17,8 +17,22 @@ jobs:
           distribution: 'temurin'
           java-version: '21.0.8'
 
+      # Step 2: Install Liferay Blade CLI (Official Liferay Method)
+      - name: Install Liferay Blade CLI
+        shell: bash
+        run: |
+          echo "🚀 Installing Liferay Blade CLI (official installer)..."
+          curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh
+          echo "✅ Blade CLI Installed Successfully"
+
+          # Ensure blade is available in PATH
+          echo "$HOME/.blade" >> $GITHUB_PATH
+
+          # Verify installation
+          blade version
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew clean
