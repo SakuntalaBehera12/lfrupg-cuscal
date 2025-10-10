@@ -8,6 +8,14 @@ concurrency:
 
 # This workflow is triggered manually through the GitHub Actions UI
 on:
+  workflow_call:
+    inputs:
+      security-check:
+        required: false
+        type: boolean
+      code-quality-check:
+        required: false
+        type: boolean
   workflow_dispatch:
     inputs:
       # Input to determine if the deployment should be executed
