@@ -50,7 +50,7 @@ jobs:
           GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
           GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
       if: ${{ inputs.security-check }}
-      uses: cuscal/app-eengineering-shared-githubactions/actions/dist/codeql-java@v1.0
+      # uses: cuscal/app-eengineering-shared-githubactions/actions/dist/codeql-java@v1.0
       with:
         # java-version is the version of java to be used for compilation. 
         java-version: ${{ env.JAVA_VERSION }}
@@ -76,7 +76,7 @@ jobs:
     # Step 2: SAST & SCA Scans
     - name: Run SAST and SCA Scans
       if: ${{ inputs.security-check }}
-      uses: cuscal/app-eengineering-shared-githubactions/actions/dist/checkmarx-one@v1.0
+      # uses: cuscal/app-eengineering-shared-githubactions/actions/dist/checkmarx-one@v1.0
       with:
         # cx-client-id & cx-client-secret is needed for authentication with CXONE server. 
         cx-client-id: ${{ vars.CX_CLIENT_ID }}
@@ -104,7 +104,7 @@ jobs:
           GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
           GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
         if: ${{ inputs.code-quality-check }}
-        uses: cuscal/app-eengineering-shared-githubactions/actions/dist/sonarqube-java@v1.0
+        # uses: cuscal/app-eengineering-shared-githubactions/actions/dist/sonarqube-java@v1.0
         with:
           # Specifies the version of Java to be used for compilation.
           java-version: ${{ env.JAVA_VERSION }}
@@ -125,9 +125,9 @@ jobs:
     env:
       PROJECT_CODE: "liferay"
       SANITIZED_BRANCH_NAME: ${{ github.ref_name }}
-    # needs:
-    #   - security_scans # Ensure this job runs after the security scans job
-    #   - code_quality_scans # Ensure this job runs after the code quality scans job
+    needs:
+      - security_scans # Ensure this job runs after the security scans job
+      - code_quality_scans # Ensure this job runs after the code quality scans job
     steps:
       # Step 1: Checkout the repository
       # - name: Checkout Code
