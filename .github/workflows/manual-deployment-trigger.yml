@@ -64,7 +64,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Display Input Parameters
-        run: |
+        run: | 
+          echo "##Hello world"
           echo "## Audit Information" >> $GITHUB_STEP_SUMMARY
           echo "**Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "**Deployment Execution Requested:** ${{ inputs.execute-deployment }}" >> $GITHUB_STEP_SUMMARY
