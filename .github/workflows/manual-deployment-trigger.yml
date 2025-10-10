@@ -84,58 +84,58 @@ jobs:
       code-quality-check: ${{ inputs.code-quality-check}}
     secrets: inherit
 
-  deploy-to-dev:
-    name: Deploy to Dev
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'dev' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: dev
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-    # This allows passing secrets as environment variables
-    secrets: inherit
+  # deploy-to-dev:
+  #   name: Deploy to Dev
+  #   needs: build
+  #   if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'dev' }} 
+  #   uses: ./.github/workflows/wf-deploy.yml
+  #   with:
+  #     environment-name: dev
+  #     post-deployment-tests: true
+  #     test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+  #   # This allows passing secrets as environment variables
+  #   secrets: inherit
       
-  deploy-to-test:
-    name: Deploy to Test
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'test' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: test
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-    # This allows passing secrets as environment variables
-    secrets: inherit
+  # deploy-to-test:
+  #   name: Deploy to Test
+  #   needs: build
+  #   if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'test' }} 
+  #   uses: ./.github/workflows/wf-deploy.yml
+  #   with:
+  #     environment-name: test
+  #     post-deployment-tests: true
+  #     test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+  #   # This allows passing secrets as environment variables
+  #   secrets: inherit
 
-  deploy-to-uat1:
-    name: Deploy to UAT1
-    needs: build
-    if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'uat' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: uat
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-      environment-number: 1
-    # This allows passing secrets as environment variables
-    secrets: inherit
+  # deploy-to-uat1:
+  #   name: Deploy to UAT1
+  #   needs: build
+  #   if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'uat' }} 
+  #   uses: ./.github/workflows/wf-deploy.yml
+  #   with:
+  #     environment-name: uat
+  #     post-deployment-tests: true
+  #     test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+  #     environment-number: 1
+  #   # This allows passing secrets as environment variables
+  #   secrets: inherit
 
-  deploy-to-uat2:
-    name: Deploy to UAT2
-    needs: 
-      - build
-      - deploy-to-uat1
+  # deploy-to-uat2:
+  #   name: Deploy to UAT2
+  #   needs: 
+  #     - build
+  #     - deploy-to-uat1
 
-    if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'uat' }} 
-    uses: ./.github/workflows/wf-deploy.yml
-    with:
-      environment-name: uat
-      post-deployment-tests: true
-      test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
-      environment-number: 2
-    # This allows passing secrets as environment variables
-    secrets: inherit
+  #   if: ${{ github.actor != 'dependabot[bot]' && inputs.execute-deployment && inputs.environment-name == 'uat' }} 
+  #   uses: ./.github/workflows/wf-deploy.yml
+  #   with:
+  #     environment-name: uat
+  #     post-deployment-tests: true
+  #     test-suite-name: ${{ endsWith(github.ref, '/main') && 'regression' || 'sanity' }}
+  #     environment-number: 2
+  #   # This allows passing secrets as environment variables
+  #   secrets: inherit
   
   
 
