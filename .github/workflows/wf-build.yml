@@ -51,19 +51,20 @@ jobs:
           GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
       if: ${{ inputs.security-check }}
       # uses: cuscal/app-eengineering-shared-githubactions/actions/dist/codeql-java@v1.0
-      with:
-        # java-version is the version of java to be used for compilation. 
-        java-version: ${{ env.JAVA_VERSION }}
+      run: |
+       echo "Running security and dependency scans..."
+       # java-version is the version of java to be used for compilation. 
+       java-version: ${{ env.JAVA_VERSION }}
         # build-commands is the custom script to be used to build the code so that it can build and scan the code. 
-        build-commands: | 
+       build-commands: | 
           chmod +x ./gradlew
           ${{ env.BUILD_COMMANDS }} -x formatSource
         # matrix-languages to be used
-        matrix-languages: ${{ env.MATRIX_LANGUAGES }}
+       matrix-languages: ${{ env.MATRIX_LANGUAGES }}
  
         # username & password for read access to Github packages.
-        GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
-        GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+       GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
+       GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
         # Step 3: Prints a link to the GitHub Advanced Security scan report
 
     - name: Print Security, Secrets & Dependency Scan Report
@@ -76,8 +77,8 @@ jobs:
     # Step 2: SAST & SCA Scans
     - name: Run SAST and SCA Scans
       if: ${{ inputs.security-check }}
-      # uses: cuscal/app-eengineering-shared-githubactions/actions/dist/checkmarx-one@v1.0
-      with:
+      run: |
+        echo "SAST & SCA Scans"
         # cx-client-id & cx-client-secret is needed for authentication with CXONE server. 
         cx-client-id: ${{ vars.CX_CLIENT_ID }}
         cx-client-secret: ${{ secrets.CX_CLIENT_SECRET }}
@@ -105,8 +106,8 @@ jobs:
           GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
         if: ${{ inputs.code-quality-check }}
         # uses: cuscal/app-eengineering-shared-githubactions/actions/dist/sonarqube-java@v1.0
-        with:
-          # Specifies the version of Java to be used for compilation.
+        run: |
+          echo "Code Quality Check"
           java-version: ${{ env.JAVA_VERSION }}
           # Specifies the custom script to be used to build the code so that it can build and scan the code.
           build-commands: | 
