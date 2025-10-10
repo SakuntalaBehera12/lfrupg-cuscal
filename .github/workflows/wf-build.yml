@@ -34,8 +34,12 @@ jobs:
       security-events: write
       actions: read
       contents: read
-
     steps:
+      - name: Print build inputs
+        run: |
+          echo "Security check: ${{ inputs.security-check }}"
+          echo "Code quality check: ${{ inputs.code-quality-check }}"
+          
       - name: Checkout Code
         uses: actions/checkout@v4
 
