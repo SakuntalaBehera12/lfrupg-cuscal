@@ -206,20 +206,20 @@ jobs:
           ls -latr build || echo "Build folder does not exist!"
           ls -latr configs || echo "Configs folder does not exist!"
           # Ensure the build file is not empty
-          if [ -f build/lfrupg-cuscal.zip.zip ]; then
-            if [ ! -s build/lfrupg-cuscal.zip.zip ]; then
-              echo "Error: build/lfrupg-cuscal.zip.zip is empty!"
+          if [ -f build/lfrupg-cuscal.zip ]; then
+            if [ ! -s build/lfrupg-cuscal.zip ]; then
+              echo "Error: build/lfrupg-cuscal.zip is empty!"
               exit 1
             fi
           else
-            echo "Error: build/lfrupg-cuscal.zip.zip does not exist!"
+            echo "Error: build/lfrupg-cuscal.zip does not exist!"
             exit 1
           fi
           # Create a folder in the current directory
           mkdir -p temp_dir
           # Copy necessary files to the folder
           echo "Copying files to the folder..."
-          cp -v build/lfrupg-cuscal.zip.zip temp_dir/CUSCAL-BUNDLE-${{ github.run_number }}.zip
+          cp -v build/lfrupg-cuscal.zip temp_dir/CUSCAL-BUNDLE-${{ github.run_number }}.zip
             if [ -d configs ]; then
             cp -r configs temp_dir/
             else
