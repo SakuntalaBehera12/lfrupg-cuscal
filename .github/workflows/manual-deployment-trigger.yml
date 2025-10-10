@@ -32,6 +32,7 @@ on:
           - dev
           - test
           - uat
+          - local
       # Input to decide whether to run security checks or not
       security-check:
         description: Run Security Check
