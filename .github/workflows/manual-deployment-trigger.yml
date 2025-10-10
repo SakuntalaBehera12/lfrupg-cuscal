@@ -22,17 +22,17 @@ on:
         required: false
         default: false
         type: boolean
-      # Input to select the target environment for deployment
-      environment-name:
-        description: Environment Name
-        required: false
-        default: dev
-        type: choice
-        options:
-          - dev
-          - test
-          - uat
-          - local
+      # # Input to select the target environment for deployment
+      # environment-name:
+      #   description: Environment Name
+      #   required: false
+      #   default: dev
+      #   type: choice
+      #   options:
+      #     - dev
+      #     - test
+      #     - uat
+      #     - local
       # Input to decide whether to run security checks or not
       security-check:
         description: Run Security Check
