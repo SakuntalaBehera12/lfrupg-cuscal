@@ -127,9 +127,9 @@ jobs:
     env:
       PROJECT_CODE: "liferay"
       SANITIZED_BRANCH_NAME: ${{ github.ref_name }}
-    needs:
-      - security_scans # Ensure this job runs after the security scans job
-      - code_quality_scans # Ensure this job runs after the code quality scans job
+    # needs:
+    #   - security_scans # Ensure this job runs after the security scans job
+    #   - code_quality_scans # Ensure this job runs after the code quality scans job
     steps:
       # Step 1: Checkout the repository
       # - name: Checkout Code
