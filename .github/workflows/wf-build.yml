@@ -165,19 +165,22 @@ jobs:
       - name: Validate and Prepare Liferay Environment Folders
         id: validate-env
         run: |
-            echo "🔍 Checking environment folder for '${{ env.ENVIRONMENT }}'..."
-            ENV_FOLDER=".env.${{ env.ENVIRONMENT }}"
-            if [ -d "${ENV_FOLDER}" ]; then
-                echo "✅ Found ${ENV_FOLDER}"
-                # Use common + environment folder
-                echo "LIFERAY_ENVIRONMENT=common,${ENV_FOLDER}" >> $GITHUB_ENV
-                else
-                echo "⚠️ ${ENV_FOLDER} not found. Using only 'common'"
-                # Use only common
-                echo "LIFERAY_ENVIRONMENT=common" >> $GITHUB_ENV
-            fi
-            echo "➡️ Using configuration folders: $LIFERAY_ENVIRONMENT"i
- 
+         echo "🔍 Checking environment folder for '${{ env.ENVIRONMENT }}'..."
+
+         ENV_FOLDER=".env.${{ env.ENVIRONMENT }}"
+
+         # Debug current directory contents for troubleshooting
+         ls -la
+
+         if [ -d "${ENV_FOLDER}" ]; then
+         echo "✅ Found ${ENV_FOLDER}"
+         echo "LIFERAY_ENVIRONMENT=common,${ENV_FOLDER}" >> $GITHUB_ENV
+         else
+          echo "⚠️ ${ENV_FOLDER} not found. Using only 'common'"
+         echo "LIFERAY_ENVIRONMENT=common" >> $GITHUB_ENV
+         fi
+
+    echo "➡️ Using configuration folders: $LIFERAY_ENVIRONMENT"
       # Step 5: Add fragments to deploy folder
       #- name: Add fragments to deploy folder
       #  run: |
