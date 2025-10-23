@@ -22,18 +22,18 @@ on:
         required: false
         default: false
         type: boolean
-      # # Input to select the target environment for deployment
-      # environment-name:
-      #   description: Environment Name
-      #   required: false
-      #   default: dev
-      #   type: choice
-      #   options:
-      #     - dev
-      #     - test
-      #     - uat
-      #     - local
-      # Input to decide whether to run security checks or not
+      # Input to select the target environment for deployment
+      environment-name:
+        description: Environment Name
+        required: false
+        default: dev
+        type: choice
+        options:
+          - dev
+          - test
+          - uat
+          - local
+     # Input to decide whether to run security checks or not
       security-check:
         description: Run Security Check
         required: false
@@ -80,9 +80,10 @@ jobs:
   build:
     name: Scan, Build and Package Application
     uses: ./.github/workflows/wf-build.yml
-    # with:
-    #   security-check: ${{ inputs.security-check}}
-    #   code-quality-check: ${{ inputs.code-quality-check}}
+    with:
+      security-check: ${{ inputs.security-check}}
+      code-quality-check: ${{ inputs.code-quality-check}}
+      environment-name: ${{ inputs.environment-name}}
     secrets: inherit
 
   # deploy-to-dev:
