@@ -21,7 +21,7 @@ name: 'Original Scan, Build and Package Application'
 env:
   JAVA_VERSION: 21.0.8
   JAVA_DISTRIBUTION: adopt
-  ENVIRONMENT: '${{ inputs.environment-name }}'
+  ENVIRONMENT: ".env.${{ inputs.environment-name }}"
   BUILD_COMMANDS: >-
     ./gradlew clean build "-Pliferay.workspace.environment=${{
     inputs.environment-name }}"
@@ -186,7 +186,8 @@ jobs:
           # blade gw clean
           # blade gw "-Pliferay.workspace.environment=common" distBundleZip
           ./gradlew clean
-          ./gradlew "-Pliferay.workspace.environment=common" distBundleZip
+          ./gradlew "-Pliferay.workspace.environment=common,${ENVIRONMENT}" distBundleZip
+
       - name: Package Liferay Bundle
         run: >
           # Verify the existence of required files and folders
