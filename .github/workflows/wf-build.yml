@@ -5,6 +5,11 @@ on:
   workflow_dispatch:
   workflow_call: # Allow this workflow to be called from other workflows
     inputs:
+      environment-name:
+        description: Target Liferay environment (e.g. dev, test, uat)
+        required: false
+        default: dev
+        type: string
       security-check:
         description: Run Security Check
         required: false
