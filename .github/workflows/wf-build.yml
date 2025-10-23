@@ -161,18 +161,22 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-        # ✅ NEW: Validate environment folder with fallback to 'common'
-      - name: Validate Liferay Environment Folder
+      # ✅ NEW: Validate environment folder with fallback to 'common'
+      - name: Validate and Prepare Liferay Environment Folders
         id: validate-env
         run: |
-          echo "Checking if environment folder exists for '${{ env.ENVIRONMENT }}'..."
-          if [ -d "configs/${{ env.ENVIRONMENT }}" ]; then
-            echo "✅ Found configs/${{ env.ENVIRONMENT }}"
-            echo "LIFERAY_ENVIRONMENT=${{ env.ENVIRONMENT }}" >> $GITHUB_ENV
-          else
-            echo "⚠️ configs/${{ env.ENVIRONMENT }} not found. Falling back to 'common'."
-            echo "LIFERAY_ENVIRONMENT=common" >> $GITHUB_ENV
-          fi
+            echo "🔍 Checking environment folder for '${{ env.ENVIRONMENT }}'..."
+            ENV_FOLDER=".env.${{ env.ENVIRONMENT }}"
+            if [ -d "${ENV_FOLDER}" ]; then
+                echo "✅ Found ${ENV_FOLDER}"
+                # Use common + environment folder
+                echo "LIFERAY_ENVIRONMENT=common,${ENV_FOLDER}" >> $GITHUB_ENV
+                else
+                echo "⚠️ ${ENV_FOLDER} not found. Using only 'common'"
+                # Use only common
+                echo "LIFERAY_ENVIRONMENT=common" >> $GITHUB_ENV
+            fi
+            echo "➡️ Using configuration folders: $LIFERAY_ENVIRONMENT"i
  
       # Step 5: Add fragments to deploy folder
       #- name: Add fragments to deploy folder
