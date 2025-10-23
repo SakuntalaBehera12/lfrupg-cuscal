@@ -1,12 +1,10 @@
-# Workflow name, which will appear in the GitHub Actions UI
-name: Original Scan, Build and Package Application
- 
-on: 
-  workflow_dispatch:
-  workflow_call: # Allow this workflow to be called from other workflows
+name: 'Original Scan, Build and Package Application'
+'on':
+  workflow_dispatch: null
+  workflow_call:
     inputs:
       environment-name:
-        description: Target Liferay environment (e.g. dev, test, uat)
+        description: 'Target Liferay environment (e.g. dev, test, uat)'
         required: false
         default: dev
         type: string
@@ -20,176 +18,141 @@ on:
         required: false
         default: true
         type: boolean
- 
-# Define environment variables used throughout the workflow steps
 env:
-  JAVA_VERSION: '21.0.8'
-  JAVA_DISTRIBUTION: 'adopt'
-# BUILD_COMMANDS: './gradlew clean build "-Pliferay.workspace.environment=common"'
-# BUILD_COMMANDS: './gradlew clean deploy "-Pliferay.workspace.environment=common"'
-  ENVIRONMENT: ${{ inputs.environment-name }}
-  BUILD_COMMANDS: './gradlew clean build "-Pliferay.workspace.environment=${{ inputs.environment-name }}"'
-  CODEQUALITY_BUILD_COMMANDS: './gradlew clean test "-Pliferay.workspace.environment=${{ inputs.environment-name }}"' # Removed sonarqube task
-  MATRIX_LANGUAGES: 'java'
-  VERSION: 1.0.0-SNAPSHOT # Artifact Version
-  ASSET_FILES: 'liferay-bundle.zip' # Placeholder for artifact ID
-
- 
+  JAVA_VERSION: 21.0.8
+  JAVA_DISTRIBUTION: adopt
+  ENVIRONMENT: '${{ inputs.environment-name }}'
+  BUILD_COMMANDS: >-
+    ./gradlew clean build "-Pliferay.workspace.environment=${{
+    inputs.environment-name }}"
+  CODEQUALITY_BUILD_COMMANDS: >-
+    ./gradlew clean test "-Pliferay.workspace.environment=${{
+    inputs.environment-name }}"
+  MATRIX_LANGUAGES: java
+  VERSION: 1.0.0-SNAPSHOT
+  ASSET_FILES: liferay-bundle.zip
 jobs:
-  # Job 1: Security Scans
   security_scans:
     name: Security Scans
-    # runs-on: ubuntu-22.04 
     runs-on: ubuntu-latest
- 
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    if: '${{ github.actor != ''dependabot[bot]'' }}'
     permissions:
       security-events: write
       actions: read
       contents: read
     steps:
-    # Step 1: Checkout the repository
-    - name: Checkout Code
-      uses: actions/checkout@v4.1.7
- 
-    # Step 2: Secrets & Dependency Scans
-    - name: Security, Secrets and Dependency Scans
-      env:
-          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
-          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
-      if: ${{ inputs.security-check }}
-      # uses: cuscal/app-eengineering-shared-githubactions/actions/dist/codeql-java@v1.0
-      run: |
-       echo "Running security and dependency scans..."
-       # java-version is the version of java to be used for compilation. 
-       java-version: ${{ env.JAVA_VERSION }}
-        # build-commands is the custom script to be used to build the code so that it can build and scan the code. 
-       build-commands: | 
-          chmod +x ./gradlew
-          ${{ env.BUILD_COMMANDS }} -x formatSource
-        # matrix-languages to be used
-       matrix-languages: ${{ env.MATRIX_LANGUAGES }}
- 
-        # username & password for read access to Github packages.
-       GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
-       GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
-        # Step 3: Prints a link to the GitHub Advanced Security scan report
-
-    - name: Print Security, Secrets & Dependency Scan Report
-      if: ${{ inputs.security-check }}
-      run: |
-        echo "## GitHub Advanced Security Report" >> $GITHUB_STEP_SUMMARY
-        echo "[CodeQL Alerts](https://github.com/$GITHUB_REPOSITORY/security/code-scanning)" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
- 
-    # Step 2: SAST & SCA Scans
-    - name: Run SAST and SCA Scans
-      if: ${{ inputs.security-check }}
-      run: |
-        echo "SAST & SCA Scans"
-        # cx-client-id & cx-client-secret is needed for authentication with CXONE server. 
-        cx-client-id: ${{ vars.CX_CLIENT_ID }}
-        cx-client-secret: ${{ secrets.CX_CLIENT_SECRET }}
-  # Job 2: Code Quality Scans
-  code_quality_scans:
-    name: Code Quality Scans
-    runs-on: [self-hosted, env-nonprod]  # The type of runner that the job will run on.
-    if: ${{ github.actor != 'dependabot[bot]' }}
-    environment: nonprod # This job is run in the nonprod runner environment.
-    steps:
-      # Step 1: Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v4.1.7
+      - name: 'Security, Secrets and Dependency Scans'
+        env:
+          GH_MAVEN_PACKAGES_READ_USER_NAME: '${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}'
+          GH_MAVEN_PACKAGES_READ_PASSWORD: '${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}'
+        if: '${{ inputs.security-check }}'
+        run: >
+          echo "Running security and dependency scans..."
 
-      # Step 2: Get the branch name.
+          # java-version is the version of java to be used for compilation. 
+
+          java-version: ${{ env.JAVA_VERSION }}
+           # build-commands is the custom script to be used to build the code so that it can build and scan the code. 
+          build-commands: | 
+             chmod +x ./gradlew
+             ${{ env.BUILD_COMMANDS }} -x formatSource
+           # matrix-languages to be used
+          matrix-languages: ${{ env.MATRIX_LANGUAGES }}
+
+           # username & password for read access to Github packages.
+          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{
+          secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
+
+          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{
+          secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+           # Step 3: Prints a link to the GitHub Advanced Security scan report
+      - name: 'Print Security, Secrets & Dependency Scan Report'
+        if: '${{ inputs.security-check }}'
+        run: >
+          echo "## GitHub Advanced Security Report" >> $GITHUB_STEP_SUMMARY
+
+          echo "[CodeQL
+          Alerts](https://github.com/$GITHUB_REPOSITORY/security/code-scanning)"
+          >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+      - name: Run SAST and SCA Scans
+        if: '${{ inputs.security-check }}'
+        run: >
+          echo "SAST & SCA Scans"
+
+          # cx-client-id & cx-client-secret is needed for authentication with
+          CXONE server. 
+
+          cx-client-id: ${{ vars.CX_CLIENT_ID }}
+
+          cx-client-secret: ${{ secrets.CX_CLIENT_SECRET }}
+  code_quality_scans:
+    name: Code Quality Scans
+    runs-on:
+      - self-hosted
+      - env-nonprod
+    if: '${{ github.actor != ''dependabot[bot]'' }}'
+    environment: nonprod
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4.1.7
       - name: Get Branch Name
         shell: bash
         id: get-branch
-        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_OUTPUT"
-
-      # Step 3: Code Quality Check
+        run: 'echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_OUTPUT"'
       - name: Code Quality Check
         env:
-          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
-          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
-        if: ${{ inputs.code-quality-check }}
-        # uses: cuscal/app-eengineering-shared-githubactions/actions/dist/sonarqube-java@v1.0
-        run: |
+          GH_MAVEN_PACKAGES_READ_USER_NAME: '${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}'
+          GH_MAVEN_PACKAGES_READ_PASSWORD: '${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}'
+        if: '${{ inputs.code-quality-check }}'
+        run: >
           echo "Code Quality Check"
+
           java-version: ${{ env.JAVA_VERSION }}
-          # Specifies the custom script to be used to build the code so that it can build and scan the code.
+
+          # Specifies the custom script to be used to build the code so that it
+          can build and scan the code.
+
           build-commands: | 
             chmod +x ./gradlew
             ${{ env.CODEQUALITY_BUILD_COMMANDS }} -x formatSource
-          # Specifies the username and password for read access to Github packages.
-          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
-          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+          # Specifies the username and password for read access to Github
+          packages.
 
-  # Job 3: Create and Upload Artifact after Code Quality and Security Checks
-  # Job 3: Build the Liferay application and package it for deployment
+          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{
+          secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}          
+
+          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{
+          secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
   create_and_upload_artifact:
-    name:  Create and Upload Artifact
-  # runs-on: ubuntu-22.04
+    name: Create and Upload Artifact
     runs-on: ubuntu-latest
     env:
-      PROJECT_CODE: "liferay"
-      SANITIZED_BRANCH_NAME: ${{ github.ref_name }}
-    # needs:
-    #   - security_scans # Ensure this job runs after the security scans job
-    #   - code_quality_scans # Ensure this job runs after the code quality scans job
+      PROJECT_CODE: liferay
+      SANITIZED_BRANCH_NAME: '${{ github.ref_name }}'
     steps:
-      # Step 1: Checkout the repository
-      # - name: Checkout Code
       - name: Checkout code
         uses: actions/checkout@v4
-      #   uses: actions/checkout@v4.1.7
-      # Step 2: Set up Java
       - name: Set up JDK
-      # uses: actions/setup-java@v3
         uses: actions/setup-java@v4
         with:
-           distribution: temurin
-           java-version: 21.0.8
- 
-      # Step 3: Set environment variables for Gradle build
+          distribution: temurin
+          java-version: 21.0.8
       - name: Set Environment Variables
-        run: |
-          echo "GH_MAVEN_PACKAGES_READ_USER_NAME=${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}" >> $GITHUB_ENV
-          echo "GH_MAVEN_PACKAGES_READ_PASSWORD=${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}" >> $GITHUB_ENV
- 
-      # Step 4: Grant execute permissions to gradlew
+        run: >
+          echo "GH_MAVEN_PACKAGES_READ_USER_NAME=${{
+          secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}" >> $GITHUB_ENV
+
+          echo "GH_MAVEN_PACKAGES_READ_PASSWORD=${{
+          secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}" >> $GITHUB_ENV
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-
-      # ✅ NEW: Validate environment folder with fallback to 'common'
       - name: Validate and Prepare Liferay Environment Folders
         id: validate-env
-        run: |
-         echo "🔍 Checking environment folder for '${{ env.ENVIRONMENT }}'..."
-
-         ENV_FOLDER=".env.${{ env.ENVIRONMENT }}"
-
-         # Debug current directory contents for troubleshooting
-         ls -la
-
-         if [ -d "${ENV_FOLDER}" ]; then
-         echo "✅ Found ${ENV_FOLDER}"
-         echo "LIFERAY_ENVIRONMENT=common,${ENV_FOLDER}" >> $GITHUB_ENV
-         else
-          echo "⚠️ ${ENV_FOLDER} not found. Using only 'common'"
-         echo "LIFERAY_ENVIRONMENT=common" >> $GITHUB_ENV
-         fi
-
-    echo "➡️ Using configuration folders: $LIFERAY_ENVIRONMENT"
-      # Step 5: Add fragments to deploy folder
-      #- name: Add fragments to deploy folder
-      #  run: |
-      #    mkdir -p configs/common/deploy
-      #    cd fragments/
-      #    for file in *; do zip -r ${file%.*}.zip $file/; done
-      #    cp *.zip ../configs/common/deploy/
-      #    rm *.zip
-
+        run: "echo \"\U0001F50D Checking environment folder for '${{ env.ENVIRONMENT }}'...\"\n\nENV_FOLDER=\".env.${{ env.ENVIRONMENT }}\"\n\n# Debug current directory contents for troubleshooting\nls -la\n\nif [ -d \"${ENV_FOLDER}\" ]; then\necho \"✅ Found ${ENV_FOLDER}\"\necho \"LIFERAY_ENVIRONMENT=common,${ENV_FOLDER}\" >> $GITHUB_ENV\nelse\n echo \"⚠️ ${ENV_FOLDER} not found. Using only 'common'\"\necho \"LIFERAY_ENVIRONMENT=common\" >> $GITHUB_ENV\nfi\n\n   echo \"➡️ Using configuration folders: $LIFERAY_ENVIRONMENT\"\n"
       - name: Add fragments to deploy folder
         run: |
           mkdir -p configs/common/deploy
@@ -197,23 +160,21 @@ jobs:
           for file in *; do zip -r ${file%.*}.zip $file/; done
           cp *.zip ../configs/common/deploy/
           rm *.zip
-
       - name: Install Liferay Blade CLI (official installer)
-        run: |
+        run: >
           echo " Installing Liferay Blade CLI..."
-          curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh
-        # Add Blade CLI to PATH for the rest of the workflow
+
+          curl -L
+          https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local
+          | sh
       - name: Add Blade CLI to PATH
         run: echo "/home/runner/jpm/bin" >> $GITHUB_PATH
-
       - name: Verify Blade CLI installation
         run: blade version
-
-      # Step 6: Build Liferay Bundle
       - name: Build Liferay Bundle
         env:
-          GH_MAVEN_PACKAGES_READ_USER_NAME: ${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}
-          GH_MAVEN_PACKAGES_READ_PASSWORD: ${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}
+          GH_MAVEN_PACKAGES_READ_USER_NAME: '${{ secrets.GH_MAVEN_PACKAGES_READ_USER_NAME }}'
+          GH_MAVEN_PACKAGES_READ_PASSWORD: '${{ secrets.GH_MAVEN_PACKAGES_READ_PASSWORD }}'
         run: |
           java -version
           blade version
@@ -226,15 +187,18 @@ jobs:
           # blade gw "-Pliferay.workspace.environment=common" distBundleZip
           ./gradlew clean
           ./gradlew "-Pliferay.workspace.environment=common" distBundleZip
- 
-      # Step 7: Package Liferay Bundle
       - name: Package Liferay Bundle
-        run: |
+        run: >
           # Verify the existence of required files and folders
+
           echo "Checking if required files and folders exist..."
+
           ls -latr build || echo "Build folder does not exist!"
+
           ls -latr configs || echo "Configs folder does not exist!"
+
           # Ensure the build file is not empty
+
           if [ -f build/lfrupg-cuscal.zip ]; then
             if [ ! -s build/lfrupg-cuscal.zip ]; then
               echo "Error: build/lfrupg-cuscal.zip is empty!"
@@ -244,33 +208,47 @@ jobs:
             echo "Error: build/lfrupg-cuscal.zip does not exist!"
             exit 1
           fi
+
           # Create a folder in the current directory
+
           mkdir -p temp_dir
+
           # Copy necessary files to the folder
+
           echo "Copying files to the folder..."
-          cp -v build/lfrupg-cuscal.zip temp_dir/CUSCAL-BUNDLE-${{ github.run_number }}.zip
+
+          cp -v build/lfrupg-cuscal.zip temp_dir/CUSCAL-BUNDLE-${{
+          github.run_number }}.zip
             if [ -d configs ]; then
             cp -r configs temp_dir/
             else
               echo "Error: configs folder does not exist!"
               exit 1
           fi
+
           # Zip the contents of the folder
+
           cd temp_dir
-          # Replace '/' with '-' in ${{ github.ref_name }} and pass as environment variable
+
+          # Replace '/' with '-' in ${{ github.ref_name }} and pass as
+          environment variable
+
           sanitized_branch_name=$(echo "${{ github.ref_name }}" | sed 's|/|-|g')
+
           echo "SANITIZED_BRANCH_NAME=${sanitized_branch_name}" >> $GITHUB_ENV
             zip -r -q ${{ env.ASSET_FILES }} .
           # Move the zip file to the current directory
             mv ${{ env.ASSET_FILES }} "$GITHUB_WORKSPACE/"
           # Clean up the folder
+
           cd "$GITHUB_WORKSPACE"
+
           rm -rf temp_dir
+
           echo "Liferay Packaging completed successfully!"
-      # Step 8: Publish Artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.1
         id: artifact-upload-step
         with:
           name: artifacts
-          path: ${{ env.ASSET_FILES }}
+          path: '${{ env.ASSET_FILES }}'
