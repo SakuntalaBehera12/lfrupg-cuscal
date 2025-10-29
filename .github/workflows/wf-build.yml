@@ -191,15 +191,13 @@ jobs:
       - name: Package Liferay Bundle
         run: >
           # Verify the existence of required files and folders
-
           echo "Checking if required files and folders exist..."
-
           ls -latr build || echo "Build folder does not exist!"
-
+          tree build || echo "Build folder does not exist!"
+          # For the configs folder
           ls -latr configs || echo "Configs folder does not exist!"
-
+          tree configs || echo "Configs folder does not exist!"
           # Ensure the build file is not empty
-
           if [ -f build/lfrupg-cuscal.zip ]; then
             if [ ! -s build/lfrupg-cuscal.zip ]; then
               echo "Error: build/lfrupg-cuscal.zip is empty!"
@@ -209,15 +207,10 @@ jobs:
             echo "Error: build/lfrupg-cuscal.zip does not exist!"
             exit 1
           fi
-
           # Create a folder in the current directory
-
           mkdir -p temp_dir
-
           # Copy necessary files to the folder
-
           echo "Copying files to the folder..."
-
           cp -v build/lfrupg-cuscal.zip temp_dir/CUSCAL-BUNDLE-${{
           github.run_number }}.zip
             if [ -d configs ]; then
@@ -226,24 +219,17 @@ jobs:
               echo "Error: configs folder does not exist!"
               exit 1
           fi
-
           # Zip the contents of the folder
-
           cd temp_dir
-
           # Replace '/' with '-' in ${{ github.ref_name }} and pass as
           environment variable
-
           sanitized_branch_name=$(echo "${{ github.ref_name }}" | sed 's|/|-|g')
-
           echo "SANITIZED_BRANCH_NAME=${sanitized_branch_name}" >> $GITHUB_ENV
             zip -r -q ${{ env.ASSET_FILES }} .
           # Move the zip file to the current directory
             mv ${{ env.ASSET_FILES }} "$GITHUB_WORKSPACE/"
           # Clean up the folder
-
           cd "$GITHUB_WORKSPACE"
-
           rm -rf temp_dir
 
           echo "Liferay Packaging completed successfully!"
