@@ -193,10 +193,10 @@ jobs:
           # Verify the existence of required files and folders
           echo "Checking if required files and folders exist..."
           ls -latr build || echo "Build folder does not exist!"
-          tree build || echo "Build folder does not exist!"
+          # tree build || echo "Build folder does not exist!"
           # For the configs folder
           ls -latr configs || echo "Configs folder does not exist!"
-          tree configs || echo "Configs folder does not exist!"
+          # tree configs || echo "Configs folder does not exist!"
           # Ensure the build file is not empty
           if [ -f build/lfrupg-cuscal.zip ]; then
             if [ ! -s build/lfrupg-cuscal.zip ]; then
